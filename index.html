@@ -1,6 +1,1098 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>José Carlos Garrido Molina — SysAdmin · IT Expert · DAW</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Rajdhani:wght@400;500;600;700&family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#03010d;--bg2:#080514;--bg3:#0d0920;
+  --cy:#00F5FF;--mg:#FF006E;--ye:#FFE600;
+  --gr:#00FF41;--pu:#BF00FF;
+  --text:#e4f0f9;--dim:#9bb1c7;--bright:#f2f8ff;
+  --border:rgba(0,245,255,.15);--bordermg:rgba(255,0,110,.25);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;font-size:18px;line-height:1.85;overflow-x:hidden;cursor:none;}
+
+/* ── BOOT LOADER ─────────────────────── */
+#boot{
+  position:fixed;inset:0;z-index:99999;
+  background:var(--bg);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1.8rem;
+  padding:2rem;cursor:default;
+  transition:opacity .8s ease;
+}
+#boot.out{opacity:0;pointer-events:none;}
+.boot-logo{
+  font-family:'Orbitron',monospace;font-size:clamp(2rem,6vw,4rem);font-weight:900;
+  color:var(--cy);letter-spacing:.2em;text-align:center;
+  text-shadow:0 0 40px var(--cy),0 0 80px rgba(0,245,255,.3);
+}
+.boot-logo em{color:var(--mg);font-style:normal;text-shadow:0 0 40px var(--mg);}
+.boot-lines{
+  font-family:'Share Tech Mono',monospace;font-size:.78rem;color:var(--gr);
+  width:min(560px,90vw);min-height:9rem;
+  display:flex;flex-direction:column;gap:.35rem;
+}
+.boot-line{opacity:0;transform:translateX(-10px);transition:opacity .2s,transform .2s;}
+.boot-line.show{opacity:1;transform:translateX(0);}
+.boot-line.ok{color:var(--cy);}
+.boot-bar-wrap{width:min(560px,90vw);}
+.boot-bar-label{
+  font-family:'Share Tech Mono',monospace;font-size:.62rem;color:var(--dim);
+  display:flex;justify-content:space-between;margin-bottom:.4rem;letter-spacing:.1em;
+}
+.boot-bar{height:2px;background:rgba(0,245,255,.1);position:relative;overflow:hidden;}
+.boot-fill{
+  height:100%;width:0;
+  background:linear-gradient(90deg,var(--cy),var(--mg),var(--cy));
+  background-size:200%;animation:shimmer 1.5s linear infinite;
+  transition:width .15s linear;
+  box-shadow:0 0 12px var(--cy);
+}
+@keyframes shimmer{to{background-position:200% center;}}
+.boot-skip{
+  font-family:'Share Tech Mono',monospace;font-size:.62rem;color:var(--dim);
+  letter-spacing:.15em;margin-top:.5rem;animation:blink 1.5s infinite;
+}
+@keyframes blink{50%{opacity:.2;}}
+
+/* ── CURSOR ─────────────────────────── */
+#cdot{width:10px;height:10px;background:var(--cy);border-radius:50%;position:fixed;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);box-shadow:0 0 12px var(--cy),0 0 28px rgba(0,245,255,.5);transition:width .15s,height .15s,background .15s;}
+#cring{width:40px;height:40px;border:1.5px solid var(--cy);border-radius:50%;position:fixed;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);opacity:.5;box-shadow:0 0 10px var(--cy);}
+#cdot.hov{width:16px;height:16px;background:var(--mg);box-shadow:0 0 22px var(--mg),0 0 44px var(--mg);}
+#cring.hov{width:56px;height:56px;border-color:var(--mg);box-shadow:0 0 18px var(--mg);}
+.tdot{position:fixed;pointer-events:none;z-index:9997;border-radius:50%;background:var(--cy);opacity:.4;transform:translate(-50%,-50%);}
+
+/* ── BG LAYERS ───────────────────────── */
+#matrix-canvas{position:fixed;inset:0;z-index:0;opacity:.14;pointer-events:none;}
+body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;background-image:linear-gradient(rgba(0,245,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(0,245,255,.025) 1px,transparent 1px);background-size:52px 52px;}
+body::after{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;background:repeating-linear-gradient(to bottom,transparent,transparent 2px,rgba(0,0,0,.05) 2px,rgba(0,0,0,.05) 4px);}
+.page{position:relative;z-index:1;opacity:0;transition:opacity .6s ease;}
+.page.visible{opacity:1;}
+
+/* ── NAV ─────────────────────────────── */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:.95rem 3.5rem;background:rgba(3,1,13,.94);border-bottom:1px solid var(--border);backdrop-filter:blur(24px);}
+.nav-logo{font-family:'Orbitron',monospace;font-size:.88rem;font-weight:700;color:var(--cy);letter-spacing:.14em;display:flex;align-items:center;gap:.5rem;}
+.nav-logo::before{content:'▶';color:var(--mg);font-size:.65rem;}
+.nav-links{display:flex;gap:1.8rem;list-style:none;}
+.nav-links a{color:var(--dim);text-decoration:none;font-family:'Share Tech Mono',monospace;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;transition:color .2s;position:relative;}
+.nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;right:0;height:1px;background:var(--cy);transform:scaleX(0);transition:transform .2s;}
+.nav-links a:hover{color:var(--cy);}
+.nav-links a:hover::after{transform:scaleX(1);}
+.nav-right{display:flex;align-items:center;gap:1rem;}
+.status-pill{display:flex;align-items:center;gap:.5rem;font-family:'Share Tech Mono',monospace;font-size:.62rem;letter-spacing:.12em;color:var(--gr);border:1px solid rgba(0,255,65,.3);padding:.35rem .9rem;}
+.sdot{width:6px;height:6px;border-radius:50%;background:var(--gr);box-shadow:0 0 7px var(--gr);animation:blink 1.5s infinite;}
+.nav-btn{font-family:'Orbitron',monospace;font-size:.68rem;font-weight:700;color:var(--bg);background:var(--cy);padding:.55rem 1.4rem;text-decoration:none;letter-spacing:.1em;clip-path:polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%);transition:all .2s;box-shadow:0 0 18px rgba(0,245,255,.45);}
+.nav-btn:hover{background:var(--mg);box-shadow:0 0 28px rgba(255,0,110,.65);}
+
+/* ── HERO ────────────────────────────── */
+.hero{min-height:100vh;display:grid;grid-template-columns:1.1fr .9fr;align-items:center;padding:7.5rem 3.5rem 5rem;gap:3.5rem;position:relative;overflow:hidden;}
+.hero::after{content:'';position:absolute;top:-20%;right:-8%;width:700px;height:700px;background:radial-gradient(circle,rgba(0,245,255,.055) 0%,transparent 70%);pointer-events:none;}
+.hero-left{display:flex;flex-direction:column;gap:1.4rem;}
+.hero-left>*{opacity:0;animation:fadeUp .7s forwards;}
+.hero-left>*:nth-child(1){animation-delay:.1s;}.hero-left>*:nth-child(2){animation-delay:.22s;}.hero-left>*:nth-child(3){animation-delay:.34s;}.hero-left>*:nth-child(4){animation-delay:.46s;}.hero-left>*:nth-child(5){animation-delay:.58s;}.hero-left>*:nth-child(6){animation-delay:.7s;}.hero-left>*:nth-child(7){animation-delay:.82s;}.hero-left>*:nth-child(8){animation-delay:.94s;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(26px);}to{opacity:1;transform:translateY(0);}}
+.sys-label{font-family:'Share Tech Mono',monospace;font-size:.73rem;letter-spacing:.28em;text-transform:uppercase;color:var(--gr);display:flex;align-items:center;gap:.8rem;}
+.sys-label::before{content:'[SYS]';color:var(--dim);}
+.hero-name{font-family:'Orbitron',monospace;font-size:clamp(2.6rem,5.5vw,4.8rem);font-weight:900;line-height:.95;color:var(--bright);text-transform:uppercase;}
+.hero-name .outline{display:block;color:transparent;-webkit-text-stroke:1.5px var(--mg);text-shadow:0 0 24px rgba(255,0,110,.38);}
+.hero-sub{font-family:'Share Tech Mono',monospace;font-size:.88rem;color:var(--cy);letter-spacing:.15em;text-shadow:0 0 12px var(--cy);}
+.daw-badge{display:inline-flex;align-items:center;gap:.7rem;font-family:'Orbitron',monospace;font-size:.73rem;font-weight:700;letter-spacing:.14em;padding:.65rem 1.3rem;border:1px solid rgba(255,230,0,.55);color:var(--ye);background:rgba(255,230,0,.07);box-shadow:0 0 20px rgba(255,230,0,.18);width:fit-content;}
+.daw-badge::before{content:'★';font-size:.9rem;}
+.hero-bio{font-size:1.05rem;line-height:1.85;color:var(--dim);padding-left:1.3rem;position:relative;}
+.hero-bio::before{content:'';position:absolute;left:0;top:0;bottom:0;width:2.5px;background:linear-gradient(to bottom,var(--mg),var(--cy),var(--pu));box-shadow:0 0 8px var(--mg);}
+.hero-tags{display:flex;flex-wrap:wrap;gap:.5rem;}
+.htag{font-family:'Share Tech Mono',monospace;font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;padding:.42rem .9rem;border:1px solid rgba(0,245,255,.22);color:var(--dim);background:rgba(0,245,255,.04);clip-path:polygon(6px 0%,100% 0%,calc(100% - 6px) 100%,0% 100%);transition:all .25s;}
+.htag:hover{border-color:var(--cy);color:var(--cy);background:rgba(0,245,255,.1);transform:translateY(-2px);box-shadow:0 4px 14px rgba(0,245,255,.15);}
+.hero-btns{display:flex;gap:1rem;flex-wrap:wrap;}
+.btn-cy{font-family:'Orbitron',monospace;font-size:.73rem;font-weight:700;letter-spacing:.1em;padding:1rem 2.2rem;text-decoration:none;display:inline-flex;align-items:center;gap:.6rem;border:1px solid var(--cy);color:var(--cy);clip-path:polygon(10px 0%,100% 0%,calc(100% - 10px) 100%,0% 100%);position:relative;overflow:hidden;transition:color .25s,box-shadow .25s;box-shadow:0 0 18px rgba(0,245,255,.22);}
+.btn-cy::before{content:'';position:absolute;inset:0;background:linear-gradient(90deg,var(--cy),var(--mg));transform:translateX(-105%);transition:transform .3s;z-index:-1;}
+.btn-cy:hover{color:var(--bg);box-shadow:0 0 35px var(--cy);}
+.btn-cy:hover::before{transform:translateX(0);}
+.btn-mg{font-family:'Orbitron',monospace;font-size:.73rem;letter-spacing:.1em;padding:1rem 1.8rem;text-decoration:none;border:1px solid rgba(255,0,110,.45);color:var(--mg);clip-path:polygon(10px 0%,100% 0%,calc(100% - 10px) 100%,0% 100%);transition:all .25s;box-shadow:0 0 14px rgba(255,0,110,.18);}
+.btn-mg:hover{border-color:var(--mg);box-shadow:0 0 28px rgba(255,0,110,.55);background:rgba(255,0,110,.1);}
+.hero-social{display:flex;gap:.8rem;flex-wrap:wrap;}
+.soc-sm{display:flex;align-items:center;gap:.55rem;font-family:'Share Tech Mono',monospace;font-size:.68rem;letter-spacing:.08em;color:var(--dim);text-decoration:none;border:1px solid var(--border);padding:.45rem .9rem;transition:all .25s;}
+.soc-sm svg{width:15px;height:15px;fill:currentColor;flex-shrink:0;}
+.soc-sm.li:hover{color:#0A66C2;border-color:#0A66C2;background:rgba(10,102,194,.08);box-shadow:0 0 14px rgba(10,102,194,.3);}
+.soc-sm.fb:hover{color:#1877F2;border-color:#1877F2;background:rgba(24,119,242,.08);box-shadow:0 0 14px rgba(24,119,242,.3);}
+
+/* HOLO CARD */
+.holo-card{background:var(--bg2);border:1px solid var(--border);padding:2.8rem;position:relative;overflow:hidden;transition:box-shadow .3s;opacity:0;animation:fadeUp .7s .4s forwards;}
+.holo-scan{position:absolute;left:0;right:0;height:2px;top:0;background:linear-gradient(90deg,transparent,var(--cy),var(--mg),var(--cy),transparent);animation:scan 4s linear infinite;}
+@keyframes scan{to{top:100%;}}
+.holo-shine{position:absolute;inset:0;pointer-events:none;}
+.card-tag{font-family:'Share Tech Mono',monospace;font-size:.65rem;letter-spacing:.28em;text-transform:uppercase;color:var(--mg);margin-bottom:1.5rem;display:flex;align-items:center;gap:.7rem;}
+.card-tag::before{content:'';width:1.5rem;height:1px;background:var(--mg);box-shadow:0 0 7px var(--mg);}
+.card-name{font-family:'Orbitron',monospace;font-size:clamp(1.4rem,2.4vw,2.1rem);font-weight:900;color:var(--bright);line-height:1;margin-bottom:.45rem;text-transform:uppercase;}
+.card-name span{display:block;color:transparent;-webkit-text-stroke:1.5px var(--cy);text-shadow:0 0 22px var(--cy);}
+.card-roles{font-family:'Share Tech Mono',monospace;font-size:.58rem;color:var(--cy);letter-spacing:.1em;margin-bottom:.5rem;text-shadow:0 0 8px var(--cy);}
+.card-loc{font-family:'Share Tech Mono',monospace;font-size:.64rem;color:var(--dim);letter-spacing:.08em;margin-bottom:1.4rem;}
+.card-div{height:1px;margin:1.3rem 0;background:linear-gradient(90deg,var(--mg),var(--cy),transparent);box-shadow:0 0 7px var(--cy);}
+.card-stats{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.4rem;}
+.cs{border:1px solid var(--border);padding:.9rem;background:rgba(0,245,255,.03);transition:all .3s;}
+.cs:hover{border-color:var(--cy);box-shadow:0 0 18px rgba(0,245,255,.22);}
+.cs-n{font-family:'Orbitron',monospace;font-size:1.9rem;font-weight:700;color:var(--cy);text-shadow:0 0 18px var(--cy);line-height:1;}
+.cs-l{font-family:'Share Tech Mono',monospace;font-size:.56rem;color:var(--dim);letter-spacing:.14em;text-transform:uppercase;margin-top:.25rem;}
+.card-social{display:flex;gap:.6rem;flex-wrap:wrap;margin-bottom:1.2rem;}
+.cs-soc{display:flex;align-items:center;gap:.5rem;font-family:'Share Tech Mono',monospace;font-size:.62rem;letter-spacing:.06em;color:var(--dim);text-decoration:none;border:1px solid var(--border);padding:.42rem .85rem;transition:all .25s;}
+.cs-soc:hover{color:var(--cy);border-color:var(--cy);background:rgba(0,245,255,.06);}
+.cs-soc svg{width:13px;height:13px;fill:currentColor;flex-shrink:0;}
+.card-avail{padding:.9rem;background:rgba(0,0,0,.4);border:1px solid rgba(255,230,0,.22);display:flex;align-items:flex-start;gap:.9rem;font-family:'Share Tech Mono',monospace;font-size:.66rem;color:var(--ye);line-height:1.6;}
+.card-avail strong{display:block;font-size:.72rem;margin-bottom:.2rem;}
+
+/* MARQUEE */
+.mq{overflow:hidden;border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:.8rem 0;background:rgba(0,0,0,.42);position:relative;z-index:1;}
+.mq-track{display:flex;gap:2.5rem;width:max-content;animation:mq 32s linear infinite;}
+.mq-item{font-family:'Share Tech Mono',monospace;font-size:.67rem;letter-spacing:.18em;text-transform:uppercase;color:var(--dim);white-space:nowrap;display:inline-flex;align-items:center;gap:1.8rem;transition:color .2s;}
+.mq-item:hover{color:var(--cy);}
+.mq-sep{color:var(--mg);opacity:.6;}
+@keyframes mq{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+
+/* SECTIONS */
+section{padding:5.5rem 3.5rem;border-top:1px solid var(--border);position:relative;z-index:1;}
+.sec-head{display:flex;align-items:center;gap:1.5rem;margin-bottom:3.5rem;}
+.sec-idx{font-family:'Orbitron',monospace;font-size:.7rem;font-weight:700;color:var(--mg);border:1px solid var(--bordermg);padding:.35rem .8rem;text-shadow:0 0 9px var(--mg);flex-shrink:0;}
+.sec-title{font-family:'Orbitron',monospace;font-size:clamp(1.7rem,3.2vw,2.8rem);font-weight:700;color:var(--bright);letter-spacing:.05em;text-transform:uppercase;}
+.sec-title .acc{color:var(--cy);text-shadow:0 0 18px var(--cy);}
+.sec-rule{flex:1;height:1px;background:linear-gradient(90deg,var(--bordermg),var(--border),transparent);}
+
+/* INFO CARDS */
+.info-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.3rem;margin-bottom:3.5rem;}
+.info-card{border:1px solid var(--border);padding:1.8rem;background:var(--bg2);position:relative;overflow:hidden;opacity:0;transform:translateY(18px);transition:opacity .5s,transform .5s,border-color .3s,box-shadow .3s;}
+.info-card.vis{opacity:1;transform:translateY(0);}
+.info-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--cy),var(--mg));transform:scaleX(0);transform-origin:left;transition:transform .4s;}
+.info-card:hover{border-color:rgba(0,245,255,.35);box-shadow:0 0 28px rgba(0,245,255,.09);}
+.info-card:hover::before{transform:scaleX(1);}
+.ic-icon{font-size:1.8rem;margin-bottom:.9rem;}
+.ic-title{font-family:'Orbitron',monospace;font-size:.73rem;font-weight:700;color:var(--cy);letter-spacing:.14em;text-transform:uppercase;margin-bottom:.7rem;}
+.ic-text{font-size:1.05rem;color:var(--dim);line-height:1.85;}
+.ic-text strong{color:var(--text);}
+
+/* NEURAL */
+#neural-canvas{width:100%;height:580px;display:block;border:1px solid var(--border);background:rgba(0,0,0,.32);}
+.neural-hint{font-family:'Share Tech Mono',monospace;text-align:center;font-size:.74rem;color:var(--dim);letter-spacing:.18em;margin-top:1.2rem;animation:pulseOp 3s infinite;}
+@keyframes pulseOp{0%,100%{opacity:1;}50%{opacity:.3;}}
+
+/* SKILLS */
+.skills-wrap{background:var(--bg2);}
+.skills-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);}
+.sk-block{background:var(--bg);padding:2.1rem;opacity:0;transform:translateY(20px);transition:opacity .5s,transform .5s,background .25s;}
+.sk-block.vis{opacity:1;transform:translateY(0);}
+.sk-block:hover{background:var(--bg3);}
+.sk-head{display:flex;align-items:center;gap:.8rem;margin-bottom:1.4rem;padding-bottom:.9rem;border-bottom:1px solid var(--border);}
+.sk-icon{font-size:1.1rem;}
+.sk-name{font-family:'Orbitron',monospace;font-size:.67rem;letter-spacing:.13em;text-transform:uppercase;color:var(--cy);font-weight:700;}
+.sk-rows{display:flex;flex-direction:column;gap:.78rem;}
+.sk-row{display:grid;grid-template-columns:1fr 65px 36px;align-items:center;gap:.55rem;}
+.sk-lbl{font-size:.88rem;color:var(--dim);}
+.sk-bar{height:2px;background:rgba(255,255,255,.05);position:relative;overflow:hidden;}
+.sk-bar::after{content:'';position:absolute;top:0;left:0;height:100%;width:0;transition:width 1.5s cubic-bezier(.25,1,.5,1);background:linear-gradient(90deg,var(--cy),rgba(0,245,255,.3));box-shadow:0 0 7px var(--cy);}
+.sk-bar.on::after{width:var(--w,70%);}
+.sk-bar.mg::after{background:linear-gradient(90deg,var(--mg),rgba(255,0,110,.3));box-shadow:0 0 7px var(--mg);}
+.sk-bar.pu::after{background:linear-gradient(90deg,var(--pu),rgba(191,0,255,.3));box-shadow:0 0 7px var(--pu);}
+.sk-bar.ye::after{background:linear-gradient(90deg,var(--ye),rgba(255,230,0,.3));box-shadow:0 0 7px var(--ye);}
+.sk-pct{font-family:'Share Tech Mono',monospace;font-size:.66rem;color:var(--cy);text-align:right;}
+.sk-pct.mg{color:var(--mg);}.sk-pct.pu{color:var(--pu);}.sk-pct.ye{color:var(--ye);}
+
+/* ── PORTFOLIO ───────────────────────── */
+.portfolio-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;}
+.pf-card{
+  position:relative;overflow:hidden;
+  background:var(--bg2);border:1px solid var(--border);
+  opacity:0;transform:translateY(28px);
+  transition:opacity .55s,transform .55s,border-color .3s,box-shadow .3s;
+}
+.pf-card.vis{opacity:1;transform:translateY(0);}
+.pf-card:hover{border-color:rgba(0,245,255,.45);box-shadow:0 0 50px rgba(0,245,255,.12),0 20px 60px rgba(0,0,0,.5);}
+.pf-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;z-index:2;background:linear-gradient(90deg,transparent,var(--cy),var(--mg),transparent);transform:scaleX(0);transform-origin:left;transition:transform .5s;}
+.pf-card:hover::before{transform:scaleX(1);}
+
+/* Preview frame */
+.pf-preview{
+  height:200px;position:relative;overflow:hidden;
+  background:var(--bg3);border-bottom:1px solid var(--border);
+}
+.pf-iframe-wrap{
+  width:100%;height:100%;position:absolute;inset:0;
+  transform:scale(.5) translate(-50%,-50%);transform-origin:0 0;
+  width:200%;height:200%;
+  pointer-events:none;
+  transition:transform .5s ease;
+}
+.pf-preview iframe{
+  width:100%;height:100%;border:none;
+  display:block;
+}
+.pf-overlay{
+  position:absolute;inset:0;z-index:1;
+  background:linear-gradient(to bottom,transparent 50%,var(--bg2) 100%);
+  transition:opacity .3s;
+}
+.pf-card:hover .pf-overlay{opacity:.5;}
+.pf-scan{position:absolute;left:0;right:0;height:1px;top:0;z-index:1;background:linear-gradient(90deg,transparent,var(--cy),transparent);animation:scan 3s linear infinite;opacity:.7;}
+
+/* Mockup fallback (shown if iframe blocked) */
+.pf-mock{
+  width:100%;height:100%;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:.8rem;position:relative;overflow:hidden;
+}
+.pf-mock-bg{
+  position:absolute;inset:0;
+  background:linear-gradient(135deg,var(--bg3),var(--bg2));
+}
+.pf-mock-lines{position:absolute;inset:0;opacity:.15;}
+.pf-mock-title{
+  font-family:'Orbitron',monospace;font-size:1.1rem;font-weight:700;
+  color:var(--cy);text-shadow:0 0 20px var(--cy);
+  position:relative;z-index:1;letter-spacing:.1em;text-align:center;
+}
+.pf-mock-url{
+  font-family:'Share Tech Mono',monospace;font-size:.65rem;
+  color:var(--dim);position:relative;z-index:1;letter-spacing:.1em;
+}
+.pf-mock-tags{display:flex;gap:.4rem;flex-wrap:wrap;justify-content:center;position:relative;z-index:1;}
+.pf-mock-tag{font-family:'Share Tech Mono',monospace;font-size:.52rem;letter-spacing:.08em;padding:.2rem .55rem;border:1px solid rgba(0,245,255,.3);color:var(--cy);background:rgba(0,245,255,.06);}
+.pf-mock-icon{font-size:2.8rem;position:relative;z-index:1;animation:float 3s ease-in-out infinite;}
+@keyframes float{0%,100%{transform:translateY(0);}50%{transform:translateY(-8px);}}
+.pf-mock-grid{
+  position:absolute;inset:0;
+  background-image:linear-gradient(rgba(0,245,255,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(0,245,255,.06) 1px,transparent 1px);
+  background-size:24px 24px;
+}
+
+/* Card body */
+.pf-body{padding:1.5rem 1.7rem 1.7rem;}
+.pf-type{font-family:'Share Tech Mono',monospace;font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--mg);margin-bottom:.6rem;display:flex;align-items:center;gap:.5rem;}
+.pf-type::before{content:'';width:1rem;height:1px;background:var(--mg);box-shadow:0 0 5px var(--mg);}
+.pf-title{font-family:'Orbitron',monospace;font-size:1rem;font-weight:700;color:var(--bright);margin-bottom:.6rem;letter-spacing:.05em;}
+.pf-desc{font-size:1rem;color:var(--dim);line-height:1.8;margin-bottom:1.1rem;}
+.pf-pills{display:flex;flex-wrap:wrap;gap:.35rem;margin-bottom:1.2rem;}
+.pp{font-family:'Share Tech Mono',monospace;font-size:.58rem;letter-spacing:.08em;padding:.22rem .58rem;background:rgba(0,245,255,.06);border:1px solid rgba(0,245,255,.22);color:var(--cy);}
+.pf-link{
+  display:inline-flex;align-items:center;gap:.6rem;
+  font-family:'Share Tech Mono',monospace;font-size:.68rem;letter-spacing:.1em;
+  color:var(--cy);text-decoration:none;
+  padding:.6rem 1.2rem;border:1px solid rgba(0,245,255,.35);
+  clip-path:polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%);
+  transition:all .25s;
+}
+.pf-link:hover{background:rgba(0,245,255,.12);box-shadow:0 0 20px rgba(0,245,255,.3);border-color:var(--cy);}
+.pf-link svg{width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2;}
+
+/* Special highlight card */
+.pf-card.special{border-color:rgba(255,230,0,.3);}
+.pf-card.special .pf-type{color:var(--ye);}
+.pf-card.special .pf-type::before{background:var(--ye);box-shadow:0 0 5px var(--ye);}
+.pf-card.special .pp{background:rgba(255,230,0,.06);border-color:rgba(255,230,0,.3);color:var(--ye);}
+.pf-card.special .pf-link{color:var(--ye);border-color:rgba(255,230,0,.4);}
+.pf-card.special .pf-link:hover{background:rgba(255,230,0,.1);box-shadow:0 0 20px rgba(255,230,0,.3);border-color:var(--ye);}
+.pf-card.special::before{background:linear-gradient(90deg,transparent,var(--ye),var(--mg),transparent);}
+
+/* EXPERIENCE */
+.exp-stack{display:flex;flex-direction:column;gap:.9rem;}
+.exp-card{display:grid;grid-template-columns:185px 1fr;border:1px solid var(--border);background:var(--bg2);position:relative;overflow:hidden;opacity:0;transform:translateX(-32px);transition:opacity .5s,transform .5s,border-color .3s,box-shadow .3s;}
+.exp-card.vis{opacity:1;transform:translateX(0);}
+.exp-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--cy),var(--mg),transparent);transform:scaleX(0);transform-origin:left;transition:transform .5s;}
+.exp-card:hover{border-color:rgba(0,245,255,.4);box-shadow:0 0 32px rgba(0,245,255,.09);}
+.exp-card:hover::before{transform:scaleX(1);}
+.exp-left{padding:1.7rem 1.2rem;border-right:1px solid var(--border);display:flex;flex-direction:column;gap:.5rem;background:rgba(0,0,0,.22);}
+.exp-yr{font-family:'Orbitron',monospace;font-size:.7rem;font-weight:700;color:var(--cy);text-shadow:0 0 9px var(--cy);}
+.exp-co{font-size:.93rem;color:var(--dim);line-height:1.55;}
+.exp-right{padding:1.7rem 2.3rem;}
+.exp-t{font-family:'Rajdhani',sans-serif;font-size:1.28rem;font-weight:700;color:var(--bright);margin-bottom:.78rem;letter-spacing:.04em;}
+.exp-pills{display:flex;flex-wrap:wrap;gap:.35rem;margin-bottom:.95rem;}
+.ep{font-family:'Share Tech Mono',monospace;font-size:.62rem;letter-spacing:.08em;padding:.25rem .62rem;background:rgba(255,0,110,.08);border:1px solid rgba(255,0,110,.27);color:var(--mg);transition:all .2s;}
+.ep:hover{background:rgba(255,0,110,.2);box-shadow:0 0 9px rgba(255,0,110,.45);}
+.exp-ul{list-style:none;display:flex;flex-direction:column;gap:.38rem;}
+.exp-ul li{font-size:1.05rem;color:var(--dim);padding-left:1.3rem;position:relative;line-height:1.7;}
+.exp-ul li::before{content:'▸';position:absolute;left:0;color:var(--cy);font-size:.7rem;top:.22rem;}
+
+/* TRAINING */
+.tr-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);}
+.tr-item{background:var(--bg);padding:1.4rem 1.7rem;display:flex;align-items:flex-start;gap:.95rem;position:relative;overflow:hidden;opacity:0;transform:translateY(16px);transition:opacity .4s,transform .4s,background .2s;}
+.tr-item::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--cy),transparent);transform:scaleX(0);transition:transform .3s;}
+.tr-item.vis{opacity:1;transform:translateY(0);}
+.tr-item:hover{background:rgba(0,245,255,.04);}
+.tr-item:hover::after{transform:scaleX(1);}
+.tr-ico{color:var(--cy);font-size:.78rem;margin-top:.18rem;flex-shrink:0;font-family:'Share Tech Mono',monospace;}
+.tr-txt{font-size:1rem;color:var(--dim);line-height:1.7;}
+.tr-txt strong{display:block;color:var(--text);font-size:.97rem;margin-bottom:.18rem;}
+.tr-hi{border:1px solid rgba(255,230,0,.35)!important;background:rgba(255,230,0,.045)!important;}
+.tr-hi .tr-ico{color:var(--ye);}
+.tr-hi strong{color:var(--ye)!important;}
+
+/* CONTACT */
+.contact-wrap{text-align:center;background:var(--bg2);position:relative;overflow:hidden;}
+.contact-wrap::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 50% 50%,rgba(255,0,110,.055),transparent);pointer-events:none;}
+.contact-pre{font-family:'Share Tech Mono',monospace;font-size:.68rem;color:var(--cy);letter-spacing:.28em;text-transform:uppercase;margin-bottom:1.5rem;display:flex;align-items:center;justify-content:center;gap:1rem;}
+.contact-pre::before,.contact-pre::after{content:'';width:3rem;height:1px;background:var(--bordermg);}
+.contact-h{font-family:'Orbitron',monospace;font-size:clamp(2.2rem,5.5vw,4.5rem);font-weight:900;letter-spacing:-.02em;color:var(--bright);margin-bottom:1rem;line-height:1.05;text-transform:uppercase;}
+.contact-h span{color:transparent;-webkit-text-stroke:1.5px var(--mg);text-shadow:0 0 32px rgba(255,0,110,.42);}
+.contact-sub{font-size:1.05rem;color:var(--dim);margin-bottom:3rem;line-height:2.1;}
+.contact-links{display:flex;justify-content:center;gap:1rem;flex-wrap:wrap;margin-bottom:1.5rem;}
+.clink{display:flex;align-items:center;gap:.85rem;font-family:'Share Tech Mono',monospace;font-size:.74rem;letter-spacing:.08em;padding:1.05rem 2rem;border:1px solid var(--border);color:var(--dim);background:var(--bg);text-decoration:none;clip-path:polygon(10px 0%,100% 0%,calc(100% - 10px) 100%,0% 100%);transition:all .3s;}
+.clink:hover{border-color:var(--cy);color:var(--cy);background:rgba(0,245,255,.07);box-shadow:0 0 28px rgba(0,245,255,.22);}
+.clink svg{width:17px;height:17px;flex-shrink:0;}
+.social-row{display:flex;justify-content:center;gap:1rem;flex-wrap:wrap;margin-top:.5rem;}
+.soc-btn{display:flex;align-items:center;gap:.8rem;font-family:'Share Tech Mono',monospace;font-size:.72rem;letter-spacing:.1em;padding:.9rem 1.8rem;border:1px solid var(--border);color:var(--dim);text-decoration:none;clip-path:polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%);transition:all .3s;}
+.soc-btn svg{width:17px;height:17px;fill:currentColor;flex-shrink:0;}
+.soc-btn.li:hover{border-color:#0A66C2;color:#0A66C2;background:rgba(10,102,194,.09);box-shadow:0 0 22px rgba(10,102,194,.35);}
+.soc-btn.fb:hover{border-color:#1877F2;color:#1877F2;background:rgba(24,119,242,.09);box-shadow:0 0 22px rgba(24,119,242,.35);}
+
+footer{padding:1.8rem 3.5rem;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;position:relative;z-index:1;font-family:'Share Tech Mono',monospace;font-size:.7rem;color:var(--dim);}
+footer span{color:var(--cy);}
+::-webkit-scrollbar{width:3px;}::-webkit-scrollbar-track{background:var(--bg);}::-webkit-scrollbar-thumb{background:var(--mg);}
+
+@media(max-width:1100px){.skills-grid{grid-template-columns:repeat(2,1fr);}.portfolio-grid{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:960px){
+  .hero{grid-template-columns:1fr;padding:6.5rem 1.8rem 4rem;gap:2.5rem;}
+  nav{padding:.9rem 1.8rem;}.nav-links,.status-pill{display:none;}
+  section{padding:4rem 1.8rem;}
+  .info-grid{grid-template-columns:1fr;}
+  .skills-grid{grid-template-columns:1fr 1fr;}
+  .portfolio-grid{grid-template-columns:1fr;}
+  .exp-card{grid-template-columns:1fr;}
+  .exp-left{border-right:none;border-bottom:1px solid var(--border);}
+  .tr-grid{grid-template-columns:1fr 1fr;}
+  footer{flex-direction:column;gap:.5rem;text-align:center;padding:1.2rem 1.8rem;}
+}
+@media(max-width:580px){.skills-grid{grid-template-columns:1fr;}.tr-grid{grid-template-columns:1fr;}.info-grid{grid-template-columns:1fr;}}
+</style>
+</head>
 <body>
-    <h1>¡Hola! jcgm.dev ya está en GitHub</h1>
+
+<!-- BOOT LOADER -->
+<div id="boot">
+  <div class="boot-logo">JCGM<em>.DEV</em></div>
+  <div class="boot-lines" id="boot-lines"></div>
+  <div class="boot-bar-wrap">
+    <div class="boot-bar-label">
+      <span id="boot-status">INICIALIZANDO...</span>
+      <span id="boot-pct">0%</span>
+    </div>
+    <div class="boot-bar"><div class="boot-fill" id="boot-fill"></div></div>
+  </div>
+  <div class="boot-skip" id="boot-skip">[ CLICK PARA ENTRAR ]</div>
+</div>
+
+<!-- CURSOR -->
+<div id="cdot"></div>
+<div id="cring"></div>
+
+<!-- MATRIX -->
+<canvas id="matrix-canvas"></canvas>
+
+<div class="page" id="page">
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">JCGM // SysAdmin</div>
+  <ul class="nav-links">
+    <li><a href="#about">SOBRE MÍ</a></li>
+    <li><a href="#portfolio">PROYECTOS</a></li>
+    <li><a href="#skills">HABILIDADES</a></li>
+    <li><a href="#exp">EXPERIENCIA</a></li>
+    <li><a href="#train">FORMACIÓN</a></li>
+    <li><a href="#contact">CONTACTO</a></li>
+  </ul>
+  <div class="nav-right">
+    <div class="status-pill"><div class="sdot"></div>DISPONIBLE</div>
+    <a href="mailto:carlos.garridomolina@gmail.com" class="nav-btn">CONTRATAR</a>
+  </div>
+</nav>
+
+<!-- ════════ HERO ════════ -->
+<section class="hero" style="border:none!important;">
+  <div class="hero-left">
+    <div class="sys-label">PERFIL CARGADO // ACCESO AUTORIZADO</div>
+    <h1 class="hero-name">José Carlos<span class="outline">Garrido Molina</span></h1>
+    <div class="hero-sub" id="scramble-el">FULLSTACK SOLUTIONS ARCHITECT · SYSTEMS EXPERT</div>
+    <div class="daw-badge">FP GRADO SUPERIOR DAW · ARQUITECTO DE SOLUCIONES</div>
+    <p class="hero-bio">
+      Con más de <strong style="color:var(--bright)">20 años</strong> liderando infraestructuras críticas, he evolucionado hacia el diseño de arquitecturas FullStack modernas. Mi enfoque une la robustez de los sistemas con la agilidad del desarrollo de software, transformando necesidades complejas en soluciones digitales eficientes, escalables y orientadas a resultados.
+    </p>
+    <div class="hero-tags">
+      <span class="htag">Linux / BSD</span><span class="htag">Windows Server</span>
+      <span class="htag">WordPress</span><span class="htag">PHP / Java</span>
+      <span class="htag">HTML5 / CSS3 / JS</span><span class="htag">Adobe Suite</span>
+      <span class="htag">Google Ads</span><span class="htag">SEO / SEM</span>
+      <span class="htag">Prestashop</span><span class="htag">Dolibarr ERP</span>
+      <span class="htag">Redes LAN/WLAN</span><span class="htag">FullStack Dev</span>
+    </div>
+    <div class="hero-btns">
+      <a href="mailto:carlos.garridomolina@gmail.com" class="btn-cy">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        CONTACTAR
+      </a>
+      <a href="tel:+34665768241" class="btn-mg">▶ +34 665 768 241</a>
+      <a href="https://github.com/JCGM-DEV" target="_blank" class="btn-cy" style="border-color:var(--pu);color:var(--pu);box-shadow:0 0 18px rgba(191,0,255,.22);">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.042-1.416-4.042-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+        GITHUB
+      </a>
+    </div>
+    <div class="hero-social">
+      <a href="https://www.linkedin.com/in/jos%C3%A9-carlos-garrido-molina-4a7762140/" target="_blank" class="soc-sm li">
+        <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>LinkedIn
+      </a>
+      <a href="https://www.facebook.com/jose.c.molina.37" target="_blank" class="soc-sm fb">
+        <svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>Facebook
+      </a>
+    </div>
+  </div>
+
+  <div class="holo-card" id="holo-card">
+    <div class="holo-scan"></div>
+    <div class="holo-shine" id="holo-shine"></div>
+    <div class="card-tag">ID // SISTEMA ACTIVO</div>
+    <div class="card-name">José Carlos<span>Garrido Molina</span></div>
+    <div class="card-roles">SOLUTIONS ARCHITECT · FULLSTACK DEV · SYSADMIN</div>
+    <div class="card-loc">📍 Viso del Marqués · Ciudad Real · Movilidad Nacional</div>
+    <div class="card-div"></div>
+    <div class="card-stats">
+      <div class="cs"><div class="cs-n" id="cnt-years">0</div><div class="cs-l">Años activo</div></div>
+      <div class="cs"><div class="cs-n">6+</div><div class="cs-l">Plataformas CMS</div></div>
+      <div class="cs"><div class="cs-n">20+</div><div class="cs-l">Certificaciones</div></div>
+      <div class="cs"><div class="cs-n">500</div><div class="cs-l">Asistentes E2H</div></div>
+    </div>
+    <div class="card-social">
+      <a href="https://www.linkedin.com/in/jos%C3%A9-carlos-garrido-molina-4a7762140/" target="_blank" class="cs-soc">
+        <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>LinkedIn
+      </a>
+      <a href="https://www.facebook.com/jose.c.molina.37" target="_blank" class="cs-soc">
+        <svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>Facebook
+      </a>
+      <a href="mailto:carlos.garridomolina@gmail.com" class="cs-soc">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>Email
+      </a>
+      <a href="https://github.com/JCGM-DEV" target="_blank" class="cs-soc">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.372.79 1.103.79 2.222v3.293c0 .317.218.7.82.577 4.73-1.587 8.195-6.084 8.195-11.385 0-6.627-5.373-12-12-12"/></svg>GitHub
+      </a>
+    </div>
+    <div class="card-avail">
+      <span style="font-size:1.4rem;flex-shrink:0">⚡</span>
+      <div><strong>DISPONIBILIDAD INMEDIATA</strong>Carnet B1 · Vehículo propio · Movilidad nacional</div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="mq">
+  <div class="mq-track">
+    <span class="mq-item">Linux <span class="mq-sep">//</span></span><span class="mq-item">WordPress <span class="mq-sep">//</span></span><span class="mq-item">Adobe Creative Suite <span class="mq-sep">//</span></span><span class="mq-item">Google Ads <span class="mq-sep">//</span></span><span class="mq-item">WooCommerce <span class="mq-sep">//</span></span><span class="mq-item">Redes LAN/WLAN <span class="mq-sep">//</span></span><span class="mq-item">Java <span class="mq-sep">//</span></span><span class="mq-item">SEO &amp; SEM <span class="mq-sep">//</span></span><span class="mq-item">Prestashop <span class="mq-sep">//</span></span><span class="mq-item">Dolibarr ERP <span class="mq-sep">//</span></span><span class="mq-item">FreeBSD <span class="mq-sep">//</span></span><span class="mq-item">FP DAW EN CURSO <span class="mq-sep">//</span></span><span class="mq-item">FullStack Dev <span class="mq-sep">//</span></span>
+    <span class="mq-item">Linux <span class="mq-sep">//</span></span><span class="mq-item">WordPress <span class="mq-sep">//</span></span><span class="mq-item">Adobe Creative Suite <span class="mq-sep">//</span></span><span class="mq-item">Google Ads <span class="mq-sep">//</span></span><span class="mq-item">WooCommerce <span class="mq-sep">//</span></span><span class="mq-item">Redes LAN/WLAN <span class="mq-sep">//</span></span><span class="mq-item">Java <span class="mq-sep">//</span></span><span class="mq-item">SEO &amp; SEM <span class="mq-sep">//</span></span><span class="mq-item">Prestashop <span class="mq-sep">//</span></span><span class="mq-item">Dolibarr ERP <span class="mq-sep">//</span></span><span class="mq-item">FreeBSD <span class="mq-sep">//</span></span><span class="mq-item">FP DAW EN CURSO <span class="mq-sep">//</span></span><span class="mq-item">FullStack Dev <span class="mq-sep">//</span></span>
+  </div>
+</div>
+
+<!-- ════════ SOBRE MÍ + NEURAL ════════ -->
+<section id="about">
+  <div class="sec-head">
+    <span class="sec-idx">01</span>
+    <h2 class="sec-title">SOBRE <span class="acc">MÍ</span></h2>
+    <div class="sec-rule"></div>
+  </div>
+  <div class="info-grid">
+    <div class="info-card">
+      <div class="ic-icon">🖥️</div>
+      <div class="ic-title">Arquitectura de Sistemas</div>
+      <div class="ic-text">20 años optimizando infraestructuras críticas en entornos reales: <strong>Linux, FreeBSD y Windows Server</strong>. Gestión de redes corporativas para la <strong>Red de Bibliotecas de Sevilla</strong> y entornos municipales, garantizando alta disponibilidad.</div>
+    </div>
+    <div class="info-card">
+      <div class="ic-icon">🚀</div>
+      <div class="ic-title">Evolución FullStack</div>
+      <div class="ic-text">Integrando décadas de conocimiento en infraestructura con el desarrollo de software avanzado (<strong>DAW</strong>). Experto en convertir arquitecturas de servidor en aplicaciones robustas, escalables y modernas.</div>
+    </div>
+    <div class="info-card">
+      <div class="ic-icon">🎯</div>
+      <div class="ic-title">Visión Técnica 360°</div>
+      <div class="ic-text">Capacidad estratégica para gestionar el ciclo de vida completo de un producto digital: desde el despliegue y seguridad de la red hasta la lógica de negocio y el diseño de interfaces de alto impacto.</div>
+    </div>
+  </div>
+  <div class="sec-head" style="margin-bottom:2rem;">
+    <span class="sec-idx" style="font-size:.6rem">01B</span>
+    <h2 class="sec-title" style="font-size:1.6rem;">NEURAL <span class="acc">SKILL MAP</span></h2>
+    <div class="sec-rule"></div>
+  </div>
+  <canvas id="neural-canvas"></canvas>
+  <p class="neural-hint">⚡ PASA EL RATÓN SOBRE LOS NODOS PARA ACTIVAR LOS ARCOS ELÉCTRICOS</p>
+</section>
+
+<!-- ════════ PORTFOLIO ════════ -->
+<section id="portfolio" style="background:var(--bg2)">
+  <div class="sec-head">
+    <span class="sec-idx">02</span>
+    <h2 class="sec-title">TRABAJOS <span class="acc">REALIZADOS</span></h2>
+    <div class="sec-rule"></div>
+  </div>
+  <div class="portfolio-grid">
+    <!-- Garuto -->
+    <div class="pf-card">
+      <div class="pf-preview">
+        <div class="pf-scan"></div>
+        <div class="pf-mock">
+          <div class="pf-mock-bg"></div>
+          <div class="pf-mock-grid"></div>
+          <div class="pf-mock-icon">🚜</div>
+          <div class="pf-mock-title">GARUTO</div>
+          <div class="pf-mock-url">tituta.es/garuto</div>
+          <div class="pf-mock-tags">
+            <span class="pf-mock-tag">Agro-Tech</span>
+            <span class="pf-mock-tag">iOS & Web</span>
+            <span class="pf-mock-tag">SIEX</span>
+          </div>
+        </div>
+        <div class="pf-overlay"></div>
+      </div>
+      <div class="pf-body">
+        <div class="pf-type">Agro-Tech · iOS & Web App</div>
+        <div class="pf-title">Garuto — Cuaderno de Campo</div>
+        <div class="pf-desc">Digitalización integral 360° para la gestión agrícola avanzada: control geolocalizado de parcelas, trazabilidad SIEX, registro automatizado de labores (riego, abonado, fitosanitarios) y analítica de cultivos en tiempo real.</div>
+        <div class="pf-pills">
+          <span class="pp">Swift (iOS)</span><span class="pp">PHP</span>
+          <span class="pp">MariaDB</span><span class="pp">SIGPAC</span>
+          <span class="pp">API Management</span><span class="pp">UX/UI</span>
+        </div>
+        <a href="https://tituta.es/garuto" target="_blank" class="pf-link">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+          VISITAR PROYECTO
+        </a>
+      </div>
+    </div>
+
+    <!-- tituta.es -->
+    <div class="pf-card">
+      <div class="pf-preview">
+        <div class="pf-scan"></div>
+        <div class="pf-mock">
+          <div class="pf-mock-bg"></div>
+          <div class="pf-mock-grid"></div>
+          <div class="pf-mock-icon">🏪</div>
+          <div class="pf-mock-title">TITUTA.ES</div>
+          <div class="pf-mock-url">www.tituta.es</div>
+          <div class="pf-mock-tags">
+            <span class="pf-mock-tag">WooCommerce</span>
+            <span class="pf-mock-tag">WordPress</span>
+            <span class="pf-mock-tag">E-Commerce</span>
+          </div>
+        </div>
+        <div class="pf-overlay"></div>
+      </div>
+      <div class="pf-body">
+        <div class="pf-type">Tienda Online · E-Commerce</div>
+        <div class="pf-title">Tituta — Tienda Online</div>
+        <div class="pf-desc">Desarrollo completo de tienda de comercio electrónico sobre WordPress con WooCommerce. Diseño personalizado, catálogo de productos, pasarelas de pago integradas, SEO optimizado y gestión de envíos. Infraestructura alojada en servidor Linux con pila LAMP.</div>
+        <div class="pf-pills">
+          <span class="pp">WordPress</span><span class="pp">WooCommerce</span>
+          <span class="pp">PHP</span><span class="pp">MySQL</span>
+          <span class="pp">Linux/LAMP</span><span class="pp">SEO</span>
+          <span class="pp">Diseño Gráfico</span>
+        </div>
+        <a href="https://www.tituta.es" target="_blank" class="pf-link">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+          VISITAR WEB
+        </a>
+      </div>
+    </div>
+
+    <!-- museoavan.es -->
+    <div class="pf-card">
+      <div class="pf-preview">
+        <div class="pf-scan"></div>
+        <div class="pf-mock">
+          <div class="pf-mock-bg"></div>
+          <div class="pf-mock-grid"></div>
+          <div class="pf-mock-icon">🦕</div>
+          <div class="pf-mock-title">MUSEOAVAN.ES</div>
+          <div class="pf-mock-url">www.museoavan.es</div>
+          <div class="pf-mock-tags">
+            <span class="pf-mock-tag">WordPress</span>
+            <span class="pf-mock-tag">Dolibarr ERP</span>
+            <span class="pf-mock-tag">Museo</span>
+          </div>
+        </div>
+        <div class="pf-overlay"></div>
+      </div>
+      <div class="pf-body">
+        <div class="pf-type">Web Institucional · ERP/CRM</div>
+        <div class="pf-title">Museo Ciencias Naturales AVAN</div>
+        <div class="pf-desc">Diseño y desarrollo web del Museo de Ciencias Naturales AVAN. Implantación del sistema ERP/CRM Dolibarr para gestión interna, control de stock y colección museística. Configuración completa de hosting, dominio e infraestructura digital.</div>
+        <div class="pf-pills">
+          <span class="pp">WordPress</span><span class="pp">Dolibarr ERP</span>
+          <span class="pp">Linux</span><span class="pp">Base de datos</span>
+          <span class="pp">Hosting</span><span class="pp">CRM</span>
+        </div>
+        <a href="https://www.museoavan.es" target="_blank" class="pf-link">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+          VISITAR WEB
+        </a>
+      </div>
+    </div>
+
+    <!-- tituta.es/daw — SPECIAL CARD -->
+    <div class="pf-card special">
+      <div class="pf-preview">
+        <div class="pf-scan" style="background:linear-gradient(90deg,transparent,var(--ye),transparent);"></div>
+        <div class="pf-mock">
+          <div class="pf-mock-bg" style="background:linear-gradient(135deg,#0d0920,#080514);"></div>
+          <div class="pf-mock-grid" style="background-image:linear-gradient(rgba(255,230,0,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(255,230,0,.06) 1px,transparent 1px);background-size:24px 24px;"></div>
+          <div class="pf-mock-icon" style="animation-delay:.5s">🎓</div>
+          <div class="pf-mock-title" style="color:var(--ye);text-shadow:0 0 20px var(--ye)">PLATAFORMA DAW</div>
+          <div class="pf-mock-url">tituta.es/daw</div>
+          <div class="pf-mock-tags">
+            <span class="pf-mock-tag" style="border-color:rgba(255,230,0,.4);color:var(--ye);background:rgba(255,230,0,.08)">FP DAW</span>
+            <span class="pf-mock-tag" style="border-color:rgba(255,230,0,.4);color:var(--ye);background:rgba(255,230,0,.08)">Aprendizaje</span>
+            <span class="pf-mock-tag" style="border-color:rgba(255,230,0,.4);color:var(--ye);background:rgba(255,230,0,.08)">Interactivo</span>
+          </div>
+        </div>
+        <div class="pf-overlay" style="background:linear-gradient(to bottom,transparent 50%,var(--bg2) 100%)"></div>
+      </div>
+      <div class="pf-body">
+        <div class="pf-type">★ Proyecto Educativo · En Desarrollo</div>
+        <div class="pf-title">Sistema de Aprendizaje DAW</div>
+        <div class="pf-desc">Plataforma interactiva de aprendizaje desarrollada como proyecto del FP Grado Superior DAW. Sistema educativo con ejercicios, recursos y seguimiento del progreso. Demuestra aplicación práctica de los conocimientos adquiridos en el ciclo formativo.</div>
+        <div class="pf-pills">
+          <span class="pp">HTML5</span><span class="pp">CSS3</span>
+          <span class="pp">JavaScript</span><span class="pp">PHP</span>
+          <span class="pp">MySQL</span><span class="pp">UX/UI</span>
+          <span class="pp">E-Learning</span>
+        </div>
+        <a href="https://www.tituta.es/daw" target="_blank" class="pf-link">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+          VER PLATAFORMA
+        </a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ════════ SKILLS ════════ -->
+<section id="skills">
+  <div class="sec-head">
+    <span class="sec-idx">03</span>
+    <h2 class="sec-title">ARSENAL DE <span class="acc">CONOCIMIENTOS</span></h2>
+    <div class="sec-rule"></div>
+  </div>
+  <div class="skills-grid">
+    <div class="sk-block">
+      <div class="sk-head"><span class="sk-icon">🖥️</span><span class="sk-name">Sistemas &amp; Infraestructura</span></div>
+      <div class="sk-rows">
+        <div class="sk-row"><span class="sk-lbl">Linux (Debian/Ubuntu/CentOS)</span><span class="sk-bar" style="--w:95%"></span><span class="sk-pct">95%</span></div>
+        <div class="sk-row"><span class="sk-lbl">FreeBSD</span><span class="sk-bar" style="--w:90%"></span><span class="sk-pct">90%</span></div>
+        <div class="sk-row"><span class="sk-lbl">Windows Server</span><span class="sk-bar" style="--w:92%"></span><span class="sk-pct">92%</span></div>
+        <div class="sk-row"><span class="sk-lbl">Servidores LAMP / LEMP</span><span class="sk-bar" style="--w:88%"></span><span class="sk-pct">88%</span></div>
+        <div class="sk-row"><span class="sk-lbl">Hardware &amp; Reparación</span><span class="sk-bar" style="--w:93%"></span><span class="sk-pct">93%</span></div>
+        <div class="sk-row"><span class="sk-lbl">Virtualización</span><span class="sk-bar" style="--w:82%"></span><span class="sk-pct">82%</span></div>
+        <div class="sk-row"><span class="sk-lbl">Shell Scripting / Bash</span><span class="sk-bar" style="--w:85%"></span><span class="sk-pct">85%</span></div>
+      </div>
+    </div>
+    <div class="sk-block">
+      <div class="sk-head"><span class="sk-icon">🌐</span><span class="sk-name">Redes &amp; Seguridad</span></div>
+      <div class="sk-rows">
+        <div class="sk-row"><span class="sk-lbl">Redes LAN / WLAN</span><span class="sk-bar" style="--w:90%"></span><span class="sk-pct">90%</span></div>
+        <div class="sk-row"><span class="sk-lbl">TCP/IP · DNS · DHCP</span><span class="sk-bar" style="--w:87%"></span><span class="sk-pct">87%</span></div>
+        <div class="sk-row"><span class="sk-lbl">Firewall &amp; Seguridad IT</span><span class="sk-bar" style="--w:84%"></span><span class="sk-pct">84%</span></div>
+        <div class="sk-row"><span class="sk-lbl">VPN &amp; SSH</span><span class="sk-bar" style="--w:82%"></span><span class="sk-pct">82%</span></div>
+        <div class="sk-row"><span class="sk-lbl">Administración Servidores</span><span class="sk-bar" style="--w:90%"></span><span class="sk-pct">90%</span></div>
+        <div class="sk-row"><span class="sk-lbl">Office 365 / Google Workspace</span><span class="sk-bar" style="--w:88%"></span><span class="sk-pct">88%</span></div>
+      </div>
+    </div>
+    <div class="sk-block" style="border:1px solid rgba(255,230,0,.3);background:rgba(255,230,0,.025);">
+      <div class="sk-head"><span class="sk-icon">★</span><span class="sk-name" style="color:var(--ye)">Desarrollo Web · FP DAW</span></div>
+      <div class="sk-rows">
+        <div class="sk-row"><span class="sk-lbl">HTML5 / CSS3</span><span class="sk-bar ye" style="--w:88%"></span><span class="sk-pct ye">88%</span></div>
+        <div class="sk-row"><span class="sk-lbl">JavaScript (ES6+)</span><span class="sk-bar ye" style="--w:82%"></span><span class="sk-pct ye">82%</span></div>
+        <div class="sk-row"><span class="sk-lbl">PHP</span><span class="sk-bar ye" style="--w:85%"></span><span class="sk-pct ye">85%</span></div>
+        <div class="sk-row"><span class="sk-lbl">Java (Certificado)</span><span class="sk-bar ye" style="--w:80%"></span><span class="sk-pct ye">80%</span></div>
+        <div class="sk-row"><span class="sk-lbl">SQL / Bases de datos</span><span class="sk-bar ye" style="--w:78%"></span><span class="sk-pct ye">78%</span></div>
+        <div class="sk-row"><span class="sk-lbl">FullStack (en formación)</span><span class="sk-bar ye" style="--w:72%"></span><span class="sk-pct ye">72%</span></div>
+      </div>
+    </div>
+    <div class="sk-block">
+      <div class="sk-head"><span class="sk-icon">⚙️</span><span class="sk-name">CMS &amp; Plataformas Web</span></div>
+      <div class="sk-rows">
+        <div class="sk-row"><span class="sk-lbl">WordPress</span><span class="sk-bar" style="--w:96%"></span><span class="sk-pct">96%</span></div>
+        <div class="sk-row"><span class="sk-lbl">Joomla</span><span class="sk-bar" style="--w:88%"></span><span class="sk-pct">88%</span></div>
+        <div class="sk-row"><span class="sk-lbl">Drupal</span><span class="sk-bar" style="--w:82%"></span><span class="sk-pct">82%</span></div>
+        <div class="sk-row"><span class="sk-lbl">Prestashop</span><span class="sk-bar" style="--w:87%"></span><span class="sk-pct">87%</span></div>
+        <div class="sk-row"><span class="sk-lbl">OpenCart / Magento</span><span class="sk-bar" style="--w:80%"></span><span class="sk-pct">80%</span></div>
+        <div class="sk-row"><span class="sk-lbl">Moodle</span><span class="sk-bar" style="--w:75%"></span><span class="sk-pct">75%</span></div>
+        <div class="sk-row"><span class="sk-lbl">Dolibarr ERP / CRM</span><span class="sk-bar" style="--w:88%"></span><span class="sk-pct">88%</span></div>
+      </div>
+    </div>
+    <div class="sk-block">
+      <div class="sk-head"><span class="sk-icon">🎨</span><span class="sk-name" style="color:var(--pu)">Diseño Gráfico &amp; Multimedia</span></div>
+      <div class="sk-rows">
+        <div class="sk-row"><span class="sk-lbl">Adobe Creative Suite</span><span class="sk-bar pu" style="--w:92%"></span><span class="sk-pct pu">92%</span></div>
+        <div class="sk-row"><span class="sk-lbl">Premiere / After Effects</span><span class="sk-bar pu" style="--w:85%"></span><span class="sk-pct pu">85%</span></div>
+        <div class="sk-row"><span class="sk-lbl">Diseño CAD</span><span class="sk-bar pu" style="--w:82%"></span><span class="sk-pct pu">82%</span></div>
+        <div class="sk-row"><span class="sk-lbl">Animación 3D</span><span class="sk-bar pu" style="--w:78%"></span><span class="sk-pct pu">78%</span></div>
+        <div class="sk-row"><span class="sk-lbl">Preimpresión &amp; Gran formato</span><span class="sk-bar pu" style="--w:93%"></span><span class="sk-pct pu">93%</span></div>
+        <div class="sk-row"><span class="sk-lbl">Identidad visual &amp; Logotipos</span><span class="sk-bar pu" style="--w:88%"></span><span class="sk-pct pu">88%</span></div>
+      </div>
+    </div>
+    <div class="sk-block">
+      <div class="sk-head"><span class="sk-icon">📊</span><span class="sk-name" style="color:var(--mg)">Marketing Digital &amp; E-Commerce</span></div>
+      <div class="sk-rows">
+        <div class="sk-row"><span class="sk-lbl">SEO / SEM</span><span class="sk-bar mg" style="--w:87%"></span><span class="sk-pct mg">87%</span></div>
+        <div class="sk-row"><span class="sk-lbl">Google Ads / Facebook Ads</span><span class="sk-bar mg" style="--w:83%"></span><span class="sk-pct mg">83%</span></div>
+        <div class="sk-row"><span class="sk-lbl">Google Analytics</span><span class="sk-bar mg" style="--w:82%"></span><span class="sk-pct mg">82%</span></div>
+        <div class="sk-row"><span class="sk-lbl">Email Marketing</span><span class="sk-bar mg" style="--w:85%"></span><span class="sk-pct mg">85%</span></div>
+        <div class="sk-row"><span class="sk-lbl">WooCommerce / Shopify</span><span class="sk-bar mg" style="--w:83%"></span><span class="sk-pct mg">83%</span></div>
+        <div class="sk-row"><span class="sk-lbl">Social Media Marketing</span><span class="sk-bar mg" style="--w:78%"></span><span class="sk-pct mg">78%</span></div>
+        <div class="sk-row"><span class="sk-lbl">Pasarelas de pago</span><span class="sk-bar mg" style="--w:80%"></span><span class="sk-pct mg">80%</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ EXPERIENCE ════════ -->
+<section id="exp" style="background:var(--bg2)">
+  <div class="sec-head">
+    <span class="sec-idx">04</span>
+    <h2 class="sec-title">TRAYECTORIA <span class="acc">PROFESIONAL</span></h2>
+    <div class="sec-rule"></div>
+  </div>
+  <div class="exp-stack">
+    <div class="exp-card"><div class="exp-left"><div class="exp-yr">2021</div><div class="exp-co">Museo Ciencias Naturales AVAN<br>Viso del Marqués</div></div><div class="exp-right"><div class="exp-t">Senior Systems & Digital Architect</div><div class="exp-pills"><span class="ep">Dolibarr ERP</span><span class="ep">WordPress</span><span class="ep">Linux</span><span class="ep">CRM</span></div><ul class="exp-ul"><li>Liderazgo en la transformación digital del museo: implantación del sistema <strong style="color:var(--text)">ERP/CRM Dolibarr</strong> para gestión integral</li><li>Desarrollo y mantenimiento de la infraestructura web y base de datos con alta disponibilidad</li><li>Optimización del inventario digital y control de stock de la colección museística</li></ul></div></div>
+    <div class="exp-card"><div class="exp-left"><div class="exp-yr">2007 – 2017</div><div class="exp-co">Docucenter-Printando S.L.<br>Dos Hermanas, Sevilla</div></div><div class="exp-right"><div class="exp-t">Especialista Senior en Infraestructura y Preimpresión</div><div class="exp-pills"><span class="ep">LAMP</span><span class="ep">Linux/FreeBSD</span><span class="ep">Prestashop</span><span class="ep">Adobe Suite</span></div><ul class="exp-ul"><li>Gestión técnica de producción gráfica de gran formato para clientes corporativos de alto nivel</li><li>Despliegue y administración de servidores <strong style="color:var(--text)">Linux/FreeBSD con pila LAMP</strong> para proyectos e-commerce</li><li>Desarrollo e integración de plataformas web complejas (Joomla, OpenCart, WordPress, Prestashop)</li></ul></div></div>
+    <div class="exp-card"><div class="exp-left"><div class="exp-yr">2000 – 2006</div><div class="exp-co">I.S.S. Ingeniería de Software<br>Dos Hermanas, Sevilla</div></div><div class="exp-right"><div class="exp-t">Administrador de Sistemas y Redes</div><div class="exp-pills"><span class="ep">Redes LAN</span><span class="ep">Seguridad</span><span class="ep">Sevilla Libros</span></div><ul class="exp-ul"><li>Optimización y mantenimiento de la red corporativa en la <strong style="color:var(--bright)">Red de Bibliotecas Públicas de Sevilla</strong></li><li>Implementación y soporte de infraestructuras críticas en el <strong style="color:var(--bright)">Ayuntamiento de Dos Hermanas</strong></li><li>Coordinación de montaje de equipos, seguridad de red y diseño de soluciones web institucionales</li></ul></div></div>
+    <div class="exp-card"><div class="exp-left"><div class="exp-yr">2000 – 2005</div><div class="exp-co">System Centros de Formación<br>Dos Hermanas y Sevilla</div></div><div class="exp-right"><div class="exp-t">Profesor Adjunto — Informática y Diseño Gráfico</div><div class="exp-pills"><span class="ep">Hardware</span><span class="ep">Redes</span><span class="ep">Linux</span><span class="ep">CAD/3D</span><span class="ep">Diseño</span></div><ul class="exp-ul"><li>Hardware, S.O. Windows/Linux, redes y ofimática</li><li>Diseño gráfico, CAD y animación 3D</li><li>Implantación de servidores y seguridad informática</li></ul></div></div>
+    <div class="exp-card"><div class="exp-left"><div class="exp-yr">2004</div><div class="exp-co">Liber Formación (FORCEM)<br>Dos Hermanas</div></div><div class="exp-right"><div class="exp-t">Profesor Adjunto — Ofimática</div><div class="exp-pills"><span class="ep">Word</span><span class="ep">Excel</span><span class="ep">Access</span><span class="ep">PowerPoint</span></div><ul class="exp-ul"><li>Cursos FORCEM de iniciación a la informática y Microsoft Office</li></ul></div></div>
+    <div class="exp-card"><div class="exp-left"><div class="exp-yr">2006</div><div class="exp-co">Montoro y Barrera Inmobiliaria<br>Dos Hermanas</div></div><div class="exp-right"><div class="exp-t">Agente Inmobiliario</div><div class="exp-pills"><span class="ep">Comercial</span><span class="ep">Base de datos</span><span class="ep">IT Support</span></div><ul class="exp-ul"><li>Captación y valoración de inmuebles, venta y alquiler</li><li>Adaptación de software de base de datos y soporte IT</li></ul></div></div>
+    <div class="exp-card"><div class="exp-left"><div class="exp-yr">2000</div><div class="exp-co">Pastor Oliva S.L.<br>Dos Hermanas</div></div><div class="exp-right"><div class="exp-t">Auxiliar Administrativo</div><div class="exp-pills"><span class="ep">Contasol</span><span class="ep">Contabilidad</span><span class="ep">Banca</span></div><ul class="exp-ul"><li>Control de stock, operaciones bancarias, contabilidad con Contasol</li></ul></div></div>
+    <div class="exp-card" style="border-color:rgba(255,230,0,.45);"><div class="exp-left" style="background:rgba(255,230,0,.05);justify-content:center;align-items:center;"><div style="font-size:2.4rem;text-align:center">⚡</div><div style="font-family:'Share Tech Mono',monospace;font-size:.56rem;letter-spacing:.15em;color:var(--ye);text-align:center;margin-top:.3rem">LOGRO CLAVE</div></div><div class="exp-right" style="background:rgba(255,230,0,.02);"><div class="exp-t" style="color:var(--ye)">Liderazgo Tecnológico: Evento E2H-Party</div><ul class="exp-ul"><li>Organización y coordinación técnica íntegra de un evento tecnológico masivo en el Gran Hipódromo de Andalucía con asistencia de <strong style="color:var(--bright)">500 profesionales</strong> del sector IT.</li></ul></div></div>
+  </div>
+</section>
+
+<!-- ════════ TRAINING ════════ -->
+<section id="train">
+  <div class="sec-head">
+    <span class="sec-idx">05</span>
+    <h2 class="sec-title">FORMACIÓN &amp; <span class="acc">CERTIFICACIONES</span></h2>
+    <div class="sec-rule"></div>
+  </div>
+  <div class="tr-grid">
+    <div class="tr-item tr-hi"><div class="tr-ico">★</div><div class="tr-txt"><strong>Desarrollo con IA: de 0 a Producción — BIG school</strong>Especialización en integración de Inteligencia Artificial en flujos de trabajo de desarrollo y despliegue a producción.</div></div>
+    <div class="tr-item tr-hi"><div class="tr-ico">★</div><div class="tr-txt"><strong>Arquitectura DAW — FP Grado Superior</strong>Especialización en Desarrollo de Aplicaciones Web: Arquitecturas escalables, seguridad en el despliegue y gestión avanzada de bases de datos.</div></div>
+    <div class="tr-item tr-hi"><div class="tr-ico">★</div><div class="tr-txt"><strong>FullStack Solutions Architect — Formación</strong>Dominio integral del ciclo de vida del software: desde infraestructuras Cloud/On-premise hasta microservicios y frontend reactivo.</div></div>
+    <div class="tr-item"><div class="tr-ico">▶</div><div class="tr-txt"><strong>Google — Marketing Digital &amp; E-Commerce</strong>7 cursos: SEO, redes sociales, email marketing, analítica, e-commerce</div></div>
+    <div class="tr-item"><div class="tr-ico">▶</div><div class="tr-txt"><strong>Certificado Profesional Java · IFCD001 MRR</strong>Colegio Mayol · POO y estructuras de datos</div></div>
+    <div class="tr-item"><div class="tr-ico">▶</div><div class="tr-txt"><strong>Introducción a la IA y Algoritmos · IFCT155PO</strong>Centro de Formación Delos</div></div>
+    <div class="tr-item"><div class="tr-ico">▶</div><div class="tr-txt"><strong>Acceso Mayores 25 años — UNED Valdepeñas</strong>06/2025 · Expediente n.º 0000-22-04644</div></div>
+    <div class="tr-item"><div class="tr-ico">▶</div><div class="tr-txt"><strong>Técnico Especialista en Microinformática</strong>System Centros de Formación</div></div>
+    <div class="tr-item"><div class="tr-ico">▶</div><div class="tr-txt"><strong>Especialista en Redes y Networking</strong>LAN, WLAN, TCP/IP, routing y switching</div></div>
+    <div class="tr-item"><div class="tr-ico">▶</div><div class="tr-txt"><strong>Administración de Sistemas UNIX (Linux / BSD)</strong>Shell, Apache, SSH y seguridad</div></div>
+    <div class="tr-item"><div class="tr-ico">▶</div><div class="tr-txt"><strong>Técnico Especialista Diseño y Animación 3D</strong>Modelado, texturizado y render</div></div>
+    <div class="tr-item"><div class="tr-ico">▶</div><div class="tr-txt"><strong>Especialista en Diseño Gráfico Publicitario</strong>Adobe Creative Suite completo</div></div>
+    <div class="tr-item"><div class="tr-ico">▶</div><div class="tr-txt"><strong>Programador Web CMS — Joomla y Drupal</strong>Gestión de contenidos, plugins y themes</div></div>
+    <div class="tr-item"><div class="tr-ico">▶</div><div class="tr-txt"><strong>Lenguaje del Diseño Gráfico</strong>Teoría del color, tipografía y composición</div></div>
+    <div class="tr-item"><div class="tr-ico">▶</div><div class="tr-txt"><strong>Técnico en Preimpresión &amp; Gran Formato</strong>Producción gráfica y plotters industriales</div></div>
+    <div class="tr-item"><div class="tr-ico">▶</div><div class="tr-txt"><strong>Mecanografía 300 ppm &amp; Inglés Nivel Medio</strong>System Centros de Formación</div></div>
+    <div class="tr-item"><div class="tr-ico">▶</div><div class="tr-txt"><strong>FP Auxiliar Administrativo</strong>Centro FP Torre de los Herberos, Dos Hermanas</div></div>
+  </div>
+</section>
+
+<!-- ════════ CONTACT ════════ -->
+<section id="contact" class="contact-wrap">
+  <div class="contact-pre">ESTABLECER CONEXIÓN</div>
+  <h2 class="contact-h">¿LISTO PARA<br><span>CONTRATARME?</span></h2>
+  <p class="contact-sub">UBICACIÓN: VISO DEL MARQUÉS (CIUDAD REAL) · <strong>MOVILIDAD NACIONAL</strong><br>DISPONIBILIDAD INMEDIATA · CARNET B1 · VEHÍCULO PROPIO</p>
+  <div class="contact-links">
+    <a href="mailto:carlos.garridomolina@gmail.com" class="clink">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      carlos.garridomolina@gmail.com
+    </a>
+    <a href="tel:+34665768241" class="clink">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8a19.79 19.79 0 01-3.07-8.68A2 2 0 012 0h3a2 2 0 012 1.72 19.79 19.79 0 00.7 2.81 2 2 0 01-.45 2.11L6.91 7.91a16 16 0 006.18 6.18l1.27-1.27a2 2 0 012.11-.45 19.79 19.79 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+      +34 665 768 241
+    </a>
+   <!-- <a href="https://www.museoavan.es" target="_blank" class="clink">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+      museoavan.es
+    </a> -->
+  </div>
+  <div class="social-row">
+    <a href="https://www.linkedin.com/in/jos%C3%A9-carlos-garrido-molina-4a7762140/" target="_blank" class="soc-btn li">
+      <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+      LinkedIn — José Carlos Garrido Molina
+    </a>
+    <a href="https://github.com/JCGM-DEV" target="_blank" class="soc-btn" style="border-color:var(--pu);color:var(--pu);">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.042-1.416-4.042-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.76-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+      GitHub — JCGM-DEV
+    </a>
+    <a href="https://www.facebook.com/jose.c.molina.37" target="_blank" class="soc-btn fb">
+      <svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+      Facebook — José C. Molina
+    </a>
+  </div>
+</section>
+
+<footer>
+  <div>© 2025 <span>José Carlos Garrido Molina</span> · Todos los derechos reservados</div>
+  <div>Viso del Marqués · <span>Ciudad Real</span> · España</div>
+</footer>
+
+</div><!-- /page -->
+
+<script>
+/* ══════════════════════════════════
+   BOOT LOADER
+══════════════════════════════════ */
+(function(){
+  var boot = document.getElementById('boot');
+  var page = document.getElementById('page');
+  var linesEl = document.getElementById('boot-lines');
+  var fillEl = document.getElementById('boot-fill');
+  var statusEl = document.getElementById('boot-status');
+  var pctEl = document.getElementById('boot-pct');
+  var skipEl = document.getElementById('boot-skip');
+  var entered = false;
+
+  var MSGS = [
+    {t:'> INICIANDO SISTEMA OPERATIVO JCGM.DEV...', ok:false},
+    {t:'> [OK] Kernel cargado: Linux 6.1.0-jcgm', ok:true},
+    {t:'> VERIFICANDO IDENTIDAD: carlos.garridomolina@gmail.com', ok:false},
+    {t:'> [OK] ACCESO AUTORIZADO — NIVEL: JUNIOR', ok:true},
+    {t:'> CARGANDO MODULOS: sistemas, redes, web, diseño...', ok:false},
+    {t:'> [OK] FP GRADO SUPERIOR DAW — EN CURSO', ok:true},
+    {t:'> [OK] 20+ años de experiencia detectados', ok:true},
+    {t:'> INICIALIZANDO NEURAL SKILL MAP... 11 nodos', ok:false},
+    {t:'> [OK] MATRIX RAIN activado', ok:true},
+    {t:'> SISTEMA LISTO — BIENVENIDO //', ok:true},
+  ];
+
+  function enter(){
+    if(entered) return;
+    entered = true;
+    fillEl.style.width = '100%';
+    pctEl.textContent = '100%';
+    statusEl.textContent = 'SISTEMA CARGADO';
+    setTimeout(function(){
+      boot.classList.add('out');
+      page.classList.add('visible');
+      setTimeout(function(){ boot.style.display='none'; }, 900);
+      startMatrix();
+      initNeural();
+      startHolo();
+      startCounters();
+    }, 400);
+  }
+
+  boot.addEventListener('click', enter);
+
+  var idx = 0;
+  function next(){
+    if(idx >= MSGS.length){ enter(); return; }
+    var d = document.createElement('div');
+    d.className = 'boot-line' + (MSGS[idx].ok ? ' ok' : '');
+    d.textContent = MSGS[idx].t;
+    linesEl.appendChild(d);
+    // scroll to bottom
+    linesEl.scrollTop = linesEl.scrollHeight;
+    // animate in
+    requestAnimationFrame(function(){ d.classList.add('show'); });
+    var pct = Math.round(((idx+1)/MSGS.length)*95);
+    fillEl.style.width = pct + '%';
+    pctEl.textContent = pct + '%';
+    statusEl.textContent = MSGS[idx].t.replace('> ','').substring(0,30)+'...';
+    idx++;
+    setTimeout(next, 160 + Math.random()*120);
+  }
+  setTimeout(next, 500);
+})();
+
+/* ══════════════════════════════════
+   CURSOR + TRAIL
+══════════════════════════════════ */
+var cdot=document.getElementById('cdot'),cring=document.getElementById('cring');
+var mx=0,my=0,rx=0,ry=0,trail=[];
+for(var i=0;i<10;i++){
+  var td=document.createElement('div');td.className='tdot';
+  td.style.opacity=(1-i/10)*.42;
+  td.style.width=td.style.height=Math.max(1.5,4.5-i*.3)+'px';
+  document.body.appendChild(td);trail.push({el:td,x:0,y:0});
+}
+document.addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY;cdot.style.left=mx+'px';cdot.style.top=my+'px';});
+(function loop(){
+  rx+=(mx-rx)*.12;ry+=(my-ry)*.12;
+  cring.style.left=rx+'px';cring.style.top=ry+'px';
+  for(var i=trail.length-1;i>0;i--){trail[i].x=trail[i-1].x;trail[i].y=trail[i-1].y;}
+  trail[0].x=mx;trail[0].y=my;
+  trail.forEach(function(t){t.el.style.left=t.x+'px';t.el.style.top=t.y+'px';});
+  requestAnimationFrame(loop);
+})();
+document.querySelectorAll('a,button,.cs,.exp-card,.tr-item,.htag,.sk-block,.info-card,.soc-btn,.soc-sm,.pf-card').forEach(function(el){
+  el.addEventListener('mouseenter',function(){cdot.classList.add('hov');cring.classList.add('hov');});
+  el.addEventListener('mouseleave',function(){cdot.classList.remove('hov');cring.classList.remove('hov');});
+});
+
+/* ══════════════════════════════════
+   MATRIX RAIN
+══════════════════════════════════ */
+function startMatrix(){
+  var c=document.getElementById('matrix-canvas'),ctx=c.getContext('2d');
+  function rsz(){c.width=window.innerWidth;c.height=window.innerHeight;}
+  rsz();window.addEventListener('resize',rsz);
+  var cols=Math.floor(window.innerWidth/16),drops=[];
+  for(var i=0;i<cols;i++)drops.push(Math.floor(Math.random()*window.innerHeight/16));
+  var chars='アイウエオカキクケコ0123456789ABCDEF<>[]{}//\\';
+  setInterval(function(){
+    ctx.fillStyle='rgba(3,1,13,0.05)';ctx.fillRect(0,0,c.width,c.height);
+    ctx.font='14px monospace';
+    for(var i=0;i<drops.length;i++){
+      ctx.fillStyle=Math.random()>.85?'#FF006E':'#00F5FF';
+      ctx.fillText(chars[Math.floor(Math.random()*chars.length)],i*16,drops[i]*16);
+      if(drops[i]*16>c.height&&Math.random()>.96)drops[i]=0;else drops[i]++;
+    }
+  },55);
+}
+
+/* ══════════════════════════════════
+   HOLO CARD 3D TILT
+══════════════════════════════════ */
+function startHolo(){
+  var card=document.getElementById('holo-card'),shine=document.getElementById('holo-shine');
+  if(!card)return;
+  card.addEventListener('mousemove',function(e){
+    var r=card.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;
+    card.style.transform='perspective(900px) rotateY('+(x*20)+'deg) rotateX('+(-y*14)+'deg) scale(1.02)';
+    card.style.boxShadow=(-x*22)+'px '+(-y*22)+'px 44px rgba(0,245,255,.14)';
+    shine.style.background='radial-gradient(ellipse 160px 160px at '+(e.clientX-r.left)+'px '+(e.clientY-r.top)+'px,rgba(0,245,255,.18),transparent)';
+  });
+  card.addEventListener('mouseleave',function(){card.style.transform='';card.style.boxShadow='';shine.style.background='';});
+}
+
+/* ══════════════════════════════════
+   COUNTERS
+══════════════════════════════════ */
+function startCounters(){
+  var el=document.getElementById('cnt-years');if(!el)return;
+  var done=false;
+  new IntersectionObserver(function(e){
+    if(e[0].isIntersecting&&!done){done=true;var v=0;
+      var iv=setInterval(function(){v++;el.textContent=v;if(v>=20){el.textContent='20+';clearInterval(iv);}},60);}
+  }).observe(el);
+}
+
+/* ══════════════════════════════════
+   SCRAMBLE TEXT
+══════════════════════════════════ */
+(function(){
+  var el=document.getElementById('scramble-el');if(!el)return;
+  var target='FULLSTACK SOLUTIONS ARCHITECT · SYSTEMS EXPERT';
+  var chars='ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789//<>[]';
+  var start=null,dur=1400;
+  function frame(ts){
+    if(!start)start=ts;
+    var prog=Math.min((ts-start)/dur,1),rev=Math.floor(prog*target.length),txt='';
+    for(var i=0;i<target.length;i++){
+      if(i<rev)txt+=target[i];
+      else if(target[i]===' '||target[i]==='·')txt+=target[i];
+      else txt+=chars[Math.floor(Math.random()*chars.length)];
+    }
+    el.textContent=txt;
+    if(prog<1)requestAnimationFrame(frame);else el.textContent=target;
+  }
+  setTimeout(function(){requestAnimationFrame(frame);},600);
+})();
+
+/* ══════════════════════════════════
+   SCROLL REVEAL
+══════════════════════════════════ */
+(function(){
+  var obs=new IntersectionObserver(function(entries){
+    entries.forEach(function(e,i){if(e.isIntersecting)setTimeout(function(){e.target.classList.add('vis');},i*70);});
+  },{threshold:.05});
+  document.querySelectorAll('.exp-card,.tr-item,.info-card,.pf-card').forEach(function(el){obs.observe(el);});
+
+  var bObs=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){
+        e.target.classList.add('vis');
+        setTimeout(function(){e.target.querySelectorAll('.sk-bar').forEach(function(b){b.classList.add('on');});},200);
+      }
+    });
+  },{threshold:.08});
+  document.querySelectorAll('.sk-block').forEach(function(el){bObs.observe(el);});
+})();
+
+/* ══════════════════════════════════
+   NEURAL SKILL MAP
+══════════════════════════════════ */
+function initNeural(){
+  var canvas=document.getElementById('neural-canvas');if(!canvas)return;
+  var ctx=canvas.getContext('2d'),t=0,hoverIdx=-1,nodes=[];
+  var DEFS=[
+    {label:'LINUX\n/ BSD',       group:'sys',   conn:[1,2,7]},
+    {label:'WINDOWS\nSERVER',    group:'sys',   conn:[0,2,7]},
+    {label:'REDES &\nSEGURIDAD', group:'sys',   conn:[0,1,3,7]},
+    {label:'ERP/CRM\nDOLIBARR',  group:'app',   conn:[2,4,7]},
+    {label:'WORDPRESS\nCMS',     group:'web',   conn:[3,5,6,7,9]},
+    {label:'DISEÑO\nGRÁFICO',    group:'design',conn:[4,6,9]},
+    {label:'MARKETING\nDIGITAL', group:'mkt',   conn:[4,5,7,8]},
+    {label:'JAVA/PHP\nHTML/CSS',  group:'web',   conn:[0,1,2,3,4,6,9]},
+    {label:'SEO/SEM\nE-COMMERCE', group:'mkt',  conn:[4,6,7]},
+    {label:'FP DAW\nEN CURSO ★', group:'daw',   conn:[4,5,7,8]},
+    {label:'ADOBE\nSUITE',       group:'design',conn:[5,6]},
+  ];
+  var COLORS={sys:'#00F5FF',web:'#FF006E',design:'#BF00FF',mkt:'#FFE600',app:'#00FF41',daw:'#FFE600'};
+
+  function place(){
+    var W=canvas.width,H=canvas.height,cx=W/2,cy=H/2,R=Math.min(W,H)*.37;
+    nodes=DEFS.map(function(d,i){
+      var a=(i/DEFS.length)*Math.PI*2-Math.PI/2,r=R*(.72+Math.random()*.28);
+      return{label:d.label,group:d.group,conn:d.conn,x:cx+Math.cos(a)*r,y:cy+Math.sin(a)*r,r:W<600?28:40,color:COLORS[d.group],phase:Math.random()*Math.PI*2,parts:[]};
+    });
+  }
+  function resize(){canvas.width=canvas.offsetWidth;canvas.height=canvas.offsetHeight;place();}
+  resize();window.addEventListener('resize',resize);
+
+  canvas.addEventListener('mousemove',function(e){
+    var r=canvas.getBoundingClientRect(),mx=e.clientX-r.left,my=e.clientY-r.top;
+    hoverIdx=-1;
+    nodes.forEach(function(n,i){n.hov=Math.hypot(mx-n.x,my-n.y)<n.r+12;if(n.hov)hoverIdx=i;});
+  });
+  canvas.addEventListener('mouseleave',function(){hoverIdx=-1;nodes.forEach(function(n){n.hov=false;});});
+
+  function bolt(x1,y1,x2,y2,color,alpha){
+    var pts=[[x1,y1]];
+    for(var i=1;i<10;i++){var tt=i/10;pts.push([x1+(x2-x1)*tt+(Math.random()-.5)*22,y1+(y2-y1)*tt+(Math.random()-.5)*22]);}
+    pts.push([x2,y2]);
+    ctx.save();ctx.globalAlpha=alpha;ctx.strokeStyle=color;ctx.shadowColor=color;ctx.shadowBlur=14;
+    ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(pts[0][0],pts[0][1]);pts.slice(1).forEach(function(p){ctx.lineTo(p[0],p[1]);});ctx.stroke();
+    ctx.lineWidth=4;ctx.globalAlpha=alpha*.18;ctx.beginPath();ctx.moveTo(pts[0][0],pts[0][1]);pts.slice(1).forEach(function(p){ctx.lineTo(p[0],p[1]);});ctx.stroke();
+    ctx.restore();
+  }
+
+  function draw(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);t+=.016;
+    nodes.forEach(function(n,i){n.conn.forEach(function(j){if(j>i){ctx.save();ctx.strokeStyle='rgba(0,245,255,.07)';ctx.lineWidth=1;ctx.setLineDash([4,8]);ctx.beginPath();ctx.moveTo(n.x,n.y);ctx.lineTo(nodes[j].x,nodes[j].y);ctx.stroke();ctx.restore();}});});
+    var act={};
+    if(hoverIdx>=0){var hn=nodes[hoverIdx];hn.conn.forEach(function(j){for(var k=0;k<2;k++)bolt(hn.x,hn.y,nodes[j].x,nodes[j].y,hn.color,.75+Math.random()*.25);act[j]=true;});if(Math.random()<.3){var a2=Math.random()*Math.PI*2,s=1.5+Math.random()*3;hn.parts.push({x:hn.x,y:hn.y,vx:Math.cos(a2)*s,vy:Math.sin(a2)*s,life:1,c:hn.color});}}
+    if(Math.random()<.04){var ni=Math.floor(Math.random()*nodes.length),nj=nodes[ni].conn[Math.floor(Math.random()*nodes[ni].conn.length)];if(nj!==undefined)bolt(nodes[ni].x,nodes[ni].y,nodes[nj].x,nodes[nj].y,'rgba(0,245,255,.2)',.28);}
+    nodes.forEach(function(n,i){
+      var isH=i===hoverIdx,isA=act[i],pulse=Math.sin(t*2+n.phase)*.4+.6,rad=n.r+(isH?9:0)+(isA?4:0);
+      var rgb=n.color==='#00F5FF'?'0,245,255':n.color==='#FF006E'?'255,0,110':n.color==='#BF00FF'?'191,0,255':n.color==='#FFE600'?'255,230,0':'0,255,65';
+      var grd=ctx.createRadialGradient(n.x,n.y,rad,n.x,n.y,rad+22+pulse*9);grd.addColorStop(0,'rgba('+rgb+','+(isH?.42:.1)+')');grd.addColorStop(1,'rgba(0,0,0,0)');ctx.fillStyle=grd;ctx.beginPath();ctx.arc(n.x,n.y,rad+22+pulse*9,0,Math.PI*2);ctx.fill();
+      var bg=ctx.createRadialGradient(n.x-rad*.3,n.y-rad*.3,0,n.x,n.y,rad);bg.addColorStop(0,n.color+'33');bg.addColorStop(1,'rgba(0,0,0,.8)');
+      ctx.save();ctx.beginPath();ctx.arc(n.x,n.y,rad,0,Math.PI*2);ctx.fillStyle=bg;ctx.fill();ctx.strokeStyle=n.color;ctx.lineWidth=isH?2.5:1.2;ctx.shadowColor=n.color;ctx.shadowBlur=isH?28:11;ctx.stroke();
+      if(isH||isA){ctx.save();ctx.translate(n.x,n.y);ctx.rotate(t*(isH?2.2:1));ctx.strokeStyle=n.color;ctx.lineWidth=1;ctx.globalAlpha=.5;ctx.setLineDash([4,6]);ctx.beginPath();ctx.arc(0,0,rad+10,0,Math.PI*2);ctx.stroke();ctx.restore();}
+      ctx.fillStyle=isH?n.color:(isA?n.color+'CC':'rgba(216,234,248,.82)');ctx.font=(canvas.width<600?'10':'12')+'px Rajdhani';ctx.textAlign='center';ctx.textBaseline='middle';ctx.shadowColor=isH?n.color:'transparent';ctx.shadowBlur=isH?10:0;
+      n.label.split('\n').forEach(function(l,li,arr){ctx.fillText(l,n.x,n.y+(li-(arr.length-1)/2)*14);});
+      ctx.restore();
+      n.parts=n.parts.filter(function(p){return p.life>0;});
+      n.parts.forEach(function(p){ctx.save();ctx.globalAlpha=p.life;ctx.fillStyle=p.c;ctx.shadowColor=p.c;ctx.shadowBlur=7;ctx.beginPath();ctx.arc(p.x,p.y,2.5,0,Math.PI*2);ctx.fill();ctx.restore();p.x+=p.vx;p.y+=p.vy;p.vx*=.94;p.vy*=.94;p.life-=.04;});
+    });
+    requestAnimationFrame(draw);
+  }
+  draw();
+}
+</script>
 </body>
 </html>
