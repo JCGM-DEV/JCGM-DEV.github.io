@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>CV José Carlos Garrido Molina</title>
+<style>
+  @page {
+    size: A4 portrait;
+    margin: 11mm 12mm 11mm 12mm;
+  }
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: #1a202c;
+    background: #ffffff;
+    font-size: 8.8pt;
+    line-height: 1.34;
+  }
+  .header {
+    text-align: left;
+    margin-bottom: 7px;
+  }
+  .name {
+    font-size: 19pt;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    color: #1e3a8a;
+    line-height: 1.1;
+  }
+  .headline {
+    font-size: 9.6pt;
+    font-weight: 600;
+    color: #475569;
+    margin-top: 2px;
+  }
+  .contact {
+    font-size: 8.4pt;
+    color: #64748b;
+    margin-top: 3px;
+  }
+  .contact a {
+    color: #0284c7;
+    text-decoration: none;
+  }
+  .contact span.sep {
+    margin: 0 4px;
+    color: #94a3b8;
+  }
+  .sec-title {
+    font-size: 9.5pt;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    color: #1e3a8a;
+    border-bottom: 1.5px solid #1e3a8a;
+    padding-bottom: 1.5px;
+    margin-top: 7px;
+    margin-bottom: 4px;
+  }
+  p.summary {
+    text-align: justify;
+    color: #334155;
+    font-size: 8.6pt;
+    line-height: 1.32;
+  }
+  .skills-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2.5px;
+    font-size: 8.4pt;
+  }
+  .skill-row {
+    color: #334155;
+  }
+  .skill-lbl {
+    font-weight: 700;
+    color: #1e293b;
+  }
+  .item {
+    margin-bottom: 5px;
+  }
+  .item:last-child {
+    margin-bottom: 2px;
+  }
+  .item-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-size: 8.8pt;
+  }
+  .item-title {
+    font-weight: 700;
+    color: #0f172a;
+  }
+  .item-sub {
+    font-weight: 500;
+    color: #475569;
+  }
+  .item-date {
+    font-size: 8pt;
+    font-weight: 600;
+    color: #64748b;
+    white-space: nowrap;
+  }
+  .item-desc {
+    color: #475569;
+    font-size: 8.2pt;
+    margin-top: 1px;
+  }
+  .stack-tag {
+    color: #0284c7;
+    font-size: 7.8pt;
+    font-weight: 600;
+  }
+  ul.bullets {
+    margin-left: 14px;
+    margin-top: 2px;
+    color: #334155;
+    font-size: 8.2pt;
+  }
+  ul.bullets li {
+    margin-bottom: 1.5px;
+    line-height: 1.28;
+  }
+  ul.bullets li strong {
+    color: #0f172a;
+  }
+  .two-cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+  .footer-note {
+    margin-top: 6px;
+    padding-top: 4px;
+    border-top: 0.5px solid #cbd5e1;
+    text-align: center;
+    font-size: 7.2pt;
+    color: #94a3b8;
+    font-style: italic;
+  }
+  .page-break {
+    page-break-before: always;
+    break-before: page;
+  }
+</style>
+</head>
+<body>
+
+  <!-- PAGE 1 -->
+  <div class="header">
+    <h1 class="name">JOSE CARLOS GARRIDO MOLINA</h1>
+    <div class="headline">Full Stack Developer | Database Architect | SysAdmin | Python · FastAPI · React · PostgreSQL</div>
+    <div class="contact">
+      <a href="mailto:hola@jcgm.dev">hola@jcgm.dev</a><span class="sep">|</span>
+      <span>665 768 241</span><span class="sep">|</span>
+      <a href="https://jcgm.dev" target="_blank">jcgm.dev</a><span class="sep">|</span>
+      <a href="https://github.com/JCGM-DEV" target="_blank">github.com/JCGM-DEV</a><span class="sep">|</span>
+      <a href="https://www.linkedin.com/in/jos%C3%A9-carlos-garrido-molina-4a7762140/" target="_blank">LinkedIn</a>
+    </div>
+  </div>
+
+  <div class="sec-title">Perfil Profesional</div>
+  <p class="summary">
+    Desarrollador Full Stack y Database Architect con visión de SysAdmin y más de 20 años de trayectoria profesional en entornos tecnológicos. Especializado en unir la robustez de infraestructuras críticas con el desarrollo de software moderno de alto rendimiento. Actualmente en <strong>AraTalent (división Ara-Tech)</strong> impulsando la plataforma <strong>Nexus App</strong>: diseño de arquitectura relacional y vectorial en PostgreSQL (Google Cloud SQL), APIs REST asíncronas con FastAPI, motor semántico de búsqueda vectorial nativa (128D) con latencia sub-15ms, agente Nexus AI Copilot con Groq LPU, pipeline Kanban reactivo en React y estricto cumplimiento normativo RGPD.
+  </p>
+
+  <div class="sec-title">Competencias Técnicas</div>
+  <div class="skills-grid">
+    <div class="skill-row"><span class="skill-lbl">Backend &amp; Arquitectura:</span> Python (FastAPI, Pydantic, SQLAlchemy, Alembic), Java (POO), PHP, REST APIs, Microservicios, Scraping.</div>
+    <div class="skill-row"><span class="skill-lbl">Bases de Datos &amp; IA:</span> PostgreSQL (Google Cloud SQL), Búsqueda Vectorial (128D, embeddings densos, similitud coseno), MySQL, MariaDB, Groq LPU, Machine Learning.</div>
+    <div class="skill-row"><span class="skill-lbl">Frontend &amp; UI/UX:</span> React, Vite, JavaScript (ES6+), HTML5, CSS3, Drag &amp; Drop nativo, Tailwind CSS, Responsive Design.</div>
+    <div class="skill-row"><span class="skill-lbl">Sistemas &amp; DevOps:</span> Linux (Debian, Ubuntu, CentOS), FreeBSD, Windows Server, Git/GitHub, Docker, Apache, Nginx, CI/CD, Shell/Bash.</div>
+    <div class="skill-row"><span class="skill-lbl">Metodologías &amp; Normativa:</span> Scrum / Ágil, RGPD europeo (derecho al olvido, auditoría y disociación irreversible), Clean Architecture, Refactorización.</div>
+    <div class="skill-row"><span class="skill-lbl">Redes &amp; CMS:</span> TCP/IP, VPN, Firewall, DNS, WordPress, WooCommerce, PrestaShop, Joomla, Dolibarr ERP/CRM, Adobe Creative Suite.</div>
+  </div>
+
+  <div class="sec-title">Proyectos Destacados</div>
+
+  <div class="item">
+    <div class="item-head">
+      <span class="item-title">Nexus App — ATS &amp; CRM Inteligente</span>
+      <span class="item-sub">AraTalent / División Ara-Tech</span>
+    </div>
+    <div class="item-desc">Plataforma empresarial de captación y gestión de talento. Búsqueda vectorial 128D (&lt;15ms), agente Nexus AI Copilot con Groq LPU, pipeline Kanban interactivo y portal público de postulaciones con protección RGPD.</div>
+    <div class="stack-tag">Stack: FastAPI · PostgreSQL (Cloud SQL) · React · Alembic · Groq LPU · Docker · Python</div>
+  </div>
+
+  <div class="item">
+    <div class="item-head">
+      <span class="item-title">FincaDev — Gestión Agrícola</span>
+      <span class="item-sub"><a href="https://tituta.es/fincadev" target="_blank" style="color:#0284c7;text-decoration:none;">tituta.es/fincadev</a></span>
+    </div>
+    <div class="item-desc">App para gestión agrícola con geolocalización de parcelas, trazabilidad de gastos y analítica de cultivos.</div>
+    <div class="stack-tag">Stack: PHP · MariaDB · JavaScript · API REST</div>
+  </div>
+
+  <div class="item">
+    <div class="item-head">
+      <span class="item-title">El Señor de los Mares — Videojuego Narrativo</span>
+      <span class="item-sub"><a href="https://jcgm.dev/elsenordelosmares" target="_blank" style="color:#0284c7;text-decoration:none;">jcgm.dev</a></span>
+    </div>
+    <div class="item-desc">Aventura conversacional histórica naval. Diseño funcional, mecánicas dinámicas y motor de decisiones en JS.</div>
+    <div class="stack-tag">Stack: JavaScript · HTML5 · CSS3 · Game Engine</div>
+  </div>
+
+  <div class="item">
+    <div class="item-head">
+      <span class="item-title">Tituta.es — E-Commerce en Producción</span>
+      <span class="item-sub"><a href="https://www.tituta.es" target="_blank" style="color:#0284c7;text-decoration:none;">www.tituta.es</a></span>
+    </div>
+    <div class="item-desc">Tienda online en producción con clientes reales, pasarelas de pago, logística y SEO optimizado sobre servidor Linux.</div>
+    <div class="stack-tag">Stack: WordPress · WooCommerce · PHP · MySQL · Linux LAMP</div>
+  </div>
+
+  <div class="item">
+    <div class="item-head">
+      <span class="item-title">Museo AVAN — Web Institucional + ERP/CRM</span>
+      <span class="item-sub"><a href="https://www.museoavan.es" target="_blank" style="color:#0284c7;text-decoration:none;">www.museoavan.es</a></span>
+    </div>
+    <div class="item-desc">Transformación digital del museo: implantación de ERP Dolibarr para control de stock museístico y web oficial.</div>
+    <div class="stack-tag">Stack: WordPress · Dolibarr ERP · PHP · MySQL · Linux</div>
+  </div>
+
+  <div class="item">
+    <div class="item-head">
+      <span class="item-title">Plataforma DAW — E-Learning &amp; Tests</span>
+      <span class="item-sub"><a href="https://jcgm.dev/plataformadetests" target="_blank" style="color:#0284c7;text-decoration:none;">jcgm.dev/plataformadetests</a></span>
+    </div>
+    <div class="item-desc">Plataforma interactiva de simulación de exámenes técnicos y seguimiento de aprendizaje para formación DAW.</div>
+    <div class="stack-tag">Stack: HTML5 · CSS3 · JavaScript nativo</div>
+  </div>
+
+  <div class="sec-title">Experiencia Profesional</div>
+
+  <div class="item">
+    <div class="item-head">
+      <span class="item-title">Full Stack Developer &amp; Database Architect</span>
+      <span class="item-sub">AraTalent (División Ara-Tech) | Remoto</span>
+      <span class="item-date">09/2026 – Presente</span>
+    </div>
+    <ul class="bullets">
+      <li>Desarrollo y evolución de <strong>Nexus App</strong>, ATS y CRM inteligente de captación y gestión de procesos de selección.</li>
+      <li><strong>Arquitectura de Datos &amp; Backend:</strong> Diseño de esquemas en PostgreSQL (Google Cloud SQL), pipeline de migraciones con Alembic, restricciones de unicidad con borrado lógico (<em>soft-delete</em>) y APIs REST asíncronas con FastAPI.</li>
+      <li><strong>Búsqueda Vectorial &amp; Matching:</strong> Motor de embeddings ortogonales de 128D y <em>Talent Rediscovery</em> (&lt;15ms) para emparejamiento semántico libre de alucinaciones entre candidatos y vacantes.</li>
+      <li><strong>Nexus AI Copilot:</strong> Asistente agéntico con Groq LPU, Tool Calling RBAC e interacción fluida por voz.</li>
+      <li><strong>Frontend Reactivo &amp; RGPD:</strong> Pipeline Kanban con drag &amp; drop nativo, portal público de postulaciones de empleo sin login, rúbricas de evaluación ciega (<em>Scorecards</em>) y módulo de auditoría legal y derecho al olvido según el <strong>RGPD</strong>.</li>
+    </ul>
+  </div>
+
+  <div class="item">
+    <div class="item-head">
+      <span class="item-title">Senior Systems &amp; Digital Architect</span>
+      <span class="item-sub">Museo AVAN | Viso del Marqués, Ciudad Real</span>
+      <span class="item-date">01/2021 – Presente</span>
+    </div>
+    <ul class="bullets">
+      <li>Desarrollo web con CMS WordPress, administración de bases de datos y automatización de procesos internos.</li>
+      <li>Implantación y mantenimiento de ERP/CRM Dolibarr para la gestión y catalogación de la colección museística.</li>
+      <li>Administración de servidor Linux, gestión de hosting, seguridad perimetral y servicios de correo.</li>
+    </ul>
+  </div>
+
+  <!-- PAGE 2 -->
+  <div class="page-break"></div>
+
+  <div class="sec-title" style="margin-top:0;">Experiencia Profesional (Continuación)</div>
+
+  <div class="item">
+    <div class="item-head">
+      <span class="item-title">Técnico Especialista en Infraestructura y Preimpresión</span>
+      <span class="item-sub">Docucenter-Printando S.L. | Dos Hermanas, Sevilla</span>
+      <span class="item-date">01/2007 – 12/2017</span>
+    </div>
+    <ul class="bullets">
+      <li>Administración de servidores Linux/FreeBSD con pila LAMP para proyectos web corporativos y comercio electrónico.</li>
+      <li>Desarrollo e integración de plataformas web con Joomla, OpenCart, WordPress, PrestaShop y HTML/CSS.</li>
+      <li>Diseño gráfico, maquetación editorial y preimpresión técnica; mantenimiento de plotters de gran formato.</li>
+      <li>Mantenimiento informático integral, soporte a usuarios y resolución de incidencias en redes de producción.</li>
+    </ul>
+  </div>
+
+  <div class="item">
+    <div class="item-head">
+      <span class="item-title">Administrador de Sistemas y Redes</span>
+      <span class="item-sub">ISS Ingeniería de Software y Sistemas | Sevilla</span>
+      <span class="item-date">01/2000 – 12/2006</span>
+    </div>
+    <ul class="bullets">
+      <li>Montaje, despliegue y mantenimiento de infraestructuras críticas en la <strong>Red de Bibliotecas Públicas de Sevilla</strong> y el <strong>Ayuntamiento de Dos Hermanas</strong>.</li>
+      <li>Administración de redes corporativas LAN/WLAN, configuración de switches, routers, cortafuegos y servidores.</li>
+      <li>Desarrollo y adaptación de soluciones web institucionales y soporte técnico a administraciones públicas.</li>
+    </ul>
+  </div>
+
+  <div class="item">
+    <div class="item-head">
+      <span class="item-title">Profesor Adjunto de Informática y Diseño Gráfico</span>
+      <span class="item-sub">System Centros de Formación | Sevilla</span>
+      <span class="item-date">01/2000 – 12/2005</span>
+    </div>
+    <ul class="bullets">
+      <li>Impartición de módulos técnicos: Arquitectura Hardware, Sistemas Operativos Windows/Linux, Redes y Seguridad.</li>
+      <li>Formación en Diseño Gráfico (Corel Draw, Photoshop), CAD/3D (AutoCAD, 3D Studio Max) e implantación de servidores.</li>
+    </ul>
+  </div>
+
+  <div class="item">
+    <div class="item-head">
+      <span class="item-title">Profesor Adjunto de Ofimática — Cursos FORCEM</span>
+      <span class="item-sub">Liber Formación | Dos Hermanas, Sevilla</span>
+      <span class="item-date">2004</span>
+    </div>
+    <ul class="bullets">
+      <li>Formación profesional continua en ofimática avanzada: Word, Excel, Access, PowerPoint y redes.</li>
+    </ul>
+  </div>
+
+  <div class="item">
+    <div class="item-head">
+      <span class="item-title">Co-organizador Técnico — E2H Party</span>
+      <span class="item-sub">Gran Hipódromo de Andalucía, Dos Hermanas</span>
+      <span class="item-date">2003</span>
+    </div>
+    <ul class="bullets">
+      <li>Coordinación de infraestructura técnica de red, despliegue de cableado y servidores para concentración de más de <strong>500 asistentes</strong> del sector IT a nivel nacional.</li>
+    </ul>
+  </div>
+
+  <div class="sec-title">Formación Académica</div>
+  <div class="item">
+    <div class="item-head">
+      <span class="item-title">FP Grado Superior — Desarrollo de Aplicaciones Web (DAW)</span>
+      <span class="item-date">09/2025 – 06/2027 (En curso · 2º Año)</span>
+    </div>
+    <div class="item-desc">FP Euroformac, Madrid. Especialización en desarrollo FullStack, arquitecturas escalables, bases de datos y prácticas FCT en AraTalent (Ara-Tech).</div>
+  </div>
+  <div class="item">
+    <div class="item-head">
+      <span class="item-title">Acceso a la Universidad para Mayores de 25 años — UNED</span>
+      <span class="item-date">2022</span>
+    </div>
+  </div>
+  <div class="item">
+    <div class="item-head">
+      <span class="item-title">FP Auxiliar Administrativo — Instituto Torre de los Herberos</span>
+      <span class="item-date">1996</span>
+    </div>
+  </div>
+  <div class="item">
+    <div class="item-head">
+      <span class="item-title">Graduado Escolar (EGB) — C.P. Jesús del Gran Poder</span>
+      <span class="item-date">1992</span>
+    </div>
+  </div>
+
+  <div class="sec-title">Certificaciones y Formación Complementaria</div>
+  <ul class="bullets" style="margin-left:14px; columns:2; column-gap:16px;">
+    <li><strong>Certificación Oficial Python Institute</strong></li>
+    <li><strong>Especialización Machine Learning con Python</strong> (150 h)</li>
+    <li><strong>Desarrollo con IA: de 0 a Producción</strong> — BIG School</li>
+    <li><strong>Ciberseguridad y Hacking Ético</strong> — BIG School (2026)</li>
+    <li><strong>Certificado Profesional Java</strong> — IFCD001 MRR</li>
+    <li><strong>Google Marketing Digital y E-Commerce</strong> (7 certificados)</li>
+    <li><strong>Técnico Especialista en Microinformática</strong> — System (1999)</li>
+    <li><strong>Especialista en Redes y Networking</strong> (LAN, WAN, TCP/IP)</li>
+    <li><strong>Administración Servidores UNIX/Linux/BSD</strong> (2003)</li>
+    <li><strong>Técnico en Diseño y Animación 3D</strong> — System (2000)</li>
+  </ul>
+
+  <div class="sec-title" style="margin-top:6px;">Idiomas y Disponibilidad</div>
+  <div style="font-size:8.2pt; color:#334155; line-height:1.35;">
+    <strong>Idiomas:</strong> Español (nativo) | Inglés (medio — comprensión y lectura técnica fluida).<br>
+    <strong>Modalidad:</strong> 100% Remoto o Presencial | <strong>Movilidad:</strong> Carnet B1 y vehículo propio | <strong>Incorporación:</strong> Activo en prácticas AraTalent / Disponibilidad continua.
+  </div>
+
+  <div class="footer-note">
+    Autorizo el tratamiento de mis datos personales con fines de selección de personal según el RGPD y la LOPDGDD.
+  </div>
+
+</body>
+</html>
