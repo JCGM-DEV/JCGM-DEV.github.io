@@ -7,7 +7,7 @@
 <style>
   @page {
     size: A4 portrait;
-    margin: 11mm 12mm 11mm 12mm;
+    margin: 9.5mm 11mm 9.5mm 11mm;
   }
   * {
     box-sizing: border-box;
@@ -19,29 +19,29 @@
     color: #1a202c;
     background: #ffffff;
     font-size: 8.8pt;
-    line-height: 1.34;
+    line-height: 1.30;
   }
   .header {
     text-align: left;
-    margin-bottom: 7px;
+    margin-bottom: 4px;
   }
   .name {
-    font-size: 19pt;
+    font-size: 18.5pt;
     font-weight: 800;
     letter-spacing: -0.5px;
     color: #1e3a8a;
     line-height: 1.1;
   }
   .headline {
-    font-size: 9.6pt;
+    font-size: 9.4pt;
     font-weight: 600;
     color: #475569;
     margin-top: 2px;
   }
   .contact {
-    font-size: 8.4pt;
+    font-size: 8.3pt;
     color: #64748b;
-    margin-top: 3px;
+    margin-top: 2px;
   }
   .contact a {
     color: #0284c7;
@@ -52,27 +52,27 @@
     color: #94a3b8;
   }
   .sec-title {
-    font-size: 9.5pt;
+    font-size: 9.3pt;
     font-weight: 800;
     text-transform: uppercase;
     letter-spacing: 0.6px;
     color: #1e3a8a;
     border-bottom: 1.5px solid #1e3a8a;
-    padding-bottom: 1.5px;
-    margin-top: 7px;
-    margin-bottom: 4px;
+    padding-bottom: 1px;
+    margin-top: 5px;
+    margin-bottom: 3px;
   }
   p.summary {
     text-align: justify;
     color: #334155;
-    font-size: 8.6pt;
-    line-height: 1.32;
+    font-size: 8.5pt;
+    line-height: 1.28;
   }
   .skills-grid {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 2.5px;
-    font-size: 8.4pt;
+    gap: 2px;
+    font-size: 8.3pt;
   }
   .skill-row {
     color: #334155;
@@ -82,7 +82,7 @@
     color: #1e293b;
   }
   .item {
-    margin-bottom: 5px;
+    margin-bottom: 3.5px;
   }
   .item:last-child {
     margin-bottom: 2px;
@@ -167,7 +167,7 @@
 
   <div class="sec-title">Perfil Profesional</div>
   <p class="summary">
-    Arquitecto de Software y Sistemas y Desarrollador Full Stack con visión de SysAdmin y más de 20 años de experiencia técnica transformando infraestructuras críticas y construyendo soluciones de Inteligencia Artificial Aplicada, Orquestación Agéntica y Micro-SaaS B2B. Actualmente en <strong>AraTalent (división Ara-Tech)</strong> liderando la evolución de arquitectura (<strong>Fase 2</strong>) de <strong>Nexus App</strong> y su <strong>Web Service Asistente CRM</strong>: orquestación agéntica determinista basada en máquinas de estados con <strong>LangGraph</strong> (<em>StateGraph</em> persistente con <em>Human-in-the-Loop</em>), base de datos vectorial nativa con <strong>pgvector</strong> (índices HNSW, distancia coseno sub-5ms multi-entidad), APIs REST asíncronas con FastAPI y Google Cloud SQL. Creador de los proyectos Micro-SaaS <strong>PrintPreflight AI</strong> (motor algorítmico de auto-reparación de PDFs con Ghostscript y PyMuPDF) y <strong>CodeTutor AI</strong> (evaluación pedagógica en tiempo real con Groq LPU).
+    Arquitecto de Software y Sistemas y Desarrollador Full Stack con visión de SysAdmin y más de 20 años de experiencia técnica transformando infraestructuras críticas y construyendo soluciones de Inteligencia Artificial Aplicada, Orquestación Agéntica y Micro-SaaS B2B. Actualmente en <strong>AraTalent (división Ara-Tech)</strong> liderando la evolución de arquitectura (<strong>Fase 2</strong>) de <strong>Nexus App</strong>: orquestación agéntica determinista basada en máquinas de estados con <strong>LangGraph</strong> (<em>StateGraph</em> persistente con <em>Human-in-the-Loop</em>), base de datos vectorial nativa con <strong>pgvector</strong> (índices HNSW, distancia coseno sub-5ms multi-entidad), APIs REST asíncronas con FastAPI y Google Cloud SQL. Creador de <strong>PrintFlow ERP</strong> (CRM &amp; ERP vertical con orquestador agéntico de 39+ tools y motor legal Veri*factu RD 1007/2023), <strong>PrintPreflight AI</strong> (auto-reparación de PDFs con Ghostscript y PyMuPDF) y <strong>CodeTutor AI</strong> (evaluación pedagógica en vivo con Groq LPU).
   </p>
 
   <div class="sec-title">Competencias Técnicas</div>
@@ -184,11 +184,19 @@
   <div class="two-cols">
     <div class="item">
       <div class="item-head">
-        <span class="item-title">Nexus App &amp; Asistente CRM</span>
+        <span class="item-title">Nexus App (Fase 2)</span>
         <span class="item-sub">aratalent.es</span>
       </div>
-      <div class="item-desc">ATS Enterprise &amp; Web Service agéntico con LangGraph StateGraph, Vector DB pgvector (HNSW &lt;5ms), B2B Deals y Briefing 360°.</div>
+      <div class="item-desc">ATS Enterprise con matching semántico pgvector (índices HNSW &lt;5ms) y orquestación agéntica LangGraph (StateGraph con Human-in-the-Loop).</div>
       <div class="stack-tag">FastAPI · LangGraph · pgvector · Cloud SQL · Groq LPU</div>
+    </div>
+    <div class="item">
+      <div class="item-head">
+        <span class="item-title">PrintFlow ERP — CRM &amp; ERP Agéntico</span>
+        <span class="item-sub">github.com/JCGM-DEV/printflow-erp</span>
+      </div>
+      <div class="item-desc">ERP para imprenta con orquestador agéntico ("J", 39+ tools, bucle ReAct, voz Whisper Turbo) y motor legal Veri*factu SHA-256 (RD 1007/2023).</div>
+      <div class="stack-tag">FastAPI · Orquestación Agéntica · Veri*factu · Groq Whisper · Telegram</div>
     </div>
     <div class="item">
       <div class="item-head">
@@ -236,29 +244,28 @@
 
   <div class="item">
     <div class="item-head">
-      <span class="item-title">Full Stack &amp; Applied AI Developer — Nexus App &amp; Asistente CRM</span>
+      <span class="item-title">Full Stack &amp; Applied AI Developer — Nexus App (Fase 2)</span>
       <span class="item-sub">AraTalent (División Ara-Tech) | Remoto</span>
       <span class="item-date">09/2026 – Presente</span>
     </div>
     <ul class="bullets">
-      <li>Desarrollo, auditoría y evolución técnica hacia la <strong>Fase 2 de Arquitectura Agéntica</strong> de <strong>Nexus App</strong> y su <strong>Web Service Asistente CRM</strong>: plataforma corporativa ATS de captación de talento y ecosistema de inteligencia comercial B2B.</li>
+      <li>Desarrollo, auditoría y evolución técnica hacia la <strong>Fase 2 de Arquitectura Agéntica</strong> de <strong>Nexus App</strong>: plataforma corporativa ATS de captación de talento y ecosistema de inteligencia para selección.</li>
       <li><strong>Orquestación Agéntica con LangGraph:</strong> Implementación de máquinas de estados deterministas (<em>StateGraph</em>) con persistencia transaccional en PostgreSQL (`AsyncPostgresSaver`), reducción de consumo de tokens en Groq LPU y soporte nativo de <em>Human-in-the-Loop</em> (pausa interactiva antes de envíos comerciales).</li>
-      <li><strong>Base de Datos Vectorial Nativa (`pgvector`):</strong> Migración a extensión nativa de PostgreSQL con índices <strong>HNSW</strong> (`vector(128)`, distancia coseno en &lt;5ms) para matching semántico híbrido multi-entidad (candidatos, vacantes, emails y notas de clientes).</li>
-      <li><strong>Web Service Asistente CRM &amp; Write Tools:</strong> Servicio web en FastAPI con agentes ejecutivos (control RBAC), automatización del pipeline comercial (B2B Deals Kanban), cálculo de forecast ponderado en tiempo real y <em>Briefing Matinal 360°</em>.</li>
+      <li><strong>Base de Datos Vectorial Nativa (`pgvector`):</strong> Migración a extensión nativa de PostgreSQL con índices <strong>HNSW</strong> (`vector(128)`, distancia coseno en &lt;5ms) para matching semántico híbrido multi-entidad (candidatos y vacantes).</li>
       <li><strong>Backend Asíncrono &amp; RGPD:</strong> Despacho de tareas desatendidas (`asyncio.create_task`), portal público con rúbricas de evaluación ciega (<em>Scorecards</em>) y módulo de derecho al olvido irreversible según el <strong>RGPD</strong>.</li>
     </ul>
   </div>
 
   <div class="item">
     <div class="item-head">
-      <span class="item-title">Software Architect &amp; Micro-SaaS Builder — PrintPreflight AI &amp; CodeTutor</span>
+      <span class="item-title">Software Architect &amp; Micro-SaaS Builder — PrintFlow ERP, PrintPreflight AI &amp; CodeTutor</span>
       <span class="item-sub">Iniciativas de Software &amp; Micro-SaaS | I+D Propia</span>
       <span class="item-date">2026 – Presente</span>
     </div>
     <ul class="bullets">
+      <li><strong>PrintFlow ERP (CRM &amp; ERP Vertical de Artes Gráficas):</strong> Arquitectura integral de gestión con orquestador agéntico ("J", 39+ herramientas, bucle ReAct, Groq Whisper Turbo y voz en tiempo real) y motor legal de facturación inalterable Veri*factu (RD 1007/2023) con encadenamiento SHA-256, QR de la AEAT y cerrojos en base de datos.</li>
       <li><strong>PrintPreflight AI (Micro-SaaS B2B):</strong> Diseño y desarrollo de motor algorítmico para validación y auto-reparación de PDFs en artes gráficas. Síntesis de sangrado mediante espejo (<em>mirror padding</em>), normalización CMYK con Ghostscript y conector WooCommerce.</li>
       <li><strong>CodeTutor AI (EdTech):</strong> Tutor de programación línea a línea desplegado en Render con inferencia ultra-rápida (Groq LPU / Llama 3.3 70B), terminal interactiva sandbox y método pedagógico DECODE.</li>
-      <li><strong>FincaDev (AgriTech PWA):</strong> Cuaderno de campo digital oficial con asistente inteligente Pistachín AI, parcelas SIGPAC y clima local.</li>
     </ul>
   </div>
 
