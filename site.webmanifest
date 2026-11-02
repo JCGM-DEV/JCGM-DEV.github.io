@@ -1,0 +1,26 @@
+{
+  "name": "José Carlos Garrido Molina — Portfolio",
+  "short_name": "JCGM-DEV",
+  "description": "Portfolio de José Carlos Garrido Molina — AI & Software Architect · Micro-SaaS Builder · Senior Systems Veteran",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#03010d",
+  "theme_color": "#00F5FF",
+  "icons": [
+    {
+      "src": "/favicon-32x32.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    },
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    },
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}
