@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>José Carlos Garrido Molina — AI &amp; Software Architect · FullStack Dev</title>
+<title>José Carlos Garrido Molina — AI &amp; Software Architect · Micro-SaaS Builder · Senior Systems Veteran</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Rajdhani:wght@400;500;600;700&family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
 <style>
 :root{
@@ -294,6 +294,22 @@ section{padding:5.5rem 3.5rem;border-top:1px solid var(--border);position:relati
 .pf-card.special .pf-link:hover{background:rgba(255,230,0,.1);box-shadow:0 0 20px rgba(255,230,0,.3);border-color:var(--ye);}
 .pf-card.special::before{background:linear-gradient(90deg,transparent,var(--ye),var(--mg),transparent);}
 
+/* Portfolio filters & badges */
+.pf-filter-wrap{display:flex;flex-wrap:wrap;justify-content:center;gap:.65rem;margin-bottom:2.6rem;}
+.pf-filter-btn{font-family:'Share Tech Mono',monospace;font-size:.72rem;letter-spacing:.12em;padding:.55rem 1.2rem;background:rgba(0,245,255,.04);border:1px solid var(--border);color:var(--dim);cursor:pointer;transition:all .25s;text-transform:uppercase;clip-path:polygon(7px 0%,100% 0%,calc(100% - 7px) 100%,0% 100%);}
+.pf-filter-btn:hover{border-color:var(--cy);color:var(--cy);background:rgba(0,245,255,.1);box-shadow:0 0 15px rgba(0,245,255,.2);transform:translateY(-1px);}
+.pf-filter-btn.active{border-color:var(--cy);color:var(--bg);background:var(--cy);box-shadow:0 0 22px var(--cy);font-weight:700;}
+.pf-card.hidden{display:none!important;}
+.pf-badge-strip{position:absolute;top:10px;right:10px;z-index:3;display:flex;gap:.4rem;flex-wrap:wrap;justify-content:flex-end;}
+.pf-badge{font-family:'Orbitron',monospace;font-size:.52rem;font-weight:700;letter-spacing:.08em;padding:.22rem .55rem;background:rgba(3,1,13,.88);border:1px solid var(--cy);color:var(--cy);backdrop-filter:blur(6px);text-transform:uppercase;box-shadow:0 0 10px rgba(0,245,255,.25);}
+.pf-badge.saas{border-color:var(--gr);color:var(--gr);box-shadow:0 0 10px rgba(0,255,65,.25);}
+.pf-badge.ai{border-color:var(--mg);color:var(--mg);box-shadow:0 0 10px rgba(255,0,110,.25);}
+.pf-badge.star{border-color:var(--ye);color:var(--ye);box-shadow:0 0 10px rgba(255,230,0,.25);}
+.pf-actions{display:flex;gap:.65rem;flex-wrap:wrap;align-items:center;margin-top:.3rem;}
+.pf-btn-gh{display:inline-flex;align-items:center;gap:.5rem;font-family:'Share Tech Mono',monospace;font-size:.65rem;letter-spacing:.08em;color:var(--dim);text-decoration:none;padding:.58rem 1rem;border:1px solid rgba(0,245,255,.2);background:rgba(0,0,0,.35);transition:all .22s;clip-path:polygon(6px 0%,100% 0%,calc(100% - 6px) 100%,0% 100%);}
+.pf-btn-gh:hover{border-color:var(--pu);color:var(--bright);background:rgba(191,0,255,.14);box-shadow:0 0 16px rgba(191,0,255,.32);}
+.pf-btn-gh svg{width:13px;height:13px;fill:currentColor;}
+
 /* EXPERIENCE */
 .exp-stack{display:flex;flex-direction:column;gap:.9rem;}
 .exp-card{display:grid;grid-template-columns:185px 1fr;border:1px solid var(--border);background:var(--bg2);position:relative;overflow:hidden;opacity:0;transform:translateX(-32px);transition:opacity .5s,transform .5s,border-color .3s,box-shadow .3s;}
@@ -425,20 +441,20 @@ footer span{color:var(--cy);}
   <div class="hero-left">
     <div class="sys-label">PERFIL CARGADO // ACCESO AUTORIZADO</div>
     <h1 class="hero-name">José Carlos<span class="outline">Garrido Molina</span></h1>
-    <div class="hero-sub" id="scramble-el">FULLSTACK SOLUTIONS ARCHITECT · SYSTEMS EXPERT</div>
-    <span class="exec-summary">Arquitecto de Sistemas con 20 años de experiencia transformando infraestructuras críticas en soluciones digitales de vanguardia.</span>
+    <div class="hero-sub" id="scramble-el">AI &amp; SOFTWARE ARCHITECT · AGENTIC ORCHESTRATION · MICRO-SAAS BUILDER</div>
+    <span class="exec-summary">Arquitecto de Software y Sistemas con más de 20 años de experiencia técnica transformando infraestructuras críticas y construyendo soluciones de Inteligencia Artificial Aplicada, Orquestación Agéntica (LangGraph, pgvector) y Micro-SaaS B2B.</span>
     <p class="hero-bio">
-      Especialista en unir la robustez de infraestructuras críticas con la agilidad del desarrollo moderno (FullStack) y la inteligencia artificial aplicada. Actualmente desarrollando e impulsando soluciones avanzadas en <strong>AraTalent (división Ara-Tech)</strong> para <strong>Nexus App</strong> (FastAPI, React, PostgreSQL Cloud SQL, IA agéntica con Groq y búsqueda vectorial nativa).
+      Especialista en fusionar dos décadas de robustez en infraestructura crítica (Linux, FreeBSD, Windows Server) y producción gráfica industrial con el desarrollo de software de vanguardia: desarrollo activo en <strong>AraTalent (división Ara-Tech)</strong> para el ecosistema <strong>Nexus App</strong> y su <strong>Web Service Asistente CRM</strong> con orquestación agéntica (<strong>LangGraph StateGraph</strong> con <em>Human-in-the-Loop</em>, base de datos vectorial nativa <strong>pgvector</strong> con índices HNSW en &lt;5ms, FastAPI y PostgreSQL Cloud SQL), creador del Micro-SaaS <strong>PrintPreflight AI</strong> (validación y reparación algorítmica de PDFs con PyMuPDF y Ghostscript) y del tutor interactivo de programación <strong>CodeTutor</strong> (evaluación en vivo con Groq LPU).
       <br><br>
-      <span style="color:var(--cy);font-weight:600;">Metodología:</span> Flujos de desarrollo agéntico (<em>Agentic Workflows</em>) y arquitectura de software de alta resiliencia.
+      <span style="color:var(--cy);font-weight:600;">Metodología &amp; Enfoque:</span> Orquestación con <em>LangGraph</em> (StateGraph &amp; checkpoints transaccionales), bases de datos vectoriales nativas (<em>pgvector</em>), flujos de desarrollo asistido (<em>Agentic Workflows</em>), micro-servicios asíncronos y arquitecturas de software de alta resiliencia.
     </p>
     <div class="hero-tags">
-      <span class="htag">FastAPI / Python</span><span class="htag">React / Vite</span>
-      <span class="htag">PostgreSQL / Cloud SQL</span><span class="htag">Búsqueda Vectorial &amp; IA</span>
-      <span class="htag">Agentic Workflows</span><span class="htag">Alta Resiliencia</span>
-      <span class="htag">Linux / BSD</span><span class="htag">Windows Server</span>
-      <span class="htag">PHP / Java</span><span class="htag">WordPress</span>
-      <span class="htag">Redes LAN/WLAN</span><span class="htag">FullStack Dev</span>
+      <span class="htag">LangGraph (StateGraph)</span><span class="htag">pgvector (HNSW)</span>
+      <span class="htag">Asistente CRM Web Service</span><span class="htag">FastAPI / Python</span>
+      <span class="htag">Groq LPU / Tool Calling</span><span class="htag">Micro-SaaS B2B</span>
+      <span class="htag">Búsqueda Vectorial (&lt;5ms)</span><span class="htag">PyMuPDF &amp; Ghostscript</span>
+      <span class="htag">PostgreSQL / Cloud SQL</span><span class="htag">Human-in-the-Loop</span>
+      <span class="htag">Linux / BSD Kernel</span><span class="htag">FullStack Dev</span>
     </div>
     <div class="hero-btns">
       <a href="#contact" class="btn-cy">
@@ -467,14 +483,14 @@ footer span{color:var(--cy);}
     <div class="holo-shine" id="holo-shine"></div>
     <div class="card-tag">ID // SISTEMA ACTIVO</div>
     <div class="card-name">José Carlos<span>Garrido Molina</span></div>
-    <div class="card-roles">AI &amp; SOFTWARE ARCHITECT · FULLSTACK DEV · SYSTEMS EXPERT</div>
+    <div class="card-roles">AI &amp; SOFTWARE ARCHITECT · FULLSTACK DEV · MICRO-SAAS BUILDER</div>
     <div class="card-loc">📍 Viso del Marqués · Ciudad Real · Remoto o Presencial</div>
     <div class="card-div"></div>
     <div class="card-stats">
       <div class="cs"><div class="cs-n" id="cnt-years">0</div><div class="cs-l">Años activo</div></div>
-      <div class="cs"><div class="cs-n">6+</div><div class="cs-l">Plataformas CMS</div></div>
+      <div class="cs"><div class="cs-n">10+</div><div class="cs-l">Proyectos Core</div></div>
+      <div class="cs"><div class="cs-n">&lt;5ms</div><div class="cs-l">Latencia pgvector</div></div>
       <div class="cs"><div class="cs-n">20+</div><div class="cs-l">Certificaciones</div></div>
-      <div class="cs"><div class="cs-n">500</div><div class="cs-l">Asistentes E2H</div></div>
     </div>
     <div class="card-social">
       <a href="https://www.linkedin.com/in/jos%C3%A9-carlos-garrido-molina-4a7762140/" target="_blank" class="cs-soc">
@@ -490,7 +506,7 @@ footer span{color:var(--cy);}
     </div>
     <div class="card-avail">
       <span style="font-size:1.4rem;flex-shrink:0">⚡</span>
-      <div><strong>FULL STACK &amp; APPLIED AI DEV — ARATALENT</strong>Activo desde 09/2026 · Remoto · Carnet B1 · Vehículo propio</div>
+      <div><strong>AI &amp; SOFTWARE ARCHITECT · FULL STACK DEV</strong>AraTalent (división Ara-Tech) · Micro-SaaS Builder · Remoto o Presencial</div>
     </div>
   </div>
 </section>
@@ -498,20 +514,25 @@ footer span{color:var(--cy);}
 <!-- TECH GRID (REPLACING MARQUEE) -->
 <div class="tech-grid-wrap">
   <div class="tech-grid">
+    <span class="tech-tag highlight">LangGraph (StateGraph)</span>
+    <span class="tech-tag highlight">pgvector (Vector DB HNSW)</span>
+    <span class="tech-tag highlight">Asistente CRM Web Service</span>
     <span class="tech-tag highlight">FastAPI / Python</span>
+    <span class="tech-tag highlight">Groq LPU / Tool Calling</span>
+    <span class="tech-tag highlight">Micro-SaaS B2B</span>
+    <span class="tech-tag highlight">Human-in-the-Loop (HITL)</span>
     <span class="tech-tag highlight">React / Vite</span>
     <span class="tech-tag highlight">PostgreSQL Cloud SQL</span>
-    <span class="tech-tag highlight">Búsqueda Vectorial (128D)</span>
-    <span class="tech-tag highlight">Groq LPU / IA Agéntica</span>
+    <span class="tech-tag highlight">PyMuPDF &amp; Ghostscript</span>
     <span class="tech-tag highlight">Agentic Workflows</span>
-    <span class="tech-tag highlight">Alta Resiliencia</span>
-    <span class="tech-tag">Linux / BSD</span>
-    <span class="tech-tag">WordPress</span>
-    <span class="tech-tag">Dolibarr ERP</span>
+    <span class="tech-tag">Linux / BSD Kernel</span>
+    <span class="tech-tag">Docker &amp; Containers</span>
+    <span class="tech-tag">Pipeline B2B Deals &amp; Forecast</span>
+    <span class="tech-tag">PWA Offline-First</span>
     <span class="tech-tag">Redes LAN/WLAN</span>
-    <span class="tech-tag">PHP / Java</span>
-    <span class="tech-tag">Prestashop</span>
-    <span class="tech-tag">FP DAW (2º Año)</span>
+    <span class="tech-tag">PHP / MariaDB / Java</span>
+    <span class="tech-tag">WordPress &amp; WooCommerce</span>
+    <span class="tech-tag">Dolibarr ERP</span>
     <span class="tech-tag highlight">Machine Learning (150h)</span>
     <span class="tech-tag highlight">Hacking Ético</span>
     <span class="tech-tag highlight">FullStack Dev</span>
@@ -528,18 +549,18 @@ footer span{color:var(--cy);}
   <div class="info-grid">
     <div class="info-card">
       <div class="ic-icon">🖥️</div>
-      <div class="ic-title">Arquitectura de Sistemas</div>
-      <div class="ic-text">20 años optimizando infraestructuras críticas en entornos reales: <strong>Linux, FreeBSD y Windows Server</strong>. Gestión de redes corporativas para la <strong>Red de Bibliotecas de Sevilla</strong> y entornos municipales, garantizando alta disponibilidad.</div>
+      <div class="ic-title">20 Años en Infraestructura Crítica</div>
+      <div class="ic-text">Dos décadas optimizando infraestructuras reales de misión crítica: <strong>Linux, FreeBSD y Windows Server</strong>. Gestión y seguridad de redes corporativas para la <strong>Red de Bibliotecas de Sevilla</strong> y entornos municipales, garantizando alta disponibilidad y tolerancia a fallos.</div>
     </div>
     <div class="info-card">
-      <div class="ic-icon">🚀</div>
-      <div class="ic-title">Evolución FullStack</div>
-      <div class="ic-text">Integrando décadas de conocimiento en infraestructura con el desarrollo de software avanzado (<strong>DAW</strong>). Experto en convertir arquitecturas de servidor en aplicaciones robustas, escalables y modernas.</div>
+      <div class="ic-icon">🧠</div>
+      <div class="ic-title">Inteligencia Artificial Aplicada &amp; Orquestación Agéntica</div>
+      <div class="ic-text">Diseño e implementación de arquitecturas con IA de vanguardia: orquestación agéntica con <strong>LangGraph</strong> (StateGraph persistente y Human-in-the-Loop) y base de datos vectorial nativa <strong>pgvector</strong> (índices HNSW &lt;5ms) en <strong>Nexus App</strong> y en el <strong>Web Service Asistente CRM</strong>, validación algorítmica y reparación de PDFs en <strong>PrintPreflight AI</strong>, y tutoría reactiva de código con Groq LPU en <strong>CodeTutor</strong>.</div>
     </div>
     <div class="info-card">
-      <div class="ic-icon">🎯</div>
-      <div class="ic-title">Visión Técnica 360°</div>
-      <div class="ic-text">Capacidad estratégica para gestionar el ciclo de vida completo de un producto digital: desde el despliegue y seguridad de la red hasta la lógica de negocio y el diseño de interfaces de alto impacto.</div>
+      <div class="ic-icon">⚡</div>
+      <div class="ic-title">Ingeniería FullStack &amp; Visión 360°</div>
+      <div class="ic-text">Capacidad única para cubrir el ciclo completo de ingeniería: desde el hardware, los protocolos de red y los procesos industriales (preimpresión, colorimetría) hasta arquitecturas asíncronas con <strong>FastAPI, PostgreSQL y React</strong> con despliegue continuo.</div>
     </div>
   </div>
   <div class="sec-head" style="margin-bottom:2rem;">
@@ -555,12 +576,26 @@ footer span{color:var(--cy);}
 <section id="portfolio" style="background:var(--bg2)">
   <div class="sec-head">
     <span class="sec-idx">02</span>
-    <h2 class="sec-title">TRABAJOS <span class="acc">REALIZADOS</span></h2>
+    <h2 class="sec-title">PROYECTOS &amp; <span class="acc">SOLUCIONES</span></h2>
     <div class="sec-rule"></div>
   </div>
+
+  <!-- Interactive Filter Tabs -->
+  <div class="pf-filter-wrap">
+    <button class="pf-filter-btn active" data-filter="all">TODOS [10]</button>
+    <button class="pf-filter-btn" data-filter="ai">IA &amp; MICRO-SAAS [5]</button>
+    <button class="pf-filter-btn" data-filter="tools">HERRAMIENTAS &amp; CLOUD [2]</button>
+    <button class="pf-filter-btn" data-filter="clients">CLIENTES &amp; VIDEOJUEGO [3]</button>
+  </div>
+
   <div class="portfolio-grid">
-    <!-- Nexus App — ATS & CRM Inteligente (AraTalent / Ara-Tech) -->
-    <div class="pf-card special" style="border-color:rgba(0,255,224,.4);box-shadow:0 0 30px rgba(0,255,224,.1);">
+
+    <!-- 1. Nexus App — ATS Enterprise & Headhunting con IA (Salto de Evolución Fase 2) -->
+    <div class="pf-card special" data-category="ai saas" style="border-color:rgba(0,255,224,.4);box-shadow:0 0 30px rgba(0,255,224,.1);">
+      <div class="pf-badge-strip">
+        <span class="pf-badge star">★ FLAGSHIP ATS</span>
+        <span class="pf-badge ai">EVOLUCIÓN FASE 2</span>
+      </div>
       <div class="pf-preview">
         <div class="pf-scan" style="background:linear-gradient(90deg,transparent,var(--cy),transparent);"></div>
         <div class="pf-mock">
@@ -568,38 +603,280 @@ footer span{color:var(--cy);}
           <div class="pf-mock-grid" style="background-image:linear-gradient(rgba(0,255,224,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(0,255,224,.07) 1px,transparent 1px);background-size:24px 24px;"></div>
           <div class="pf-mock-icon" style="animation-delay:.3s">🧠</div>
           <div class="pf-mock-title" style="color:var(--cy);text-shadow:0 0 20px var(--cy)">NEXUS APP</div>
-          <div class="pf-mock-url">aratalent.es · ara-tech</div>
+          <div class="pf-mock-url">aratalent.es · LangGraph &amp; pgvector</div>
           <div class="pf-mock-tags">
-            <span class="pf-mock-tag" style="border-color:rgba(0,255,224,.4);color:var(--cy);background:rgba(0,255,224,.08)">ATS &amp; CRM</span>
-            <span class="pf-mock-tag" style="border-color:rgba(0,255,224,.4);color:var(--cy);background:rgba(0,255,224,.08)">Búsqueda Vectorial</span>
-            <span class="pf-mock-tag" style="border-color:rgba(0,255,224,.4);color:var(--cy);background:rgba(0,255,224,.08)">IA Agéntica</span>
+            <span class="pf-mock-tag" style="border-color:rgba(0,255,224,.4);color:var(--cy);background:rgba(0,255,224,.08)">LangGraph StateGraph</span>
+            <span class="pf-mock-tag" style="border-color:rgba(0,255,224,.4);color:var(--cy);background:rgba(0,255,224,.08)">pgvector (HNSW)</span>
+            <span class="pf-mock-tag" style="border-color:rgba(0,255,224,.4);color:var(--cy);background:rgba(0,255,224,.08)">Groq Inferencia</span>
           </div>
         </div>
         <div class="pf-overlay" style="background:linear-gradient(to bottom,transparent 50%,var(--bg2) 100%)"></div>
       </div>
       <div class="pf-body">
         <div class="pf-type" style="color:var(--cy)">★ AraTalent (División Ara-Tech) · Full Stack &amp; Applied AI Developer</div>
-        <div class="pf-title">Nexus App — ATS &amp; CRM Inteligente con IA</div>
-        <div class="pf-desc">Plataforma empresarial de captación y gestión de talento (ATS &amp; CRM). Arquitectura de datos en Google Cloud SQL, motor nativo de búsqueda vectorial (128D) para matching semántico en &lt;15ms, agente Nexus AI Copilot con Groq LPU y Tool Calling RBAC, pipeline Kanban interactivo, portal público de empleo y cumplimiento estricto del RGPD europeo.</div>
+        <div class="pf-title">Nexus App — ATS Enterprise con Matching Vectorial (Fase 2)</div>
+        <div class="pf-desc">Plataforma empresarial de captación y selección de talento en pleno salto evolutivo (<strong>Fase 2</strong>): migración del motor de matching semántico a <strong>pgvector</strong> nativo con índices HNSW en PostgreSQL Cloud SQL (búsqueda coseno en &lt;5ms multi-entidad sobre candidatos y vacantes), orquestación de workflows deterministas con <strong>LangGraph</strong> (máquina de estados <em>StateGraph</em> persistente con <em>Human-in-the-Loop</em>), inferencia ultra-rápida (Groq LPU), pipeline Kanban reactivo y cumplimiento estricto del RGPD europeo.</div>
         <div class="pf-pills">
           <span class="pp" style="border-color:var(--cy);color:var(--cy)">FastAPI</span>
+          <span class="pp">LangGraph StateGraph</span>
+          <span class="pp">pgvector (HNSW)</span>
           <span class="pp">PostgreSQL Cloud SQL</span>
           <span class="pp">React / Vite</span>
-          <span class="pp">Búsqueda Vectorial (128D)</span>
           <span class="pp">Groq LPU</span>
+          <span class="pp">Human-in-the-Loop</span>
           <span class="pp">Alembic</span>
           <span class="pp">RGPD</span>
-          <span class="pp">Docker</span>
         </div>
-        <div class="pf-link" style="color:var(--cy);cursor:default;">
-          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
-          DESARROLLO EN PRODUCCIÓN INTERNA
+        <div class="pf-actions">
+          <div class="pf-link" style="color:var(--cy);cursor:default;">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 01-4-10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+            EN PRODUCCIÓN &amp; EVOLUCIÓN FASE 2
+          </div>
         </div>
       </div>
     </div>
 
-    <!-- ControlStudios — Command Center & Estudio DAW -->
-    <div class="pf-card">
+    <!-- 2. Asistente CRM — Web Service con Orquestación Agéntica (AraTalent / Ara-Tech) -->
+    <div class="pf-card special" data-category="ai saas" style="border-color:rgba(191,0,255,.45);box-shadow:0 0 30px rgba(191,0,255,.12);">
+      <div class="pf-badge-strip">
+        <span class="pf-badge star" style="border-color:var(--pu);color:var(--pu);">★ WEB SERVICE IA</span>
+        <span class="pf-badge ai">ORQUESTACIÓN AGÉNTICA</span>
+      </div>
+      <div class="pf-preview">
+        <div class="pf-scan" style="background:linear-gradient(90deg,transparent,var(--pu),transparent);"></div>
+        <div class="pf-mock">
+          <div class="pf-mock-bg" style="background:linear-gradient(135deg,#190426,#0c0114);"></div>
+          <div class="pf-mock-grid" style="background-image:linear-gradient(rgba(191,0,255,.08) 1px,transparent 1px),linear-gradient(90deg,rgba(191,0,255,.08) 1px,transparent 1px);background-size:24px 24px;"></div>
+          <div class="pf-mock-icon" style="animation-delay:.4s">🤖</div>
+          <div class="pf-mock-title" style="color:var(--pu);text-shadow:0 0 20px var(--pu)">ASISTENTE CRM</div>
+          <div class="pf-mock-url">nexus-crm.aratalent.es · Web Service Agéntico</div>
+          <div class="pf-mock-tags">
+            <span class="pf-mock-tag" style="border-color:rgba(191,0,255,.4);color:var(--pu);background:rgba(191,0,255,.08)">LangGraph HITL</span>
+            <span class="pf-mock-tag" style="border-color:rgba(191,0,255,.4);color:var(--pu);background:rgba(191,0,255,.08)">pgvector CRM Notes</span>
+            <span class="pf-mock-tag" style="border-color:rgba(191,0,255,.4);color:var(--pu);background:rgba(191,0,255,.08)">Deals &amp; Forecast</span>
+          </div>
+        </div>
+        <div class="pf-overlay" style="background:linear-gradient(to bottom,transparent 50%,var(--bg2) 100%)"></div>
+      </div>
+      <div class="pf-body">
+        <div class="pf-type" style="color:var(--pu)">★ Web Service Asistente CRM · Orquestación Agéntica &amp; B2B Deals Pipeline</div>
+        <div class="pf-title">Asistente CRM — Web Service con Orquestación Agéntica &amp; Deals Pipeline</div>
+        <div class="pf-desc">Web service empresarial de inteligencia comercial y reclutamiento ejecutado con <strong>FastAPI</strong>, orquestación agéntica basada en grafos deterministas con <strong>LangGraph</strong> (<em>StateGraph</em> con checkpoints en PostgreSQL y <em>Human-in-the-Loop</em>) y memoria episódica en base de datos vectorial nativa <strong>pgvector</strong> (HNSW &lt;5ms en emails y notas comerciales). Integra herramientas ejecutivas (<em>Write Tools</em> con SRP y control de roles RBAC) para avanzar oportunidades de negocio (B2B Deals Kanban), recalcular forecast ponderado en tiempo real, sincronizar scrapers en segundo plano (<code>asyncio</code>) y consolidar el <em>Briefing Matinal 360°</em> para la dirección.</div>
+        <div class="pf-pills">
+          <span class="pp" style="border-color:var(--pu);color:var(--pu)">FastAPI Web Service</span>
+          <span class="pp">LangGraph (StateGraph)</span>
+          <span class="pp">pgvector (HNSW)</span>
+          <span class="pp">Tool Calling Ejecutivo</span>
+          <span class="pp">Pipeline B2B Deals</span>
+          <span class="pp">Forecast Ponderado</span>
+          <span class="pp">Human-in-the-Loop</span>
+          <span class="pp">Groq LPU (Llama 3.3)</span>
+          <span class="pp">Asyncio Tasks</span>
+          <span class="pp">PostgreSQL 15</span>
+        </div>
+        <div class="pf-actions">
+          <div class="pf-link" style="color:var(--pu);border-color:rgba(191,0,255,.4);cursor:default;">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 01-4-10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+            WEB SERVICE AGÉNTICO EN PRODUCCIÓN
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. PrintPreflight AI — Micro-SaaS B2B -->
+    <div class="pf-card special" data-category="ai saas" style="border-color:rgba(0,255,65,.4);box-shadow:0 0 30px rgba(0,255,65,.09);">
+      <div class="pf-badge-strip">
+        <span class="pf-badge star" style="border-color:var(--gr);color:var(--gr);">★ MICRO-SAAS B2B</span>
+        <span class="pf-badge saas">CORE VERIFICADO</span>
+      </div>
+      <div class="pf-preview">
+        <div class="pf-scan" style="background:linear-gradient(90deg,transparent,var(--gr),transparent);"></div>
+        <div class="pf-mock">
+          <div class="pf-mock-bg" style="background:linear-gradient(135deg,#021a0d,#010d07);"></div>
+          <div class="pf-mock-grid" style="background-image:linear-gradient(rgba(0,255,65,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(0,255,65,.07) 1px,transparent 1px);background-size:24px 24px;"></div>
+          <div class="pf-mock-icon" style="animation-delay:.5s">🖨️</div>
+          <div class="pf-mock-title" style="color:var(--gr);text-shadow:0 0 20px var(--gr)">PRINTPREFLIGHT AI</div>
+          <div class="pf-mock-url">printpreflight.ai · B2B Engine</div>
+          <div class="pf-mock-tags">
+            <span class="pf-mock-tag" style="border-color:rgba(0,255,65,.4);color:var(--gr);background:rgba(0,255,65,.08)">Ghostscript Core</span>
+            <span class="pf-mock-tag" style="border-color:rgba(0,255,65,.4);color:var(--gr);background:rgba(0,255,65,.08)">Mirror Bleed Fix</span>
+            <span class="pf-mock-tag" style="border-color:rgba(0,255,65,.4);color:var(--gr);background:rgba(0,255,65,.08)">FastAPI REST</span>
+          </div>
+        </div>
+        <div class="pf-overlay" style="background:linear-gradient(to bottom,transparent 50%,var(--bg2) 100%)"></div>
+      </div>
+      <div class="pf-body">
+        <div class="pf-type" style="color:var(--gr)">★ Micro-SaaS B2B · Imprentas Digitales &amp; Web-to-Print</div>
+        <div class="pf-title">PrintPreflight AI — Preflight &amp; Auto-Fix de PDFs</div>
+        <div class="pf-desc">Micro-SaaS B2B para validación y reparación automática de archivos PDF en artes gráficas. Motor algorítmico capaz de detectar falta de sangrado a nivel de píxel/micra, reparar automáticamente mediante síntesis de bordes en espejo (<em>mirror padding</em>), normalizar espacios de color a CMYK con Ghostscript y generar pruebas de impresión certificadas. Conecta 10+ años de experiencia en artes gráficas con FastAPI y Celery/Redis.</div>
+        <div class="pf-pills">
+          <span class="pp" style="border-color:var(--gr);color:var(--gr)">FastAPI</span>
+          <span class="pp">Python</span>
+          <span class="pp">Ghostscript</span>
+          <span class="pp">PyMuPDF</span>
+          <span class="pp">Mirror Bleed Padding</span>
+          <span class="pp">PostgreSQL 16</span>
+          <span class="pp">Celery / Redis</span>
+          <span class="pp">WooCommerce Plugin</span>
+        </div>
+        <div class="pf-actions">
+          <div class="pf-link" style="color:var(--gr);border-color:rgba(0,255,65,.4);cursor:default;">
+            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            MOTOR CORE VERIFICADO (12/12 TESTS)
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. CodeTutor — Tutor de Programación Línea a Línea -->
+    <div class="pf-card special" data-category="ai saas" style="border-color:rgba(255,0,110,.4);box-shadow:0 0 30px rgba(255,0,110,.09);">
+      <div class="pf-badge-strip">
+        <span class="pf-badge ai">GROQ LPU</span>
+        <span class="pf-badge star">LIVE EN RENDER</span>
+      </div>
+      <div class="pf-preview">
+        <div class="pf-scan" style="background:linear-gradient(90deg,transparent,var(--mg),transparent);"></div>
+        <div class="pf-mock">
+          <div class="pf-mock-bg" style="background:linear-gradient(135deg,#1f0212,#0f0109);"></div>
+          <div class="pf-mock-grid" style="background-image:linear-gradient(rgba(255,0,110,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(255,0,110,.07) 1px,transparent 1px);background-size:24px 24px;"></div>
+          <div class="pf-mock-icon" style="animation-delay:.7s">🤖</div>
+          <div class="pf-mock-title" style="color:var(--mg);text-shadow:0 0 20px var(--mg)">CODETUTOR AI</div>
+          <div class="pf-mock-url">correctorcodigo.onrender.com</div>
+          <div class="pf-mock-tags">
+            <span class="pf-mock-tag" style="border-color:rgba(255,0,110,.4);color:var(--mg);background:rgba(255,0,110,.08)">Método DECODE</span>
+            <span class="pf-mock-tag" style="border-color:rgba(255,0,110,.4);color:var(--mg);background:rgba(255,0,110,.08)">Línea a Línea</span>
+            <span class="pf-mock-tag" style="border-color:rgba(255,0,110,.4);color:var(--mg);background:rgba(255,0,110,.08)">Terminal Sandbox</span>
+          </div>
+        </div>
+        <div class="pf-overlay" style="background:linear-gradient(to bottom,transparent 50%,var(--bg2) 100%)"></div>
+      </div>
+      <div class="pf-body">
+        <div class="pf-type" style="color:var(--mg)">★ EdTech AI · Tutor Interactivo en Tiempo Real</div>
+        <div class="pf-title">CodeTutor — Tutor de Código Línea a Línea</div>
+        <div class="pf-desc">Tutor interactivo de programación con inferencia ultra-rápida asistida por IA (Groq LPU / Llama 3.3 70B). Descompone retos algorítmicos mediante el método pedagógico DECODE, evalúa código línea a línea con sincronización reactiva en milisegundos y ejecuta soluciones en una terminal/sandbox interactiva (Python, Java, JS) con aislamiento seguro y análisis de complejidad. Desplegado y 100% funcional en Render.</div>
+        <div class="pf-pills">
+          <span class="pp" style="border-color:var(--mg);color:var(--mg)">FastAPI</span>
+          <span class="pp">Groq LPU (Llama 3.3)</span>
+          <span class="pp">Sandbox Subprocess</span>
+          <span class="pp">Método DECODE</span>
+          <span class="pp">Terminal Interactiva</span>
+          <span class="pp">Render Deployment</span>
+          <span class="pp">VS Code UI</span>
+        </div>
+        <div class="pf-actions">
+          <a href="https://correctorcodigo.onrender.com/" target="_blank" class="pf-link">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+            PROBAR APP EN VIVO
+          </a>
+          <a href="https://github.com/JCGM-DEV/CorrectorCodigo" target="_blank" class="pf-btn-gh">
+            <svg viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.042-1.416-4.042-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.76-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.24 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+            CÓDIGO GITHUB
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. FincaDev — AgriTech con Pistachín AI -->
+    <div class="pf-card" data-category="ai saas">
+      <div class="pf-badge-strip">
+        <span class="pf-badge saas">AGRITECH PWA</span>
+        <span class="pf-badge ai">PISTACHÍN AI</span>
+      </div>
+      <div class="pf-preview">
+        <div class="pf-scan"></div>
+        <div class="pf-mock">
+          <div class="pf-mock-bg"></div>
+          <div class="pf-mock-grid"></div>
+          <div class="pf-mock-icon">🌿</div>
+          <div class="pf-mock-title">FINCADEV</div>
+          <div class="pf-mock-url">tituta.es/fincadev · SIGPAC GIS</div>
+          <div class="pf-mock-tags">
+            <span class="pf-mock-tag">Pistachín AI</span>
+            <span class="pf-mock-tag">SIGPAC Parcelas</span>
+            <span class="pf-mock-tag">Open-Meteo API</span>
+          </div>
+        </div>
+        <div class="pf-overlay"></div>
+      </div>
+      <div class="pf-body">
+        <div class="pf-type">AgriTech PWA · Gestión Agronómica con IA &amp; SIGPAC</div>
+        <div class="pf-title">FincaDev — Cuaderno de Campo con Pistachín AI</div>
+        <div class="pf-desc">Plataforma integral de gestión agronómica oficial para explotaciones de pistacho. Combina cuaderno de campo normativo, cartografía digital y visor de parcelas SIGPAC, estación meteorológica local en tiempo real con Open-Meteo, y el asistente virtual inteligente <strong>Pistachín AI</strong> para recomendaciones fitosanitarias, control de labores, maquinaria y almacén. PWA offline-first con sincronización automática mediante Service Worker.</div>
+        <div class="pf-pills">
+          <span class="pp">PWA Offline-First</span>
+          <span class="pp">Pistachín AI</span>
+          <span class="pp">Open-Meteo API</span>
+          <span class="pp">SIGPAC / Mapas</span>
+          <span class="pp">PHP / MariaDB</span>
+          <span class="pp">Service Worker</span>
+          <span class="pp">Trazabilidad</span>
+        </div>
+        <div class="pf-actions">
+          <a href="https://tituta.es/fincadev/" target="_blank" class="pf-link">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 01-4-10 15.3 15.3 0 01-4-10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+            PROBAR APP
+          </a>
+          <a href="https://github.com/JCGM-DEV/cuaderno-pistacho" target="_blank" class="pf-btn-gh">
+            <svg viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.042-1.416-4.042-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.76-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.24 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+            CÓDIGO GITHUB
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5. Xerox 550 Digital Engine — Presupuestos & Rentabilidad -->
+    <div class="pf-card" data-category="tools">
+      <div class="pf-badge-strip">
+        <span class="pf-badge star">WCAG 2.1</span>
+        <span class="pf-badge">PDF INGESTION</span>
+      </div>
+      <div class="pf-preview">
+        <div class="pf-scan"></div>
+        <div class="pf-mock">
+          <div class="pf-mock-bg"></div>
+          <div class="pf-mock-grid"></div>
+          <div class="pf-mock-icon">⚙️</div>
+          <div class="pf-mock-title">XEROX 550 ENGINE</div>
+          <div class="pf-mock-url">jcgm.dev/xerox550</div>
+          <div class="pf-mock-tags">
+            <span class="pf-mock-tag">PDF Drag &amp; Drop</span>
+            <span class="pf-mock-tag">Cost Engine</span>
+            <span class="pf-mock-tag">WCAG 2.1</span>
+          </div>
+        </div>
+        <div class="pf-overlay"></div>
+      </div>
+      <div class="pf-body">
+        <div class="pf-type">Industrial FinTech &amp; Print Engine · Copistería Digital</div>
+        <div class="pf-title">Xerox 550 — Calculadora de Presupuestos &amp; Márgenes</div>
+        <div class="pf-desc">Aplicación web de alta precisión para talleres de artes gráficas y copisterías equipadas con prensa digital Xerox Color 550. Permite la ingesta de PDFs por arrastre, cálculo dinámico de presupuestos por volumen de tirada, desglose pormenorizado de costes (tóner, clic, papel, encuadernado) y balance de rentabilidad neto al instante. Cumple con estándares de accesibilidad WCAG 2.1.</div>
+        <div class="pf-pills">
+          <span class="pp">JavaScript ES6+</span>
+          <span class="pp">PDF Drag &amp; Drop</span>
+          <span class="pp">Cost &amp; Margin Engine</span>
+          <span class="pp">WCAG 2.1 Accesible</span>
+          <span class="pp">PWA</span>
+          <span class="pp">Print Shop Analytics</span>
+        </div>
+        <div class="pf-actions">
+          <a href="https://jcgm.dev/xerox550/" target="_blank" class="pf-link">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 01-4-10 15.3 15.3 0 01-4-10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+            PROBAR APP
+          </a>
+          <a href="https://github.com/JCGM-DEV/xerox550" target="_blank" class="pf-btn-gh">
+            <svg viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.042-1.416-4.042-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.76-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.24 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+            CÓDIGO GITHUB
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 6. ControlStudios — Command Center & Estudio DAW -->
+    <div class="pf-card" data-category="tools">
+      <div class="pf-badge-strip">
+        <span class="pf-badge">FIREBASE CLOUD</span>
+        <span class="pf-badge">AUDIO API</span>
+      </div>
       <div class="pf-preview">
         <div class="pf-scan"></div>
         <div class="pf-mock">
@@ -607,7 +884,7 @@ footer span{color:var(--cy);}
           <div class="pf-mock-grid"></div>
           <div class="pf-mock-icon">🎯</div>
           <div class="pf-mock-title">CONTROLSTUDIOS</div>
-          <div class="pf-mock-url">jcgm.dev/controlstudios</div>
+          <div class="pf-mock-url">jcgm.dev/ControlStudios</div>
           <div class="pf-mock-tags">
             <span class="pf-mock-tag">Firebase Cloud</span>
             <span class="pf-mock-tag">Focus Timer</span>
@@ -617,9 +894,9 @@ footer span{color:var(--cy);}
         <div class="pf-overlay"></div>
       </div>
       <div class="pf-body">
-        <div class="pf-type">Web App · Cloud Sync &amp; Productividad</div>
+        <div class="pf-type">Web App · Cloud Sync &amp; Productividad de Estudio</div>
         <div class="pf-title">ControlStudios — Command Center DAW 2º</div>
-        <div class="pf-desc">Herramienta integral de alto rendimiento para la gestión y seguimiento del curso DAW. Incluye control de entregas evaluables y TFC, cronograma visual de hitos, modo concentración Pomodoro con Web Audio API, horario interactivo con alarmas de clase y sincronización en tiempo real en la nube con Firebase (Firestore &amp; Auth). Demuestra proactividad, disciplina organizativa y arquitectura frontend cloud.</div>
+        <div class="pf-desc">Herramienta integral de alto rendimiento para el seguimiento y organización del curso DAW. Incluye control de entregas evaluables y TFC, cronograma visual de hitos, modo concentración Pomodoro con síntesis sonora en Web Audio API, horario interactivo con alarmas de clase y sincronización multi-dispositivo en la nube en tiempo real mediante Firebase (Firestore &amp; Auth).</div>
         <div class="pf-pills">
           <span class="pp">JavaScript ES6+</span>
           <span class="pp">Firebase Firestore</span>
@@ -629,55 +906,25 @@ footer span{color:var(--cy);}
           <span class="pp">Glassmorphism</span>
           <span class="pp">GitHub Pages</span>
         </div>
-        <div style="display:flex;gap:.8rem;flex-wrap:wrap;">
+        <div class="pf-actions">
           <a href="https://jcgm.dev/ControlStudios/" target="_blank" class="pf-link">
-            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 01-4-10 15.3 15.3 0 01-4-10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
             PROBAR APP
           </a>
-          <a href="https://github.com/JCGM-DEV/ControlStudios" target="_blank" class="pf-link" style="border-color:rgba(0,245,255,.2);color:var(--dim);">
-            <svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+          <a href="https://github.com/JCGM-DEV/ControlStudios" target="_blank" class="pf-btn-gh">
+            <svg viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.042-1.416-4.042-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.76-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.24 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
             CÓDIGO GITHUB
           </a>
         </div>
       </div>
     </div>
 
-    <!-- FincaDev -->
-    <div class="pf-card">
-      <div class="pf-preview">
-        <div class="pf-scan"></div>
-        <div class="pf-mock">
-          <div class="pf-mock-bg"></div>
-          <div class="pf-mock-grid"></div>
-          <div class="pf-mock-icon">🏘️</div>
-          <div class="pf-mock-title">FINCADEV</div>
-          <div class="pf-mock-url">tituta.es/fincadev</div>
-          <div class="pf-mock-tags">
-            <span class="pf-mock-tag">Gestión</span>
-            <span class="pf-mock-tag">Inmobiliaria</span>
-            <span class="pf-mock-tag">Web App</span>
-          </div>
-        </div>
-        <div class="pf-overlay"></div>
+    <!-- 7. Tituta — E-Commerce -->
+    <div class="pf-card" data-category="clients">
+      <div class="pf-badge-strip">
+        <span class="pf-badge">E-COMMERCE</span>
+        <span class="pf-badge">LAMP LINUX</span>
       </div>
-      <div class="pf-body">
-        <div class="pf-type">Gestión Inmobiliaria · Web App</div>
-        <div class="pf-title">FincaDev — Control de Fincas</div>
-        <div class="pf-desc">Plataforma para la gestión integral de fincas y comunidades, optimizando el control de gastos, mantenimientos y la comunicación directa con propietarios.</div>
-        <div class="pf-pills">
-          <span class="pp">PHP</span><span class="pp">MariaDB</span>
-          <span class="pp">JavaScript</span><span class="pp">Backend</span>
-          <span class="pp">Gestión Digital</span>
-        </div>
-        <a href="https://tituta.es/fincadev/" target="_blank" class="pf-link">
-          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
-          VISITAR PROYECTO
-        </a>
-      </div>
-    </div>
-
-    <!-- tituta.es -->
-    <div class="pf-card">
       <div class="pf-preview">
         <div class="pf-scan"></div>
         <div class="pf-mock">
@@ -695,24 +942,30 @@ footer span{color:var(--cy);}
         <div class="pf-overlay"></div>
       </div>
       <div class="pf-body">
-        <div class="pf-type">Tienda Online · E-Commerce</div>
+        <div class="pf-type">Tienda Online · E-Commerce &amp; Pasarelas de Pago</div>
         <div class="pf-title">Tituta — Tienda Online</div>
-        <div class="pf-desc">Desarrollo completo de tienda de comercio electrónico sobre WordPress con WooCommerce. Diseño personalizado, catálogo de productos, pasarelas de pago integradas, SEO optimizado y gestión de envíos. Infraestructura alojada en servidor Linux con pila LAMP.</div>
+        <div class="pf-desc">Desarrollo completo de tienda de comercio electrónico sobre WordPress con WooCommerce alojada en servidor Linux con pila LAMP propia. Diseño corporativo personalizado, pasarelas de pago seguras integradas, optimización SEO técnica y logística sincronizada.</div>
         <div class="pf-pills">
           <span class="pp">WordPress</span><span class="pp">WooCommerce</span>
           <span class="pp">PHP</span><span class="pp">MySQL</span>
           <span class="pp">Linux/LAMP</span><span class="pp">SEO</span>
           <span class="pp">Diseño Gráfico</span>
         </div>
-        <a href="https://www.tituta.es" target="_blank" class="pf-link">
-          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
-          VISITAR WEB
-        </a>
+        <div class="pf-actions">
+          <a href="https://www.tituta.es" target="_blank" class="pf-link">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 01-4-10 15.3 15.3 0 01-4-10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+            VISITAR WEB
+          </a>
+        </div>
       </div>
     </div>
 
-    <!-- museoavan.es -->
-    <div class="pf-card">
+    <!-- 8. Museo Ciencias Naturales AVAN -->
+    <div class="pf-card" data-category="clients">
+      <div class="pf-badge-strip">
+        <span class="pf-badge">ERP/CRM</span>
+        <span class="pf-badge">ALTA DISPONIBILIDAD</span>
+      </div>
       <div class="pf-preview">
         <div class="pf-scan"></div>
         <div class="pf-mock">
@@ -730,88 +983,72 @@ footer span{color:var(--cy);}
         <div class="pf-overlay"></div>
       </div>
       <div class="pf-body">
-        <div class="pf-type">Web Institucional · ERP/CRM</div>
+        <div class="pf-type">Web Institucional · Implantación ERP/CRM Dolibarr</div>
         <div class="pf-title">Museo Ciencias Naturales AVAN</div>
-        <div class="pf-desc">Diseño y desarrollo web del Museo de Ciencias Naturales AVAN. Implantación del sistema ERP/CRM Dolibarr para gestión interna, control de stock y colección museística. Configuración completa de hosting, dominio e infraestructura digital.</div>
+        <div class="pf-desc">Diseño y desarrollo web corporativo del Museo de Ciencias Naturales AVAN. Implantación y parametrización del sistema ERP/CRM Dolibarr para la catalogación museística, control de stock y colección de fósiles y minerales. Despliegue en infraestructura Linux con alta disponibilidad.</div>
         <div class="pf-pills">
           <span class="pp">WordPress</span><span class="pp">Dolibarr ERP</span>
           <span class="pp">Linux</span><span class="pp">Base de datos</span>
           <span class="pp">Hosting</span><span class="pp">CRM</span>
         </div>
-        <a href="https://www.museoavan.es" target="_blank" class="pf-link">
-          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
-          VISITAR WEB
-        </a>
+        <div class="pf-actions">
+          <a href="https://www.museoavan.es" target="_blank" class="pf-link">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 01-4-10 15.3 15.3 0 01-4-10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+            VISITAR WEB
+          </a>
+        </div>
       </div>
     </div>
 
-    <!-- Plataforma DAW — SPECIAL CARD -->
-    <div class="pf-card special">
+    <!-- 10. El Señor de los Mares — Videojuego de Aventura Conversacional -->
+    <div class="pf-card" data-category="clients">
+      <div class="pf-badge-strip">
+        <span class="pf-badge" style="border-color:var(--cy);color:var(--cy);">★ GAME DEV</span>
+        <span class="pf-badge">PWA EN VITE</span>
+      </div>
       <div class="pf-preview">
-        <div class="pf-scan" style="background:linear-gradient(90deg,transparent,var(--ye),transparent);"></div>
+        <div class="pf-scan" style="background:linear-gradient(90deg,transparent,var(--cy),transparent);"></div>
         <div class="pf-mock">
-          <div class="pf-mock-bg" style="background:linear-gradient(135deg,#0d0920,#080514);"></div>
-          <div class="pf-mock-grid" style="background-image:linear-gradient(rgba(255,230,0,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(255,230,0,.06) 1px,transparent 1px);background-size:24px 24px;"></div>
-          <div class="pf-mock-icon" style="animation-delay:.5s">🎓</div>
-          <div class="pf-mock-title" style="color:var(--ye);text-shadow:0 0 20px var(--ye)">PLATAFORMA DAW</div>
-          <div class="pf-mock-url">jcgm.dev/plataformadetests</div>
+          <div class="pf-mock-bg" style="background:linear-gradient(135deg,#031a29,#010c14);"></div>
+          <div class="pf-mock-grid" style="background-image:linear-gradient(rgba(0,255,224,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(0,255,224,.06) 1px,transparent 1px);background-size:24px 24px;"></div>
+          <div class="pf-mock-icon" style="animation-delay:.6s">⚓</div>
+          <div class="pf-mock-title" style="color:var(--cy);text-shadow:0 0 20px var(--cy)">EL SEÑOR DE LOS MARES</div>
+          <div class="pf-mock-url">jcgm.dev/elsenordelosmares · Vite PWA</div>
           <div class="pf-mock-tags">
-            <span class="pf-mock-tag" style="border-color:rgba(255,230,0,.4);color:var(--ye);background:rgba(255,230,0,.08)">DAW 2027</span>
-            <span class="pf-mock-tag" style="border-color:rgba(255,230,0,.4);color:var(--ye);background:rgba(255,230,0,.08)">Exámenes</span>
-            <span class="pf-mock-tag" style="border-color:rgba(255,230,0,.4);color:var(--ye);background:rgba(255,230,0,.08)">Interactiva</span>
+            <span class="pf-mock-tag" style="border-color:rgba(0,255,224,.4);color:var(--cy);background:rgba(0,255,224,.08)">Game Design</span>
+            <span class="pf-mock-tag" style="border-color:rgba(0,255,224,.4);color:var(--cy);background:rgba(0,255,224,.08)">Árbol de Decisiones</span>
+            <span class="pf-mock-tag" style="border-color:rgba(0,255,224,.4);color:var(--cy);background:rgba(0,255,224,.08)">Web Audio API</span>
           </div>
         </div>
         <div class="pf-overlay" style="background:linear-gradient(to bottom,transparent 50%,var(--bg2) 100%)"></div>
       </div>
       <div class="pf-body">
-        <div class="pf-type">★ Centro de Alto Rendimiento · DAW 2027</div>
-        <div class="pf-title">Sistema de Repaso de Exámenes</div>
-        <div class="pf-desc">Plataforma avanzada de entrenamiento para el éxito en el ciclo DAW. Incluye simulacros de examen en tiempo real, recursos didácticos y seguimiento dinámico del aprendizaje.</div>
+        <div class="pf-type" style="color:var(--cy)">Videojuego Histórico · Aventura Conversacional &amp; PWA Offline</div>
+        <div class="pf-title">El Señor de los Mares — Epopeya Histórica Naval</div>
+        <div class="pf-desc">Videojuego interactivo de aventura conversacional ambientado en las gestas históricas del Marqués de Santa Cruz (Álvaro de Bazán). Desarrollado como Progressive Web App (PWA) con <strong>Vite</strong>, motor narrativo con árboles de decisión y múltiples desenlaces dinámicos, ambientación sonora con Web Audio API, animaciones fluidas y soporte offline completo mediante Service Worker.</div>
         <div class="pf-pills">
-          <span class="pp">HTML5</span><span class="pp">CSS3</span>
-          <span class="pp">JavaScript</span><span class="pp">DAW Study</span>
-          <span class="pp">E-Learning</span><span class="pp">UX/UI</span>
+          <span class="pp" style="border-color:var(--cy);color:var(--cy)">JavaScript ES6+</span>
+          <span class="pp">Vite</span>
+          <span class="pp">PWA Offline-First</span>
+          <span class="pp">Service Worker</span>
+          <span class="pp">Game Design</span>
+          <span class="pp">Narrative Logic</span>
+          <span class="pp">Web Audio API</span>
+          <span class="pp">UI/UX Inmersivo</span>
         </div>
-        <a href="https://jcgm.dev/plataformadetests/" target="_blank" class="pf-link">
-          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
-          VER PLATAFORMA
-        </a>
+        <div class="pf-actions">
+          <a href="https://jcgm.dev/elsenordelosmares/" target="_blank" class="pf-link">
+            <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            JUGAR AHORA
+          </a>
+          <a href="https://github.com/JCGM-DEV/elsenordelosmares" target="_blank" class="pf-btn-gh">
+            <svg viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.042-1.416-4.042-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.76-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.24 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+            CÓDIGO GITHUB
+          </a>
+        </div>
       </div>
     </div>
 
-    <!-- El Señor de los Mares -->
-    <div class="pf-card">
-      <div class="pf-preview">
-        <div class="pf-scan"></div>
-        <div class="pf-mock">
-          <div class="pf-mock-bg"></div>
-          <div class="pf-mock-grid"></div>
-          <div class="pf-mock-icon">⚓</div>
-          <div class="pf-mock-title">EL SEÑOR DE LOS MARES</div>
-          <div class="pf-mock-url">jcgm.dev/elsenordelosmares</div>
-          <div class="pf-mock-tags">
-            <span class="pf-mock-tag">Game Dev</span>
-            <span class="pf-mock-tag">Histórico</span>
-            <span class="pf-mock-tag">JS Engine</span>
-          </div>
-        </div>
-        <div class="pf-overlay"></div>
-      </div>
-      <div class="pf-body">
-        <div class="pf-type">Videojuego · Aventura Conversacional</div>
-        <div class="pf-title">El Señor de los Mares (Epopeya)</div>
-        <div class="pf-desc">Sumérgete en una aventura histórica naval sobre el Marqués de Santa Cruz. Un videojuego interactivo desarrollado con lógica narrativa y sistemas de decisión dinámicos.</div>
-        <div class="pf-pills">
-          <span class="pp">JavaScript</span><span class="pp">Game Design</span>
-          <span class="pp">Narrative</span><span class="pp">History</span>
-          <span class="pp">UX/UI</span>
-        </div>
-        <a href="https://jcgm.dev/elsenordelosmares/" target="_blank" class="pf-link">
-          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
-          JUGAR AHORA
-        </a>
-      </div>
-    </div>
   </div>
 </section>
 
@@ -847,17 +1084,18 @@ footer span{color:var(--cy);}
       </div>
     </div>
     <div class="sk-block" style="border:1px solid rgba(255,230,0,.3);background:rgba(255,230,0,.025);">
-      <div class="sk-head"><span class="sk-icon">★</span><span class="sk-name" style="color:var(--ye)">Desarrollo Web · FP DAW &amp; AraTalent</span></div>
+      <div class="sk-head"><span class="sk-icon">★</span><span class="sk-name" style="color:var(--ye)">Desarrollo Web · IA Aplicada &amp; Orquestación Agéntica</span></div>
       <div class="sk-rows">
-        <div class="sk-row"><span class="sk-lbl">FastAPI / APIs Asíncronas REST</span><span class="sk-bar ye" style="--w:92%"></span><span class="sk-pct ye">AVANZADO</span></div>
+        <div class="sk-row"><span class="sk-lbl">LangGraph / StateGraph &amp; Human-in-the-Loop</span><span class="sk-bar ye" style="--w:93%"></span><span class="sk-pct ye">AVANZADO</span></div>
+        <div class="sk-row"><span class="sk-lbl">pgvector (PostgreSQL) / Índices HNSW &lt;5ms</span><span class="sk-bar ye" style="--w:92%"></span><span class="sk-pct ye">AVANZADO</span></div>
+        <div class="sk-row"><span class="sk-lbl">Web Services Agénticos (FastAPI &amp; Tools)</span><span class="sk-bar ye" style="--w:94%"></span><span class="sk-pct ye">AVANZADO</span></div>
+        <div class="sk-row"><span class="sk-lbl">Groq LPU / Tool Calling (Llama 3.3)</span><span class="sk-bar ye" style="--w:92%"></span><span class="sk-pct ye">AVANZADO</span></div>
         <div class="sk-row"><span class="sk-lbl">PostgreSQL / Cloud SQL &amp; Alembic</span><span class="sk-bar ye" style="--w:90%"></span><span class="sk-pct ye">AVANZADO</span></div>
-        <div class="sk-row"><span class="sk-lbl">Búsqueda Vectorial (128D) &amp; IA</span><span class="sk-bar ye" style="--w:88%"></span><span class="sk-pct ye">AVANZADO</span></div>
-        <div class="sk-row"><span class="sk-lbl">React / Vite (Frontend Reactivo)</span><span class="sk-bar ye" style="--w:85%"></span><span class="sk-pct ye">AVANZADO</span></div>
+        <div class="sk-row"><span class="sk-lbl">Ghostscript / PyMuPDF &amp; PDF Engine</span><span class="sk-bar ye" style="--w:92%"></span><span class="sk-pct ye">AVANZADO</span></div>
+        <div class="sk-row"><span class="sk-lbl">React / Vite (Kanban Drag &amp; Drop)</span><span class="sk-bar ye" style="--w:88%"></span><span class="sk-pct ye">AVANZADO</span></div>
         <div class="sk-row"><span class="sk-lbl">Python / Machine Learning (150h)</span><span class="sk-bar ye" style="--w:90%"></span><span class="sk-pct ye">AVANZADO</span></div>
-        <div class="sk-row"><span class="sk-lbl">PHP / Java (Certificado)</span><span class="sk-bar ye" style="--w:85%"></span><span class="sk-pct ye">AVANZADO</span></div>
-        <div class="sk-row"><span class="sk-lbl">HTML5 / CSS3 / JavaScript (ES6+)</span><span class="sk-bar ye" style="--w:88%"></span><span class="sk-pct ye">AVANZADO</span></div>
-        <div class="sk-row"><span class="sk-lbl">FullStack &amp; IA Agéntica (Groq LPU)</span><span class="sk-bar ye" style="--w:85%"></span><span class="sk-pct ye">CONTINUO</span></div>
-        <div class="sk-row"><span class="sk-lbl">Agentic Workflows &amp; Alta Resiliencia</span><span class="sk-bar ye" style="--w:90%"></span><span class="sk-pct ye">AVANZADO</span></div>
+        <div class="sk-row"><span class="sk-lbl">PWA Offline-First &amp; Web Audio API</span><span class="sk-bar ye" style="--w:88%"></span><span class="sk-pct ye">AVANZADO</span></div>
+        <div class="sk-row"><span class="sk-lbl">Pipeline B2B Deals &amp; Forecast Ponderado</span><span class="sk-bar ye" style="--w:91%"></span><span class="sk-pct ye">AVANZADO</span></div>
       </div>
     </div>
     <div class="sk-block">
@@ -912,23 +1150,48 @@ footer span{color:var(--cy);}
         <div class="exp-co"><strong style="color:var(--bright)">AraTalent (División Ara-Tech)</strong><br>Remoto · Prácticas DAW</div>
       </div>
       <div class="exp-right">
-        <div class="exp-t" style="color:var(--cy);">Full Stack &amp; Applied AI Developer — Nexus App</div>
+        <div class="exp-t" style="color:var(--cy);">Full Stack &amp; Applied AI Developer — Nexus App &amp; Asistente CRM</div>
         <div class="exp-pills">
           <span class="ep" style="border-color:var(--cy);color:var(--cy);">FastAPI</span>
-          <span class="ep">React / Vite</span>
+          <span class="ep">LangGraph (StateGraph)</span>
+          <span class="ep">pgvector (HNSW)</span>
           <span class="ep">PostgreSQL Cloud SQL</span>
-          <span class="ep">Búsqueda Vectorial (128D)</span>
           <span class="ep">Groq LPU</span>
+          <span class="ep">React / Vite</span>
+          <span class="ep">Human-in-the-Loop</span>
           <span class="ep">Alembic</span>
           <span class="ep">RGPD</span>
         </div>
         <ul class="exp-ul">
-          <li>Desarrollo, auditoría y evolución técnica integral de <strong style="color:var(--bright)">Nexus App</strong>: plataforma corporativa ATS &amp; CRM de selección de talento y gestión de procesos.</li>
-          <li><strong>Arquitectura de Datos &amp; Backend:</strong> Modelado y migración de esquemas en <strong style="color:var(--text)">PostgreSQL (Google Cloud SQL) con Alembic</strong>, restricciones de unicidad con borrado lógico (<em>soft-delete</em>) y optimización de endpoints asíncronos en FastAPI.</li>
-          <li><strong>Búsqueda Vectorial Semántica (128D) &amp; <em>Talent Rediscovery</em>:</strong> Desarrollo de motor vectorial matemático ortogonal con latencia sub-15ms en memoria/SQL, eliminando sesgos y discriminando perfiles con scoring ponderado multicriterio.</li>
-          <li><strong>Nexus AI Copilot:</strong> Asistente conversacional multi-herramienta (<em>Tool Calling</em>) con control de roles RBAC, inferencia ultra-rápida (Groq LPU) e integración por voz.</li>
-          <li><strong>Frontend Reactivo &amp; RGPD:</strong> Tablero Kanban interactivo (Drag &amp; Drop nativo), portal público de ofertas de empleo con auto-postulación, rúbricas de evaluación ciega (<em>Scorecards</em>) y módulo integral de cumplimiento del <strong style="color:var(--text)">RGPD</strong> (derecho al olvido irreversible y registro de auditoría legal).</li>
-          <li><strong>Metodología de Desarrollo Acelerado con IA:</strong> Flujos de trabajo de ingeniería de software (*AI-Augmented Engineering*) asistidos por agentes autónomos de IA para aceleración de despliegues, auditoría, testing y arquitectura.</li>
+          <li>Desarrollo, auditoría y evolución técnica hacia la <strong style="color:var(--bright)">Fase 2 de Arquitectura Agéntica</strong> de <strong>Nexus App</strong> y su <strong>Web Service Asistente CRM</strong>: plataforma corporativa ATS de captación de talento y ecosistema de inteligencia comercial B2B.</li>
+          <li><strong>Orquestación Agéntica con LangGraph:</strong> Implementación de máquinas de estados deterministas (<em>StateGraph</em>) con checkpoints transaccionales en PostgreSQL (`AsyncPostgresSaver`), reducción drástica del consumo de tokens en Groq y soporte nativo de <em>Human-in-the-Loop</em> (pausa interactiva antes de envíos de propuestas comerciales y correos).</li>
+          <li><strong>Migración a Base de Datos Vectorial Nativa (`pgvector`):</strong> Sustitución de búsquedas en memoria por la extensión nativa de PostgreSQL con índices <strong>HNSW</strong> (`vector(128)`, distancia coseno en &lt;5ms sobre millones de registros) para matching semántico híbrido multi-entidad (candidatos, vacantes, emails y notas de clientes).</li>
+          <li><strong>Web Service Asistente CRM &amp; Write Tools:</strong> Servicio web desacoplado en FastAPI con agentes ejecutivos gobernados por control de roles RBAC. Automatización del pipeline de oportunidades comerciales (B2B Deals Kanban), cálculo de forecast financiero ponderado en tiempo real y generación del <em>Briefing Matinal 360°</em> para la dirección.</li>
+          <li><strong>Backend Asíncrono &amp; Frontend Reactivo:</strong> Despacho de tareas desatendidas en segundo plano (`asyncio.create_task`), portal público de vacantes, rúbricas ciegas (<em>Scorecards</em>) y módulo de cumplimiento estricto del <strong style="color:var(--text)">RGPD</strong> (derecho al olvido irreversible y registro de auditoría).</li>
+          <li><strong>Metodología de Desarrollo Acelerado con IA:</strong> Flujos de ingeniería de software aumentada (*AI-Augmented Engineering*) asistidos por agentes autónomos para diseño arquitectónico, pruebas unitarias asíncronas y optimización de rendimiento.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="exp-card" style="border-color:rgba(255,0,110,.4);box-shadow:0 0 25px rgba(255,0,110,.07);">
+      <div class="exp-left" style="background:rgba(255,0,110,.05);">
+        <div class="exp-yr" style="color:var(--mg);">2026 – Act.</div>
+        <div class="exp-co"><strong style="color:var(--bright)">Iniciativas de Software &amp; Micro-SaaS</strong><br>I+D Propia</div>
+      </div>
+      <div class="exp-right">
+        <div class="exp-t" style="color:var(--mg);">Software Architect &amp; Micro-SaaS Builder — PrintPreflight AI &amp; CodeTutor</div>
+        <div class="exp-pills">
+          <span class="ep" style="border-color:var(--mg);color:var(--mg);">FastAPI</span>
+          <span class="ep">PyMuPDF</span>
+          <span class="ep">Ghostscript</span>
+          <span class="ep">Groq LPU (Llama 3.3)</span>
+          <span class="ep">PostgreSQL 16</span>
+          <span class="ep">Celery / Redis</span>
+          <span class="ep">PWA / Offline</span>
+        </div>
+        <ul class="exp-ul">
+          <li><strong>PrintPreflight AI (Micro-SaaS B2B):</strong> Conceptualización, diseño y desarrollo de arquitectura desacoplada para validación y corrección de PDFs en imprentas. Motor algorítmico de sangrado mediante espejo (<em>mirror padding</em>), conversión normalizada RGB a CMYK y conector WooCommerce.</li>
+          <li><strong>CodeTutor AI:</strong> Creación de un tutor pedagógico de código en tiempo real con inferencia Groq LPU, terminal interactiva sandbox y método de descomposición lógica DECODE.</li>
+          <li><strong>FincaDev (AgriTech):</strong> Desarrollo de PWA offline-first con integración de cartografía SIGPAC, clima en tiempo real y asistente agronómico Pistachín AI.</li>
         </ul>
       </div>
     </div>
@@ -1049,13 +1312,18 @@ footer span{color:var(--cy);}
     {t:'> [OK] Kernel cargado: Linux 6.1.0-jcgm', ok:true},
     {t:'> VERIFICANDO IDENTIDAD: hola@jcgm.dev', ok:false},
     {t:'> [OK] ACCESO AUTORIZADO — NIVEL: PROFESSIONAL', ok:true},
-    {t:'> CARGANDO MODULOS: sistemas, redes, web, backend, IA...', ok:false},
+    {t:'> CARGANDO MODULOS: micro-saas, backend, sistemas, IA...', ok:false},
     {t:'> [OK] DESARROLLADOR EN ARATALENT (ARA-TECH) — 09/2026', ok:true},
-    {t:'> [OK] NEXUS APP: FASTAPI · REACT · VECTOR SEARCH · CLOUD SQL', ok:true},
+    {t:'> [OK] NEXUS APP: EVOLUCIÓN FASE 2 · LANGGRAPH · PGVECTOR · CLOUD SQL', ok:true},
+    {t:'> [OK] ASISTENTE CRM: WEB SERVICE AGÉNTICO · B2B DEALS & FORECAST', ok:true},
+    {t:'> [OK] PRINTPREFLIGHT AI: MICRO-SAAS B2B · GHOSTSCRIPT · FASTAPI', ok:true},
+    {t:'> [OK] CODETUTOR: GROQ LPU · EVALUACIÓN LÍNEA A LÍNEA EN TIEMPO REAL', ok:true},
+    {t:'> [OK] FINCADEV: PISTACHÍN AI · AGTECH PWA & SIGPAC', ok:true},
+    {t:'> [OK] XEROX 550 DIGITAL ENGINE DESPLEGADO EN JCGM.DEV', ok:true},
+    {t:'> [OK] EL SEÑOR DE LOS MARES: AVENTURA NARRATIVA PWA EN VITE DESPLEGADA', ok:true},
     {t:'> [OK] ESPECIALIZACIÓN MACHINE LEARNING (150H) COMPLETADA', ok:true},
-    {t:'> [OK] HACKING ÉTICO & CIBERSEGURIDAD — BIG SCHOOL CERTIFICADO', ok:true},
     {t:'> [OK] 20+ años de experiencia detectados', ok:true},
-    {t:'> INICIALIZANDO NEURAL SKILL MAP... 12 nodos', ok:false},
+    {t:'> INICIALIZANDO NEURAL SKILL MAP... 12 nodos interconectados', ok:false},
     {t:'> [OK] MATRIX RAIN activado', ok:true},
     {t:'> SISTEMA LISTO — BIENVENIDO //', ok:true},
   ];
@@ -1120,7 +1388,7 @@ document.addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY;cdot
   trail.forEach(function(t){t.el.style.left=t.x+'px';t.el.style.top=t.y+'px';});
   requestAnimationFrame(loop);
 })();
-document.querySelectorAll('a,button,.cs,.exp-card,.tr-item,.htag,.sk-block,.info-card,.soc-btn,.soc-sm,.pf-card').forEach(function(el){
+document.querySelectorAll('a,button,.cs,.exp-card,.tr-item,.htag,.sk-block,.info-card,.soc-btn,.soc-sm,.pf-card,.pf-filter-btn,.pf-btn-gh').forEach(function(el){
   el.addEventListener('mouseenter',function(){cdot.classList.add('hov');cring.classList.add('hov');});
   el.addEventListener('mouseleave',function(){cdot.classList.remove('hov');cring.classList.remove('hov');});
 });
@@ -1177,7 +1445,7 @@ function startCounters(){
 ══════════════════════════════════ */
 (function(){
   var el=document.getElementById('scramble-el');if(!el)return;
-  var target='FULLSTACK SOLUTIONS ARCHITECT · SYSTEMS EXPERT';
+  var target='AI & SOFTWARE ARCHITECT · FULLSTACK DEV · MICRO-SAAS BUILDER';
   var chars='ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789//<>[]';
   var start=null,dur=1400;
   function frame(ts){
@@ -1221,20 +1489,20 @@ function initNeural(){
   var canvas=document.getElementById('neural-canvas');if(!canvas)return;
   var ctx=canvas.getContext('2d'),t=0,hoverIdx=-1,nodes=[];
   var DEFS=[
-    {label:'LINUX\n/ BSD',       group:'sys',   conn:[1,2,7]},
-    {label:'WINDOWS\nSERVER',    group:'sys',   conn:[0,2,7]},
-    {label:'REDES &\nSEGURIDAD', group:'sys',   conn:[0,1,3,7]},
-    {label:'FASTAPI &\nCLOUD SQL ★', group:'app', conn:[2,4,7,9,11]},
-    {label:'REACT &\nFRONTEND ★', group:'web',   conn:[3,5,6,7,9]},
-    {label:'DISEÑO\nGRÁFICO',    group:'design',conn:[4,6,9]},
-    {label:'MARKETING\nDIGITAL', group:'mkt',   conn:[4,5,7,8]},
-    {label:'JAVA/PHP\nHTML/CSS',  group:'web',   conn:[0,1,2,3,4,6,9,11]},
-    {label:'SEO/SEM\nE-COMMERCE', group:'mkt',  conn:[4,6,7]},
-    {label:'ARATALENT\nARA-TECH ★', group:'daw',   conn:[3,4,7,8,11]},
-    {label:'ADOBE\nSUITE',       group:'design',conn:[5,6]},
-    {label:'BÚSQUEDA\nVECTORIAL ★', group:'daw',   conn:[3,7,9]},
+    {label:'FASTAPI &\nPYTHON ★',       group:'app',   conn:[1,2,3,7,11]},
+    {label:'LANGGRAPH &\nORQUESTACIÓN ★',group:'ai',   conn:[0,2,7,8]},
+    {label:'PGVECTOR &\nVECTOR DB HNSW ★',group:'ai',  conn:[0,1,8,11]},
+    {label:'PRINTPREFLIGHT\nAI (SAAS) ★',group:'app',  conn:[0,4,9,11]},
+    {label:'REACT / VITE\nFRONTEND ★',   group:'web',   conn:[0,1,3,5,8]},
+    {label:'PWA OFFLINE\n& WEB AUDIO',  group:'web',   conn:[4,6,8,10]},
+    {label:'LINUX / BSD\nKERNEL & LAMP',group:'sys',   conn:[0,7,9,10,11]},
+    {label:'REDES LAN/WLAN\n& SEGURIDAD',group:'sys',  conn:[0,6,11]},
+    {label:'NEXUS APP &\nASISTENTE CRM ★',group:'daw', conn:[0,1,2,4,11]},
+    {label:'PREIMPRESIÓN &\nGHOSTSCRIPT',group:'design',conn:[3,6]},
+    {label:'FINCADEV\nAGRITECH & AI', group:'app',   conn:[5,6]},
+    {label:'POSTGRESQL &\nCLOUD SQL',    group:'sys',   conn:[0,2,3,6,8]},
   ];
-  var COLORS={sys:'#00F5FF',web:'#FF006E',design:'#BF00FF',mkt:'#FFE600',app:'#00FF41',daw:'#FFE600'};
+  var COLORS={sys:'#00F5FF',web:'#FF006E',design:'#BF00FF',mkt:'#FFE600',app:'#00FF41',daw:'#FFE600',ai:'#00F5FF'};
 
   function place(){
     var W=canvas.width,H=canvas.height,cx=W/2,cy=H/2,R=Math.min(W,H)*.37;
@@ -1288,6 +1556,29 @@ function initNeural(){
   }
   draw();
 }
+
+/* ══════════════════════════════════
+   PORTFOLIO FILTER TABS
+══════════════════════════════════ */
+(function(){
+  var btns = document.querySelectorAll('.pf-filter-btn');
+  var cards = document.querySelectorAll('.portfolio-grid .pf-card');
+  btns.forEach(function(btn){
+    btn.addEventListener('click', function(){
+      btns.forEach(function(b){ b.classList.remove('active'); });
+      btn.classList.add('active');
+      var filter = btn.getAttribute('data-filter');
+      cards.forEach(function(card){
+        var cat = card.getAttribute('data-category') || '';
+        if(filter === 'all' || cat.indexOf(filter) !== -1){
+          card.classList.remove('hidden');
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+    });
+  });
+})();
 </script>
 </body>
 </html>
