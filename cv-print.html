@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CV José Carlos Garrido Molina — AI &amp; Software Architect</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<style>
+  @page {
+    size: A4 portrait;
+    margin: 9.5mm 11mm 9.5mm 11mm;
+  }
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: #1a202c;
+    background: #ffffff;
+    font-size: 8.8pt;
+    line-height: 1.30;
+  }
+
+  /* BARRA FLOTANTE EN PANTALLA (NO IMPRIMIBLE) */
+  .no-print {
+    position: sticky;
+    top: 0;
+    z-index: 9999;
+    background: #0f172a;
+    color: #e2e8f0;
+    padding: 10px 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.25);
+    font-size: 9pt;
+    font-family: inherit;
+  }
+  .no-print .info {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .no-print .badge {
+    background: #0284c7;
+    color: #ffffff;
+    font-weight: 700;
+    padding: 2px 7px;
+    border-radius: 4px;
+    font-size: 7.5pt;
+    letter-spacing: 0.05em;
+  }
+  .no-print .actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .no-print button {
+    background: #2563eb;
+    color: #ffffff;
+    border: none;
+    padding: 6px 14px;
+    font-weight: 600;
+    font-size: 8.8pt;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .no-print button:hover {
+    background: #1d4ed8;
+  }
+  .no-print a {
+    color: #93c5fd;
+    text-decoration: none;
+    font-weight: 500;
+  }
+  .no-print a:hover {
+    text-decoration: underline;
+  }
+
+  @media print {
+    .no-print {
+      display: none !important;
+    }
+    body {
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+      background: #ffffff;
+    }
+  }
+
+  /* ESTRUCTURA DEL CV */
+  .header {
+    text-align: left;
+    margin-bottom: 4px;
+  }
+  .name {
+    font-size: 18.5pt;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    color: #1e3a8a;
+    line-height: 1.1;
+  }
+  .headline {
+    font-size: 9.4pt;
+    font-weight: 600;
+    color: #475569;
+    margin-top: 2px;
+  }
+  .contact {
+    font-size: 8.3pt;
+    color: #64748b;
+    margin-top: 2px;
+  }
+  .contact a {
+    color: #0284c7;
+    text-decoration: none;
+  }
+  .contact span.sep {
+    margin: 0 4px;
+    color: #94a3b8;
+  }
+  .sec-title {
+    font-size: 9.3pt;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    color: #1e3a8a;
+    border-bottom: 1.5px solid #1e3a8a;
+    padding-bottom: 1px;
+    margin-top: 5px;
+    margin-bottom: 3px;
+  }
+  p.summary {
+    text-align: justify;
+    color: #334155;
+    font-size: 8.5pt;
+    line-height: 1.28;
+  }
+  .skills-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2px;
+    font-size: 8.3pt;
+  }
+  .skill-row {
+    color: #334155;
+  }
+  .skill-lbl {
+    font-weight: 700;
+    color: #1e293b;
+  }
+  .item {
+    margin-bottom: 3.5px;
+  }
+  .item:last-child {
+    margin-bottom: 2px;
+  }
+  .item-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-size: 8.8pt;
+  }
+  .item-title {
+    font-weight: 700;
+    color: #0f172a;
+  }
+  .item-sub {
+    font-weight: 500;
+    color: #475569;
+  }
+  .item-date {
+    font-size: 8pt;
+    font-weight: 600;
+    color: #64748b;
+    white-space: nowrap;
+  }
+  .item-desc {
+    color: #475569;
+    font-size: 8.2pt;
+    margin-top: 1px;
+  }
+  .stack-tag {
+    color: #0284c7;
+    font-size: 7.8pt;
+    font-weight: 600;
+  }
+  ul.bullets {
+    margin-left: 14px;
+    margin-top: 2px;
+    color: #334155;
+    font-size: 8.2pt;
+  }
+  ul.bullets li {
+    margin-bottom: 1.5px;
+    line-height: 1.28;
+  }
+  ul.bullets li strong {
+    color: #0f172a;
+  }
+  .two-cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+  .footer-note {
+    margin-top: 6px;
+    padding-top: 4px;
+    border-top: 0.5px solid #cbd5e1;
+    text-align: center;
+    font-size: 7.2pt;
+    color: #94a3b8;
+    font-style: italic;
+  }
+  .page-break {
+    page-break-before: always;
+    break-before: page;
+  }
+</style>
+</head>
+<body>
+
+  <!-- BARRA DE UTILIDAD PARA NAVEGADOR -->
+  <div class="no-print">
+    <div class="info">
+      <span class="badge">A4 EJECUTIVO</span>
+      <span>Vista de Impresión Oficial — <strong>AI &amp; Software Architect</strong></span>
+    </div>
+    <div class="actions">
+      <button onclick="window.print()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+        Guardar como PDF (Ctrl+P)
+      </button>
+      <a href="index.html">← Volver a jcgm.dev</a>
+    </div>
+  </div>
+
+  <!-- PÁGINA 1 -->
+  <div class="header">
+    <h1 class="name">JOSE CARLOS GARRIDO MOLINA</h1>
+    <div class="headline">AI &amp; Software Architect · Agentic Orchestration · Micro-SaaS Builder</div>
+    <div class="contact">
+      <a href="mailto:hola@jcgm.dev">hola@jcgm.dev</a><span class="sep">|</span>
+      <span>+34 665 768 241</span><span class="sep">|</span>
+      <a href="https://jcgm.dev" target="_blank">jcgm.dev</a><span class="sep">|</span>
+      <a href="https://github.com/JCGM-DEV" target="_blank">github.com/JCGM-DEV</a><span class="sep">|</span>
+      <a href="https://www.linkedin.com/in/jos%C3%A9-carlos-garrido-molina-4a7762140/" target="_blank">LinkedIn</a>
+    </div>
+  </div>
+
+  <div class="sec-title">Perfil Profesional</div>
+  <p class="summary">
+    Arquitecto de Software y Sistemas y Desarrollador Full Stack con visión de SysAdmin y más de 20 años de experiencia técnica transformando infraestructuras críticas y construyendo soluciones de Inteligencia Artificial Aplicada, Orquestación Agéntica y Micro-SaaS B2B. Actualmente en <strong>AraTalent (división Ara-Tech)</strong> liderando la evolución de arquitectura (<strong>Fase 2</strong>) de <strong>Nexus App</strong>: orquestación agéntica determinista basada en máquinas de estados con <strong>LangGraph</strong> (<em>StateGraph</em> persistente con <em>Human-in-the-Loop</em>), base de datos vectorial nativa con <strong>pgvector</strong> (índices HNSW, distancia coseno sub-5ms multi-entidad), APIs REST asíncronas con FastAPI y Google Cloud SQL. Creador de <strong>PrintFlow ERP</strong> (CRM &amp; ERP vertical con orquestador agéntico de 39+ tools y motor legal Veri*factu RD 1007/2023), <strong>PrintPreflight AI</strong> (auto-reparación de PDFs con Ghostscript y PyMuPDF) y <strong>CodeTutor AI</strong> (evaluación pedagógica en vivo con Groq LPU).
+  </p>
+
+  <div class="sec-title">Competencias Técnicas</div>
+  <div class="skills-grid">
+    <div class="skill-row"><span class="skill-lbl">Backend &amp; Orquestación:</span> Python (FastAPI, LangGraph StateGraph, Human-in-the-Loop, SQLAlchemy 2.0 Async, Alembic, Pydantic), Java (POO), REST APIs, Microservicios, Scraping asíncrono (asyncio).</div>
+    <div class="skill-row"><span class="skill-lbl">Bases de Datos &amp; IA Vectorial:</span> PostgreSQL (Google Cloud SQL), pgvector (índices HNSW, búsqueda vectorial coseno &lt;5ms), MySQL, MariaDB, Groq LPU (Llama 3.3, Tool Calling RBAC), Machine Learning (150h).</div>
+    <div class="skill-row"><span class="skill-lbl">Frontend &amp; UI/UX:</span> React 19, Vite, JavaScript (ES6+), PWA Offline-First (Service Worker), Kanban Drag &amp; Drop nativo, Web Audio API, Responsive Design.</div>
+    <div class="skill-row"><span class="skill-lbl">Sistemas &amp; DevOps:</span> Linux (Debian, Ubuntu, CentOS), FreeBSD, Windows Server, Docker, Git/GitHub, Apache/Nginx, Shell Scripting/Bash, Redes Corporativas LAN/WLAN.</div>
+    <div class="skill-row"><span class="skill-lbl">Metodologías &amp; IA:</span> Agentic Workflows, AI-Augmented Engineering, Clean Architecture, RGPD europeo (derecho al olvido irreversible, disociación y auditoría legal).</div>
+    <div class="skill-row"><span class="skill-lbl">E-Commerce &amp; Operaciones B2B:</span> Dolibarr ERP/CRM, WooCommerce, WordPress, PrestaShop, SEO Técnico &amp; Analítica, Pasarelas de Pago, Ghostscript, PyMuPDF, Adobe Creative Suite.</div>
+  </div>
+
+  <div class="sec-title">Proyectos Destacados &amp; Micro-SaaS</div>
+  <div class="two-cols">
+    <div class="item">
+      <div class="item-head">
+        <span class="item-title">Nexus App (Fase 2)</span>
+        <span class="item-sub">aratalent.es</span>
+      </div>
+      <div class="item-desc">ATS Enterprise con matching semántico pgvector (índices HNSW &lt;5ms) y orquestación agéntica LangGraph (StateGraph con Human-in-the-Loop).</div>
+      <div class="stack-tag">FastAPI · LangGraph · pgvector · Cloud SQL · Groq LPU</div>
+    </div>
+    <div class="item">
+      <div class="item-head">
+        <span class="item-title">PrintFlow ERP — CRM &amp; ERP Agéntico</span>
+        <span class="item-sub">github.com/JCGM-DEV/printflow-erp</span>
+      </div>
+      <div class="item-desc">ERP para imprenta con orquestador agéntico ("J", 39+ tools, bucle ReAct, voz Whisper Turbo) y motor legal Veri*factu SHA-256 (RD 1007/2023).</div>
+      <div class="stack-tag">FastAPI · Orquestación Agéntica · Veri*factu · Groq Whisper · Telegram</div>
+    </div>
+    <div class="item">
+      <div class="item-head">
+        <span class="item-title">PrintPreflight AI — Micro-SaaS B2B</span>
+        <span class="item-sub">printpreflight.ai</span>
+      </div>
+      <div class="item-desc">Motor algorítmico de preflight y auto-reparación de PDFs para imprentas (mirror padding, sangrado y color CMYK).</div>
+      <div class="stack-tag">FastAPI · Ghostscript · PyMuPDF · PostgreSQL 16</div>
+    </div>
+    <div class="item">
+      <div class="item-head">
+        <span class="item-title">CodeTutor AI — Tutor en Vivo</span>
+        <span class="item-sub"><a href="https://correctorcodigo.onrender.com/" target="_blank" style="color:#0284c7;text-decoration:none;">onrender.com</a></span>
+      </div>
+      <div class="item-desc">Tutor de código línea a línea con Groq LPU (Llama 3.3 70B), método DECODE pedagógico y terminal interactiva sandbox.</div>
+      <div class="stack-tag">FastAPI · Groq LPU · Sandbox Subprocess · React</div>
+    </div>
+    <div class="item">
+      <div class="item-head">
+        <span class="item-title">FincaDev — AgriTech PWA</span>
+        <span class="item-sub"><a href="https://tituta.es/fincadev" target="_blank" style="color:#0284c7;text-decoration:none;">tituta.es/fincadev</a></span>
+      </div>
+      <div class="item-desc">Cuaderno de campo digital oficial con asistente inteligente Pistachín AI, parcelas SIGPAC y clima local en tiempo real.</div>
+      <div class="stack-tag">PWA Offline · Pistachín AI · SIGPAC · Open-Meteo</div>
+    </div>
+    <div class="item">
+      <div class="item-head">
+        <span class="item-title">El Señor de los Mares — Videojuego</span>
+        <span class="item-sub"><a href="https://jcgm.dev/elsenordelosmares" target="_blank" style="color:#0284c7;text-decoration:none;">jcgm.dev</a></span>
+      </div>
+      <div class="item-desc">Aventura conversacional histórica naval (Álvaro de Bazán). Motor de decisiones narrativo, Web Audio API y PWA en Vite.</div>
+      <div class="stack-tag">JavaScript ES6+ · Vite · PWA · Web Audio · Game Design</div>
+    </div>
+    <div class="item">
+      <div class="item-head">
+        <span class="item-title">Xerox 550 — Calculadora Costes</span>
+        <span class="item-sub"><a href="https://jcgm.dev/xerox550" target="_blank" style="color:#0284c7;text-decoration:none;">jcgm.dev/xerox550</a></span>
+      </div>
+      <div class="item-desc">Software de presupuestos y márgenes para prensa Xerox Color 550. Ingesta de PDFs por arrastre y balance neto instantáneo.</div>
+      <div class="stack-tag">JavaScript · PDF Ingestion · Cost Engine · WCAG 2.1</div>
+    </div>
+  </div>
+
+  <div class="sec-title">Experiencia Profesional</div>
+
+  <div class="item">
+    <div class="item-head">
+      <span class="item-title">Full Stack &amp; Applied AI Developer — Nexus App (Fase 2)</span>
+      <span class="item-sub">AraTalent (División Ara-Tech) | Remoto</span>
+      <span class="item-date">09/2026 – Presente</span>
+    </div>
+    <ul class="bullets">
+      <li>Desarrollo, auditoría y evolución técnica hacia la <strong>Fase 2 de Arquitectura Agéntica</strong> de <strong>Nexus App</strong>: plataforma corporativa ATS de captación de talento y ecosistema de inteligencia para selección.</li>
+      <li><strong>Orquestación Agéntica con LangGraph:</strong> Implementación de máquinas de estados deterministas (<em>StateGraph</em>) con persistencia transaccional en PostgreSQL (`AsyncPostgresSaver`), reducción de consumo de tokens en Groq LPU y soporte nativo de <em>Human-in-the-Loop</em> (pausa interactiva antes de envíos comerciales).</li>
+      <li><strong>Base de Datos Vectorial Nativa (`pgvector`):</strong> Migración a extensión nativa de PostgreSQL con índices <strong>HNSW</strong> (`vector(128)`, distancia coseno en &lt;5ms) para matching semántico híbrido multi-entidad (candidatos y vacantes).</li>
+      <li><strong>Backend Asíncrono &amp; RGPD:</strong> Despacho de tareas desatendidas (`asyncio.create_task`), portal público con rúbricas de evaluación ciega (<em>Scorecards</em>) y módulo de derecho al olvido irreversible según el <strong>RGPD</strong>.</li>
+    </ul>
+  </div>
+
+  <div class="item">
+    <div class="item-head">
+      <span class="item-title">Software Architect &amp; Micro-SaaS Builder — PrintFlow ERP, PrintPreflight AI &amp; CodeTutor</span>
+      <span class="item-sub">Iniciativas de Software &amp; Micro-SaaS | I+D Propia</span>
+      <span class="item-date">2026 – Presente</span>
+    </div>
+    <ul class="bullets">
+      <li><strong>PrintFlow ERP (CRM &amp; ERP Vertical de Artes Gráficas):</strong> Concepción y arquitectura de plataforma de gestión con orquestador agéntico autónomo ("J", 39+ herramientas, bucle ReAct, Groq Whisper Turbo y voz en tiempo real con Web Audio) y motor de facturación inalterable Veri*factu (RD 1007/2023) con encadenamiento criptográfico SHA-256, QR de la AEAT y cerrojos en base de datos.</li>
+      <li><strong>PrintPreflight AI (Micro-SaaS B2B):</strong> Motor algorítmico para validación y auto-reparación de PDFs en artes gráficas. Síntesis de sangrado mediante espejo (<em>mirror padding</em>), normalización CMYK con Ghostscript y conector WooCommerce.</li>
+      <li><strong>CodeTutor AI (EdTech):</strong> Tutor de programación línea a línea desplegado en Render con inferencia ultra-rápida (Groq LPU / Llama 3.3 70B), terminal interactiva sandbox y método pedagógico DECODE.</li>
+      <li><strong>FincaDev (AgriTech PWA):</strong> Cuaderno de campo digital oficial con asistente inteligente Pistachín AI, parcelas SIGPAC y clima local.</li>
+    </ul>
+  </div>
+
+  <!-- PÁGINA 2 -->
+  <div class="page-break"></div>
+
+  <div class="sec-title" style="margin-top:0;">Experiencia Profesional (Continuación)</div>
+
+  <div class="item">
+    <div class="item-head">
+      <span class="item-title">Technical Lead · FullStack &amp; Print Systems</span>
+      <span class="item-sub">Tituta — Imprenta Digital &amp; Soluciones Web | Viso del Marqués, Ciudad Real</span>
+      <span class="item-date">2017 – Presente</span>
+    </div>
+    <ul class="bullets">
+      <li>Dirección técnica, arquitectura e-commerce sobre servidores Linux propios y automatización de flujos de preimpresión digital e industrial.</li>
+      <li>Laboratorio real de operaciones B2B donde nacieron las arquitecturas de PrintFlow ERP, PrintPreflight AI y Xerox 550 Engine.</li>
+    </ul>
+  </div>
+
+  <div class="item">
+    <div class="item-head">
+      <span class="item-title">Senior Systems &amp; Digital Architect</span>
+      <span class="item-sub">Museo AVAN | Viso del Marqués, Ciudad Real</span>
+      <span class="item-date">01/2021 – Presente</span>
+    </div>
+    <ul class="bullets">
+      <li>Desarrollo web corporativo del museo, administración de bases de datos y optimización de flujos internos.</li>
+      <li>Implantación y parametrización de ERP/CRM Dolibarr para la catalogación museística y control de stock de la colección.</li>
+      <li>Administración de servidor Linux, gestión de hosting, seguridad perimetral y servicios de correo con alta disponibilidad.</li>
+    </ul>
+  </div>
+
+  <div class="item">
+    <div class="item-head">
+      <span class="item-title">Técnico Especialista en Infraestructura y Preimpresión</span>
+      <span class="item-sub">Docucenter-Printando S.L. | Dos Hermanas, Sevilla</span>
+      <span class="item-date">01/2007 – 12/2017</span>
+    </div>
+    <ul class="bullets">
+      <li>Administración de servidores Linux/FreeBSD con pila LAMP para proyectos web corporativos y comercio electrónico.</li>
+      <li>Desarrollo e integración de plataformas web con Joomla, OpenCart, WordPress, PrestaShop y HTML/CSS.</li>
+      <li>Diseño gráfico, maquetación editorial y preimpresión técnica; mantenimiento de plotters de gran formato.</li>
+      <li>Mantenimiento informático integral, soporte a usuarios y resolución de incidencias en redes de producción.</li>
+    </ul>
+  </div>
+
+  <div class="item">
+    <div class="item-head">
+      <span class="item-title">Administrador de Sistemas y Redes</span>
+      <span class="item-sub">ISS Ingeniería de Software y Sistemas | Sevilla</span>
+      <span class="item-date">01/2000 – 12/2006</span>
+    </div>
+    <ul class="bullets">
+      <li>Montaje, despliegue y mantenimiento de infraestructuras críticas en la <strong>Red de Bibliotecas Públicas de Sevilla</strong> y el <strong>Ayuntamiento de Dos Hermanas</strong>.</li>
+      <li>Administración de redes corporativas LAN/WLAN, configuración de switches, routers, cortafuegos y servidores.</li>
+      <li>Desarrollo y adaptación de soluciones web institucionales y soporte técnico a administraciones públicas.</li>
+    </ul>
+  </div>
+
+  <div class="item">
+    <div class="item-head">
+      <span class="item-title">Profesor Adjunto — Hardware, Redes y Sistemas Linux</span>
+      <span class="item-sub">System Centros de Formación | Sevilla</span>
+      <span class="item-date">01/2000 – 12/2005</span>
+    </div>
+    <ul class="bullets">
+      <li>Impartición de módulos técnicos: Arquitectura Hardware, Sistemas Operativos Windows/Linux, Redes y Seguridad.</li>
+      <li>Formación técnica e implantación de servidores y seguridad informática.</li>
+    </ul>
+  </div>
+
+  <div class="item">
+    <div class="item-head">
+      <span class="item-title">Co-organizador Técnico — E2H Party</span>
+      <span class="item-sub">Gran Hipódromo de Andalucía, Dos Hermanas</span>
+      <span class="item-date">2003</span>
+    </div>
+    <ul class="bullets">
+      <li>Coordinación de infraestructura técnica de red, despliegue de cableado y servidores para concentración de más de <strong>500 asistentes</strong> del sector IT a nivel nacional.</li>
+    </ul>
+  </div>
+
+  <div class="sec-title">Formación Académica</div>
+  <div class="item">
+    <div class="item-head">
+      <span class="item-title">FP Grado Superior — Desarrollo de Aplicaciones Web (DAW)</span>
+      <span class="item-date">09/2025 – 06/2027 (En curso · 2º Año)</span>
+    </div>
+    <div class="item-desc">FP Euroformac, Madrid. Especialización en desarrollo FullStack, arquitecturas escalables, bases de datos y prácticas FCT en AraTalent (Ara-Tech).</div>
+  </div>
+  <div class="item">
+    <div class="item-head">
+      <span class="item-title">Acceso a la Universidad para Mayores de 25 años — UNED Valdepeñas</span>
+      <span class="item-date">06/2025</span>
+    </div>
+  </div>
+  <div class="item">
+    <div class="item-head">
+      <span class="item-title">Graduado Escolar (EGB) — C.P. Jesús del Gran Poder</span>
+      <span class="item-date">1992</span>
+    </div>
+  </div>
+
+  <div class="sec-title">Certificaciones y Formación Complementaria</div>
+  <ul class="bullets" style="margin-left:14px; columns:2; column-gap:16px;">
+    <li><strong>Especialización Machine Learning con Python</strong> (150 h — Completado)</li>
+    <li><strong>Desarrollo con IA: de 0 a Producción</strong> — BIG School</li>
+    <li><strong>Hacking Ético: de 0 a Hackear Aplicaciones</strong> — BIG School (Certificado 10/2026)</li>
+    <li><strong>Certificado Profesional Java</strong> — IFCD001 MRR</li>
+    <li><strong>Google Marketing Digital y E-Commerce</strong> (7 certificados)</li>
+    <li><strong>Técnico Especialista en Microinformática</strong> — System (1999)</li>
+    <li><strong>Especialista en Redes y Networking</strong> (LAN, WAN, TCP/IP)</li>
+    <li><strong>Administración Servidores UNIX/Linux/BSD</strong> (2003)</li>
+    <li><strong>Técnico en Diseño y Animación 3D</strong> — System (2000)</li>
+  </ul>
+
+  <div class="sec-title" style="margin-top:6px;">Idiomas y Disponibilidad</div>
+  <div style="font-size:8.2pt; color:#334155; line-height:1.35;">
+    <strong>Idiomas:</strong> Español (nativo) | Inglés (medio — comprensión y lectura técnica fluida).<br>
+    <strong>Modalidad:</strong> Remoto / Híbrido / Presencial | <strong>Disponibilidad:</strong> Inmediata | <strong>Incorporación:</strong> Activo en AraTalent (Ara-Tech) / Disponibilidad continua.
+  </div>
+
+  <div class="footer-note">
+    Autorizo el tratamiento de mis datos personales con fines de selección de personal según el RGPD y la LOPDGDD.
+  </div>
+
+</body>
+</html>
