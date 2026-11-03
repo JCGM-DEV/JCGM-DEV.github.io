@@ -236,8 +236,15 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;font-
 .boot-skip{
   font-family:'Share Tech Mono',monospace;font-size:.62rem;color:var(--dim);
   letter-spacing:.15em;margin-top:.5rem;animation:blink 1.5s infinite;
+  cursor:pointer;user-select:none;transition:color .2s ease;
 }
+.boot-skip:hover{color:var(--cy);}
 @keyframes blink{50%{opacity:.2;}}
+
+html.boot-skipped #boot{display:none!important;}
+html.boot-skipped .page{opacity:1!important;}
+.sk-featured{grid-column:span 2;}
+@media(max-width:580px){.sk-featured{grid-column:span 1;}}
 
 /* ── CURSOR ─────────────────────────── */
 #cdot{width:10px;height:10px;background:var(--cy);border-radius:50%;position:fixed;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);box-shadow:0 0 12px var(--cy),0 0 28px rgba(0,245,255,.5);transition:width .15s,height .15s,background .15s;}
@@ -325,13 +332,6 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .cs-soc svg{width:13px;height:13px;fill:currentColor;flex-shrink:0;}
 .card-avail{padding:.9rem;background:rgba(0,0,0,.4);border:1px solid rgba(255,230,0,.22);display:flex;align-items:flex-start;gap:.9rem;font-family:'Share Tech Mono',monospace;font-size:.66rem;color:var(--ye);line-height:1.6;}
 .card-avail strong{display:block;font-size:.72rem;margin-bottom:.2rem;}
-
-/* TECH GRID (REPLACING MARQUEE) */
-.tech-grid-wrap{padding:2rem 3.5rem;background:rgba(0,0,0,.3);border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
-.tech-grid{display:flex;flex-wrap:wrap;justify-content:center;gap:1rem;max-width:1200px;margin:0 auto;}
-.tech-tag{font-family:'Share Tech Mono',monospace;font-size:.75rem;letter-spacing:.1em;padding:.5rem 1.2rem;background:rgba(0,245,255,.05);border:1px solid var(--border);color:var(--dim);transition:all .3s;clip-path:polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%);}
-.tech-tag:hover{border-color:var(--cy);color:var(--cy);background:rgba(0,245,255,.12);transform:translateY(-2px);box-shadow:0 0 15px rgba(0,245,255,.2);}
-.tech-tag.highlight{border-color:var(--ye);color:var(--ye);background:rgba(255,230,0,.05);}
 
 /* SECTIONS */
 section{padding:5.5rem 3.5rem;border-top:1px solid var(--border);position:relative;z-index:1;}
@@ -573,6 +573,7 @@ footer span{color:var(--cy);}
 }
 @media(max-width:580px){.skills-grid{grid-template-columns:1fr;}.tr-grid{grid-template-columns:1fr;}.info-grid{grid-template-columns:1fr;}}
 </style>
+<script>try{if(sessionStorage.getItem('boot_seen')==='true'){document.documentElement.classList.add('boot-skipped');}}catch(e){}</script>
 </head>
 <body>
 
@@ -587,7 +588,7 @@ footer span{color:var(--cy);}
     </div>
     <div class="boot-bar"><div class="boot-fill" id="boot-fill"></div></div>
   </div>
-  <div class="boot-skip" id="boot-skip">[ CLICK PARA ENTRAR ]</div>
+  <div class="boot-skip" id="boot-skip" role="button" tabindex="0" title="Saltar secuencia de inicio">[ SALTAR INTRO ]</div>
 </div>
 
 <!-- CURSOR -->
@@ -629,12 +630,14 @@ footer span{color:var(--cy);}
       <span style="color:var(--cy);font-weight:600;">Metodología &amp; Enfoque:</span> Orquestación agéntica autónoma (<em>LangGraph &amp; Tool Calling ReAct</em>), bases de datos vectoriales nativas (<em>pgvector</em>), sistemas de facturación criptográfica (<em>Veri*factu SHA-256</em>), flujos de desarrollo asistido (<em>Agentic Workflows</em>) y arquitecturas resilientes.
     </p>
     <div class="hero-tags">
-      <span class="htag">LangGraph (StateGraph)</span><span class="htag">pgvector (HNSW)</span>
-      <span class="htag">PrintFlow ERP (Veri*factu)</span><span class="htag">FastAPI / Python</span>
-      <span class="htag">Orquestador IA (39+ Tools)</span><span class="htag">Micro-SaaS B2B</span>
-      <span class="htag">Búsqueda Vectorial (&lt;5ms)</span><span class="htag">PyMuPDF &amp; Ghostscript</span>
-      <span class="htag">PostgreSQL / Cloud SQL</span><span class="htag">Human-in-the-Loop</span>
-      <span class="htag">Linux / BSD Kernel</span><span class="htag">FullStack Dev</span>
+      <span class="htag">LangGraph (StateGraph)</span>
+      <span class="htag">pgvector (HNSW)</span>
+      <span class="htag">FastAPI / Python</span>
+      <span class="htag">PostgreSQL Cloud SQL</span>
+      <span class="htag">Groq LPU / Tool Calling</span>
+      <span class="htag">React / Vite</span>
+      <span class="htag">Docker &amp; Linux Kernel</span>
+      <span class="htag">Veri*factu SHA-256</span>
     </div>
     <div class="hero-btns">
       <a href="#contact" class="btn-cy">
@@ -667,7 +670,7 @@ footer span{color:var(--cy);}
     <div class="card-loc">📍 Viso del Marqués · Ciudad Real · Remoto o Presencial</div>
     <div class="card-div"></div>
     <div class="card-stats">
-      <div class="cs"><div class="cs-n" id="cnt-years">0</div><div class="cs-l">Años activo</div></div>
+      <div class="cs"><div class="cs-n" id="cnt-years" data-target="20+">20+</div><div class="cs-l">Años de Exp.</div></div>
       <div class="cs"><div class="cs-n">10+</div><div class="cs-l">Proyectos Core</div></div>
       <div class="cs"><div class="cs-n">&lt;5ms</div><div class="cs-l">Latencia pgvector</div></div>
       <div class="cs"><div class="cs-n">20+</div><div class="cs-l">Certificaciones</div></div>
@@ -691,33 +694,6 @@ footer span{color:var(--cy);}
   </div>
 </section>
 
-<!-- TECH GRID (REPLACING MARQUEE) -->
-<div class="tech-grid-wrap">
-  <div class="tech-grid">
-    <span class="tech-tag highlight">LangGraph (StateGraph)</span>
-    <span class="tech-tag highlight">pgvector (Vector DB HNSW)</span>
-    <span class="tech-tag highlight">PrintFlow ERP (Veri*factu)</span>
-    <span class="tech-tag highlight">FastAPI / Python</span>
-    <span class="tech-tag highlight">Groq LPU / Tool Calling</span>
-    <span class="tech-tag highlight">Micro-SaaS B2B</span>
-    <span class="tech-tag highlight">Human-in-the-Loop (HITL)</span>
-    <span class="tech-tag highlight">React / Vite</span>
-    <span class="tech-tag highlight">PostgreSQL Cloud SQL</span>
-    <span class="tech-tag highlight">PyMuPDF &amp; Ghostscript</span>
-    <span class="tech-tag highlight">Agentic Workflows</span>
-    <span class="tech-tag">Linux / BSD Kernel</span>
-    <span class="tech-tag">Docker &amp; Containers</span>
-    <span class="tech-tag">Pipeline B2B Deals &amp; Forecast</span>
-    <span class="tech-tag">PWA Offline-First</span>
-    <span class="tech-tag">Redes LAN/WLAN</span>
-    <span class="tech-tag">PHP / MariaDB / Java</span>
-    <span class="tech-tag">WordPress &amp; WooCommerce</span>
-    <span class="tech-tag">Dolibarr ERP</span>
-    <span class="tech-tag highlight">Machine Learning (150h)</span>
-    <span class="tech-tag highlight">Hacking Ético</span>
-    <span class="tech-tag highlight">FullStack Dev</span>
-  </div>
-</div>
 
 <!-- ════════ SOBRE MÍ + NEURAL ════════ -->
 <section id="about">
@@ -1261,10 +1237,19 @@ footer span{color:var(--cy);}
         <div class="sk-row"><span class="sk-lbl">Firewall &amp; Seguridad IT</span><span class="sk-bar" style="--w:84%"></span><span class="sk-pct">INTERMEDIO</span></div>
         <div class="sk-row"><span class="sk-lbl">VPN &amp; SSH</span><span class="sk-bar" style="--w:82%"></span><span class="sk-pct">AVANZADO</span></div>
         <div class="sk-row"><span class="sk-lbl">Administración Servidores</span><span class="sk-bar" style="--w:90%"></span><span class="sk-pct">AVANZADO</span></div>
-        <div class="sk-row"><span class="sk-lbl">Office 365 / Google Workspace</span><span class="sk-bar" style="--w:88%"></span><span class="sk-pct">AVANZADO</span></div>
       </div>
     </div>
-    <div class="sk-block" style="border:1px solid rgba(255,230,0,.3);background:rgba(255,230,0,.025);">
+    <div class="sk-block">
+      <div class="sk-head"><span class="sk-icon">💼</span><span class="sk-name" style="color:var(--mg)">E-Commerce, ERP &amp; Operaciones B2B</span></div>
+      <div class="sk-rows">
+        <div class="sk-row"><span class="sk-lbl">Dolibarr ERP / CRM</span><span class="sk-bar mg" style="--w:90%"></span><span class="sk-pct mg">AVANZADO</span></div>
+        <div class="sk-row"><span class="sk-lbl">WooCommerce / WordPress</span><span class="sk-bar mg" style="--w:95%"></span><span class="sk-pct mg">EXPERTO</span></div>
+        <div class="sk-row"><span class="sk-lbl">Prestashop</span><span class="sk-bar mg" style="--w:88%"></span><span class="sk-pct mg">AVANZADO</span></div>
+        <div class="sk-row"><span class="sk-lbl">SEO Técnico &amp; Analítica</span><span class="sk-bar mg" style="--w:88%"></span><span class="sk-pct mg">AVANZADO</span></div>
+        <div class="sk-row"><span class="sk-lbl">Pasarelas de Pago</span><span class="sk-bar mg" style="--w:85%"></span><span class="sk-pct mg">AVANZADO</span></div>
+      </div>
+    </div>
+    <div class="sk-block sk-featured" style="border:1px solid rgba(255,230,0,.3);background:rgba(255,230,0,.025);">
       <div class="sk-head"><span class="sk-icon">★</span><span class="sk-name" style="color:var(--ye)">Desarrollo Web · IA Aplicada &amp; Orquestación Agéntica</span></div>
       <div class="sk-rows">
         <div class="sk-row"><span class="sk-lbl">LangGraph / StateGraph &amp; Human-in-the-Loop</span><span class="sk-bar ye" style="--w:93%"></span><span class="sk-pct ye">AVANZADO</span></div>
@@ -1280,38 +1265,12 @@ footer span{color:var(--cy);}
       </div>
     </div>
     <div class="sk-block">
-      <div class="sk-head"><span class="sk-icon">⚙️</span><span class="sk-name">CMS &amp; Plataformas Web</span></div>
-      <div class="sk-rows">
-        <div class="sk-row"><span class="sk-lbl">WordPress</span><span class="sk-bar" style="--w:96%"></span><span class="sk-pct">EXPERTO</span></div>
-        <div class="sk-row"><span class="sk-lbl">Joomla</span><span class="sk-bar" style="--w:88%"></span><span class="sk-pct">AVANZADO</span></div>
-        <div class="sk-row"><span class="sk-lbl">Drupal</span><span class="sk-bar" style="--w:82%"></span><span class="sk-pct">AVANZADO</span></div>
-        <div class="sk-row"><span class="sk-lbl">Prestashop</span><span class="sk-bar" style="--w:87%"></span><span class="sk-pct">AVANZADO</span></div>
-        <div class="sk-row"><span class="sk-lbl">OpenCart / Magento</span><span class="sk-bar" style="--w:80%"></span><span class="sk-pct">INTERMEDIO</span></div>
-        <div class="sk-row"><span class="sk-lbl">Moodle</span><span class="sk-bar" style="--w:75%"></span><span class="sk-pct">INTERMEDIO</span></div>
-        <div class="sk-row"><span class="sk-lbl">Dolibarr ERP / CRM</span><span class="sk-bar" style="--w:88%"></span><span class="sk-pct">AVANZADO</span></div>
-      </div>
-    </div>
-    <div class="sk-block">
       <div class="sk-head"><span class="sk-icon">🎨</span><span class="sk-name" style="color:var(--pu)">Diseño Gráfico &amp; Multimedia</span></div>
       <div class="sk-rows">
         <div class="sk-row"><span class="sk-lbl">Adobe Creative Suite</span><span class="sk-bar pu" style="--w:92%"></span><span class="sk-pct pu">EXPERTO</span></div>
-        <div class="sk-row"><span class="sk-lbl">Premiere / After Effects</span><span class="sk-bar pu" style="--w:85%"></span><span class="sk-pct pu">AVANZADO</span></div>
-        <div class="sk-row"><span class="sk-lbl">Diseño CAD</span><span class="sk-bar pu" style="--w:82%"></span><span class="sk-pct pu">AVANZADO</span></div>
-        <div class="sk-row"><span class="sk-lbl">Animación 3D</span><span class="sk-bar pu" style="--w:78%"></span><span class="sk-pct pu">INTERMEDIO</span></div>
         <div class="sk-row"><span class="sk-lbl">Preimpresión &amp; Gran formato</span><span class="sk-bar pu" style="--w:93%"></span><span class="sk-pct pu">EXPERTO</span></div>
+        <div class="sk-row"><span class="sk-lbl">Diseño CAD</span><span class="sk-bar pu" style="--w:82%"></span><span class="sk-pct pu">AVANZADO</span></div>
         <div class="sk-row"><span class="sk-lbl">Identidad visual &amp; Logotipos</span><span class="sk-bar pu" style="--w:88%"></span><span class="sk-pct pu">AVANZADO</span></div>
-      </div>
-    </div>
-    <div class="sk-block">
-      <div class="sk-head"><span class="sk-icon">📊</span><span class="sk-name" style="color:var(--mg)">Marketing Digital &amp; E-Commerce</span></div>
-      <div class="sk-rows">
-        <div class="sk-row"><span class="sk-lbl">SEO / SEM</span><span class="sk-bar mg" style="--w:87%"></span><span class="sk-pct mg">AVANZADO</span></div>
-        <div class="sk-row"><span class="sk-lbl">Google Ads / Meta Ads</span><span class="sk-bar mg" style="--w:83%"></span><span class="sk-pct mg">AVANZADO</span></div>
-        <div class="sk-row"><span class="sk-lbl">Google Analytics</span><span class="sk-bar mg" style="--w:82%"></span><span class="sk-pct mg">AVANZADO</span></div>
-        <div class="sk-row"><span class="sk-lbl">Email Marketing</span><span class="sk-bar mg" style="--w:85%"></span><span class="sk-pct mg">AVANZADO</span></div>
-        <div class="sk-row"><span class="sk-lbl">WooCommerce / Shopify</span><span class="sk-bar mg" style="--w:83%"></span><span class="sk-pct mg">AVANZADO</span></div>
-        <div class="sk-row"><span class="sk-lbl">Social Media Marketing</span><span class="sk-bar mg" style="--w:78%"></span><span class="sk-pct mg">INTERMEDIO</span></div>
-        <div class="sk-row"><span class="sk-lbl">Pasarelas de pago</span><span class="sk-bar mg" style="--w:80%"></span><span class="sk-pct mg">AVANZADO</span></div>
       </div>
     </div>
   </div>
@@ -1328,7 +1287,7 @@ footer span{color:var(--cy);}
     <div class="exp-card" style="border-color:rgba(0,255,224,.4);box-shadow:0 0 25px rgba(0,255,224,.07);">
       <div class="exp-left" style="background:rgba(0,255,224,.05);">
         <div class="exp-yr" style="color:var(--cy);">09/2026 – Act.</div>
-        <div class="exp-co"><strong style="color:var(--bright)">AraTalent (División Ara-Tech)</strong><br>Remoto · Prácticas DAW</div>
+        <div class="exp-co"><strong style="color:var(--bright)">AraTalent (División Ara-Tech)</strong><br>Remoto · División Ara-Tech</div>
       </div>
       <div class="exp-right">
         <div class="exp-t" style="color:var(--cy);">Full Stack &amp; Applied AI Developer — Nexus App (Fase 2)</div>
@@ -1376,13 +1335,29 @@ footer span{color:var(--cy);}
         </ul>
       </div>
     </div>
-    <div class="exp-card"><div class="exp-left"><div class="exp-yr">2021</div><div class="exp-co">Museo Ciencias Naturales AVAN<br>Viso del Marqués</div></div><div class="exp-right"><div class="exp-t">Senior Systems & Digital Architect</div><div class="exp-pills"><span class="ep">Dolibarr ERP</span><span class="ep">WordPress</span><span class="ep">Linux</span><span class="ep">CRM</span></div><ul class="exp-ul"><li>Liderazgo en la transformación digital del museo: implantación del sistema <strong style="color:var(--text)">ERP/CRM Dolibarr</strong> para gestión integral</li><li>Desarrollo y mantenimiento de la infraestructura web y base de datos con alta disponibilidad</li><li>Optimización del inventario digital y control de stock de la colección museística</li></ul></div></div>
+    <div class="exp-card" style="border-color:rgba(191,0,255,.4);box-shadow:0 0 25px rgba(191,0,255,.07);">
+      <div class="exp-left" style="background:rgba(191,0,255,.05);">
+        <div class="exp-yr" style="color:var(--pu);">2017 – Act.</div>
+        <div class="exp-co"><strong style="color:var(--bright)">Tituta — Imprenta Digital &amp; Soluciones Web</strong><br>Viso del Marqués, Ciudad Real</div>
+      </div>
+      <div class="exp-right">
+        <div class="exp-t" style="color:var(--pu);">Technical Lead · FullStack &amp; Print Systems</div>
+        <div class="exp-pills">
+          <span class="ep" style="border-color:var(--pu);color:var(--pu);">Linux/LAMP</span>
+          <span class="ep">E-Commerce</span>
+          <span class="ep">Automatización Preimpresión</span>
+          <span class="ep">Xerox Production</span>
+          <span class="ep">ERP/Facturación</span>
+        </div>
+        <ul class="exp-ul">
+          <li>Dirección técnica, arquitectura e-commerce sobre servidores Linux propios y automatización de flujos de preimpresión digital e industrial. Laboratorio real de operaciones B2B donde nacieron las arquitecturas de PrintFlow ERP, PrintPreflight AI y Xerox 550 Engine.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="exp-card"><div class="exp-left"><div class="exp-yr">2021</div><div class="exp-co">Museo Ciencias Naturales AVAN<br>Viso del Marqués</div></div><div class="exp-right"><div class="exp-t">Senior Systems &amp; Digital Architect</div><div class="exp-pills"><span class="ep">Dolibarr ERP</span><span class="ep">WordPress</span><span class="ep">Linux</span><span class="ep">CRM</span></div><ul class="exp-ul"><li>Liderazgo en la transformación digital del museo: implantación del sistema <strong style="color:var(--text)">ERP/CRM Dolibarr</strong> para gestión integral</li><li>Desarrollo y mantenimiento de la infraestructura web y base de datos con alta disponibilidad</li><li>Optimización del inventario digital y control de stock de la colección museística</li></ul></div></div>
     <div class="exp-card"><div class="exp-left"><div class="exp-yr">2007 – 2017</div><div class="exp-co">Docucenter-Printando S.L.<br>Dos Hermanas, Sevilla</div></div><div class="exp-right"><div class="exp-t">Especialista Senior en Infraestructura y Preimpresión</div><div class="exp-pills"><span class="ep">LAMP</span><span class="ep">Linux/FreeBSD</span><span class="ep">Prestashop</span><span class="ep">Adobe Suite</span></div><ul class="exp-ul"><li>Gestión técnica de producción gráfica de gran formato para clientes corporativos de alto nivel</li><li>Despliegue y administración de servidores <strong style="color:var(--text)">Linux/FreeBSD con pila LAMP</strong> para proyectos e-commerce</li><li>Desarrollo e integración de plataformas web complejas (Joomla, OpenCart, WordPress, Prestashop)</li></ul></div></div>
     <div class="exp-card"><div class="exp-left"><div class="exp-yr">2000 – 2006</div><div class="exp-co">I.S.S. Ingeniería de Software<br>Dos Hermanas, Sevilla</div></div><div class="exp-right"><div class="exp-t">Administrador de Sistemas y Redes</div><div class="exp-pills"><span class="ep">Redes LAN</span><span class="ep">Seguridad</span><span class="ep">Sevilla Libros</span></div><ul class="exp-ul"><li>Optimización y mantenimiento de la red corporativa en la <strong style="color:var(--bright)">Red de Bibliotecas Públicas de Sevilla</strong></li><li>Implementación y soporte de infraestructuras críticas en el <strong style="color:var(--bright)">Ayuntamiento de Dos Hermanas</strong></li><li>Coordinación de montaje de equipos, seguridad de red y diseño de soluciones web institucionales</li></ul></div></div>
-    <div class="exp-card"><div class="exp-left"><div class="exp-yr">2000 – 2005</div><div class="exp-co">System Centros de Formación<br>Dos Hermanas y Sevilla</div></div><div class="exp-right"><div class="exp-t">Profesor Adjunto — Informática y Diseño Gráfico</div><div class="exp-pills"><span class="ep">Hardware</span><span class="ep">Redes</span><span class="ep">Linux</span><span class="ep">CAD/3D</span><span class="ep">Diseño</span></div><ul class="exp-ul"><li>Hardware, S.O. Windows/Linux, redes y ofimática</li><li>Diseño gráfico, CAD y animación 3D</li><li>Implantación de servidores y seguridad informática</li></ul></div></div>
-    <div class="exp-card"><div class="exp-left"><div class="exp-yr">2004</div><div class="exp-co">Liber Formación (FORCEM)<br>Dos Hermanas</div></div><div class="exp-right"><div class="exp-t">Profesor Adjunto — Ofimática</div><div class="exp-pills"><span class="ep">Word</span><span class="ep">Excel</span><span class="ep">Access</span><span class="ep">PowerPoint</span></div><ul class="exp-ul"><li>Cursos FORCEM de iniciación a la informática y Microsoft Office</li></ul></div></div>
-    <div class="exp-card"><div class="exp-left"><div class="exp-yr">2006</div><div class="exp-co">Montoro y Barrera Inmobiliaria<br>Dos Hermanas</div></div><div class="exp-right"><div class="exp-t">Agente Inmobiliario</div><div class="exp-pills"><span class="ep">Comercial</span><span class="ep">Base de datos</span><span class="ep">IT Support</span></div><ul class="exp-ul"><li>Captación y valoración de inmuebles, venta y alquiler</li><li>Adaptación de software de base de datos y soporte IT</li></ul></div></div>
-    <div class="exp-card"><div class="exp-left"><div class="exp-yr">2000</div><div class="exp-co">Pastor Oliva S.L.<br>Dos Hermanas</div></div><div class="exp-right"><div class="exp-t">Auxiliar Administrativo</div><div class="exp-pills"><span class="ep">Contasol</span><span class="ep">Contabilidad</span><span class="ep">Banca</span></div><ul class="exp-ul"><li>Control de stock, operaciones bancarias, contabilidad con Contasol</li></ul></div></div>
+    <div class="exp-card"><div class="exp-left"><div class="exp-yr">2000 – 2005</div><div class="exp-co">System Centros de Formación<br>Dos Hermanas y Sevilla</div></div><div class="exp-right"><div class="exp-t">Profesor Adjunto — Hardware, Redes y Sistemas Linux</div><div class="exp-pills"><span class="ep">Hardware</span><span class="ep">Redes LAN/WLAN</span><span class="ep">Linux</span><span class="ep">Servidores</span></div><ul class="exp-ul"><li>Formación técnica en arquitectura de hardware, sistemas operativos Linux/Windows y administración de redes.</li><li>Implantación de servidores, seguridad informática y montaje de laboratorios de red.</li></ul></div></div>
     <div class="exp-card" style="border-color:rgba(255,230,0,.45);"><div class="exp-left" style="background:rgba(255,230,0,.05);justify-content:center;align-items:center;"><div style="font-size:2.4rem;text-align:center">⚡</div><div style="font-family:'Share Tech Mono',monospace;font-size:.56rem;letter-spacing:.15em;color:var(--ye);text-align:center;margin-top:.3rem">LOGRO CLAVE</div></div><div class="exp-right" style="background:rgba(255,230,0,.02);"><div class="exp-t" style="color:var(--ye)">Liderazgo Tecnológico: Evento E2H-Party</div><ul class="exp-ul"><li>Organización y coordinación técnica íntegra de un evento tecnológico masivo en el Gran Hipódromo de Andalucía con asistencia de <strong style="color:var(--bright)">500 profesionales</strong> del sector IT.</li></ul></div></div>
   </div>
 </section>
@@ -1403,17 +1378,14 @@ footer span{color:var(--cy);}
     <div class="tr-item"><div class="tr-ico">▶</div><div class="tr-txt"><strong>Google — Marketing Digital &amp; E-Commerce</strong>7 cursos: SEO, redes sociales, email marketing, analítica, e-commerce</div></div>
     <div class="tr-item"><div class="tr-ico">▶</div><div class="tr-txt"><strong>Certificado Profesional Java · IFCD001 MRR</strong>Colegio Mayol · POO y estructuras de datos</div></div>
     <div class="tr-item"><div class="tr-ico">▶</div><div class="tr-txt"><strong>Introducción a la IA y Algoritmos · IFCT155PO</strong>Centro de Formación Delos</div></div>
-    <div class="tr-item"><div class="tr-ico">▶</div><div class="tr-txt"><strong>Acceso Mayores 25 años — UNED Valdepeñas</strong>06/2025 · Expediente n.º 0000-22-04644</div></div>
+    <div class="tr-item"><div class="tr-ico">▶</div><div class="tr-txt"><strong>Acceso Mayores 25 años — UNED Valdepeñas</strong>06/2025 · UNED Valdepeñas</div></div>
     <div class="tr-item"><div class="tr-ico">▶</div><div class="tr-txt"><strong>Técnico Especialista en Microinformática</strong>System Centros de Formación</div></div>
     <div class="tr-item"><div class="tr-ico">▶</div><div class="tr-txt"><strong>Especialista en Redes y Networking</strong>LAN, WLAN, TCP/IP, routing y switching</div></div>
     <div class="tr-item"><div class="tr-ico">▶</div><div class="tr-txt"><strong>Administración de Sistemas UNIX (Linux / BSD)</strong>Shell, Apache, SSH y seguridad</div></div>
     <div class="tr-item"><div class="tr-ico">▶</div><div class="tr-txt"><strong>Técnico Especialista Diseño y Animación 3D</strong>Modelado, texturizado y render</div></div>
     <div class="tr-item"><div class="tr-ico">▶</div><div class="tr-txt"><strong>Especialista en Diseño Gráfico Publicitario</strong>Adobe Creative Suite completo</div></div>
-    <div class="tr-item"><div class="tr-ico">▶</div><div class="tr-txt"><strong>Programador Web CMS — Joomla y Drupal</strong>Gestión de contenidos, plugins y themes</div></div>
     <div class="tr-item"><div class="tr-ico">▶</div><div class="tr-txt"><strong>Lenguaje del Diseño Gráfico</strong>Teoría del color, tipografía y composición</div></div>
     <div class="tr-item"><div class="tr-ico">▶</div><div class="tr-txt"><strong>Técnico en Preimpresión &amp; Gran Formato</strong>Producción gráfica y plotters industriales</div></div>
-    <div class="tr-item"><div class="tr-ico">▶</div><div class="tr-txt"><strong>Mecanografía 300 ppm &amp; Inglés Nivel Medio</strong>System Centros de Formación</div></div>
-    <div class="tr-item"><div class="tr-ico">▶</div><div class="tr-txt"><strong>FP Auxiliar Administrativo</strong>Centro FP Torre de los Herberos, Dos Hermanas</div></div>
   </div>
 </section>
 
@@ -1421,7 +1393,7 @@ footer span{color:var(--cy);}
 <section id="contact" class="contact-wrap">
   <div class="contact-pre">ESTABLECER CONEXIÓN</div>
   <h2 class="contact-h">¿LISTO PARA<br><span>CONTRATARME?</span></h2>
-  <p class="contact-sub">UBICACIÓN: VISO DEL MARQUÉS (CIUDAD REAL) · <strong>REMOTO O PRESENCIAL</strong><br>DISPONIBILIDAD INMEDIATA · CARNET B1 · VEHÍCULO PROPIO</p>
+  <p class="contact-sub">UBICACIÓN: VISO DEL MARQUÉS (CIUDAD REAL) · <strong>REMOTO O PRESENCIAL</strong><br>DISPONIBILIDAD INMEDIATA · REMOTO / HÍBRIDO / PRESENCIAL</p>
   <div class="contact-links">
     <a href="mailto:hola@jcgm.dev" class="clink">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
@@ -1509,44 +1481,79 @@ footer span{color:var(--cy);}
     {t:'> SISTEMA LISTO — BIENVENIDO //', ok:true},
   ];
 
-  function enter(){
+  function enter(immediate){
     if(entered) return;
     entered = true;
-    fillEl.style.width = '100%';
-    pctEl.textContent = '100%';
-    statusEl.textContent = 'SISTEMA CARGADO';
-    setTimeout(function(){
-      boot.classList.add('out');
-      page.classList.add('visible');
-      setTimeout(function(){ boot.style.display='none'; }, 900);
+    try { sessionStorage.setItem('boot_seen', 'true'); } catch(e){}
+    if(fillEl) fillEl.style.width = '100%';
+    if(pctEl) pctEl.textContent = '100%';
+    if(statusEl) statusEl.textContent = 'SISTEMA CARGADO';
+    if(immediate){
+      if(boot) boot.style.display = 'none';
+      if(page) page.classList.add('visible');
       startMatrix();
       initNeural();
       startHolo();
       startCounters();
-    }, 400);
+      return;
+    }
+    setTimeout(function(){
+      if(boot) boot.classList.add('out');
+      if(page) page.classList.add('visible');
+      setTimeout(function(){ if(boot) boot.style.display='none'; }, 800);
+      startMatrix();
+      initNeural();
+      startHolo();
+      startCounters();
+    }, 200);
   }
 
-  boot.addEventListener('click', enter);
+  // Si ya se ha visto la intro en esta sesión, saltar inmediatamente sin animación
+  try {
+    if (sessionStorage.getItem('boot_seen') === 'true') {
+      enter(true);
+      return;
+    }
+  } catch(e){}
 
+  // Botón visible [ SALTAR INTRO ] interactivo desde el milisegundo 0
+  if(skipEl){
+    skipEl.addEventListener('click', function(e){
+      e.stopPropagation();
+      enter();
+    });
+    skipEl.addEventListener('keydown', function(e){
+      if(e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        enter();
+      }
+    });
+  }
+  if(boot){
+    boot.addEventListener('click', function(){ enter(); });
+  }
+
+  // Secuencia de carga ultra-rápida (máximo 1.2 segundos total) y auto-dismiss
   var idx = 0;
   function next(){
-    if(idx >= MSGS.length){ enter(); return; }
+    if(idx >= MSGS.length){
+      enter();
+      return;
+    }
     var d = document.createElement('div');
     d.className = 'boot-line' + (MSGS[idx].ok ? ' ok' : '');
     d.textContent = MSGS[idx].t;
     linesEl.appendChild(d);
-    // scroll to bottom
     linesEl.scrollTop = linesEl.scrollHeight;
-    // animate in
     requestAnimationFrame(function(){ d.classList.add('show'); });
     var pct = Math.round(((idx+1)/MSGS.length)*95);
-    fillEl.style.width = pct + '%';
-    pctEl.textContent = pct + '%';
-    statusEl.textContent = MSGS[idx].t.replace('> ','').substring(0,30)+'...';
+    if(fillEl) fillEl.style.width = pct + '%';
+    if(pctEl) pctEl.textContent = pct + '%';
+    if(statusEl) statusEl.textContent = MSGS[idx].t.replace('> ','').substring(0,30)+'...';
     idx++;
-    setTimeout(next, 160 + Math.random()*120);
+    setTimeout(next, 45); // 18 mensajes * 45ms ≈ 810ms
   }
-  setTimeout(next, 500);
+  setTimeout(next, 50); // 50ms + 810ms + 200ms auto-dismiss = ~1.06s (< 1.2s)
 })();
 
 /* ══════════════════════════════════
@@ -1615,10 +1622,19 @@ function startHolo(){
 ══════════════════════════════════ */
 function startCounters(){
   var el=document.getElementById('cnt-years');if(!el)return;
-  var v=0;
+  var target = 20;
+  var v = 0;
   setTimeout(function(){
-    var iv=setInterval(function(){v++;el.textContent=v;if(v>=20){el.textContent='20+';clearInterval(iv);}},60);
-  }, 300);
+    var iv = setInterval(function(){
+      v += 2;
+      if(v >= target){
+        el.textContent = '20+';
+        clearInterval(iv);
+      } else {
+        el.textContent = v;
+      }
+    }, 35);
+  }, 150);
 }
 
 /* ══════════════════════════════════
